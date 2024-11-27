@@ -26,6 +26,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('account-type')->group(function () {
         Route::get('/', [AccountTypeController::class, 'index']);
+        Route::post('/', [AccountTypeController::class, 'store']);
+        Route::put('/{accountType}', [AccountTypeController::class, 'update']);
+        Route::delete('/{accountType}', [AccountTypeController::class, 'destroy']);
     });
 
     Route::prefix('incidents')->group(function () {
