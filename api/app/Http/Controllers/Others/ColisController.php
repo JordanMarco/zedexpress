@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ColisController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (auth()->user()->accountType->code != AccountTypeEnum::ADMIN->value) {
             $colis = Colis::where("who", auth()->id())->get();
@@ -92,9 +92,8 @@ class ColisController extends Controller
         $colis->save();
     }
 
-    public function send($id)
+    public function send(Colis $colis)
     {
-        $colis = Colis::findOrFail($id);
         $colis->statut = "Envoyé";
 
         $details = [
