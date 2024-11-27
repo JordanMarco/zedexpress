@@ -15,9 +15,13 @@ class PaymentController extends Controller
 {
     public function pay(Colis $colis)
     {
+        if ($colis->statut !== ColisStatusEnum::UNPAID->value) {
+            return response()->json(['message' => 'Le colis est déjà payé'], 400);
+        }
+
         $payment = new Payment();
         $payment->user_id = Auth::id();
-        $payment->coli_id = $colis->id;
+        $payment->colis_id = $colis->id;
         $payment->amount = $colis->tarif->montant;
         $payment->save();
         $payment->fresh();
@@ -36,7 +40,7 @@ class PaymentController extends Controller
         if ($success === 1) {
             $payment->status = PaymentStatusEnum::PAYED->value;
             $payment->save();
-            $payment->colis->update(['status' => ColisStatusEnum::WAITING->value]);
+            $payment->colis->update(['statut' => ColisStatusEnum::WAITING->value]);
         } else {
             $payment->status = PaymentStatusEnum::CANCELLED->value;
             $payment->save();
