@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('login')->unique();
             $table->string('language_code')->default(LanguageEnum::FR->value);
-            $table->foreignIdFor(AccountType::class, 'account_id')->constrained()->noActionOnDelete();
+            $table->foreignIdFor(AccountType::class, 'account_id')->constrained('account_types')->noActionOnDelete();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

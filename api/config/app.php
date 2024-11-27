@@ -31,6 +31,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    "stripe_secret" => env('STRIPE_SECRET', null),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Others\AccountTypeController;
 use App\Http\Controllers\Others\ColisController;
 use App\Http\Controllers\Others\IncidentsController;
+use App\Http\Controllers\Others\PaymentController;
 use App\Http\Controllers\Others\TarifsController;
 use App\Http\Controllers\Others\UserController;
 use Illuminate\Http\Request;
@@ -63,4 +64,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{colis}', [ColisController::class, 'update']);
         Route::delete('/{colis}', [ColisController::class, 'destroy']);
     });
+
+
+    Route::prefix('pay')->group(function () {
+        Route::post('/{colis}', [PaymentController::class, 'pay']);
+        Route::get('/view/{payment}', [PaymentController::class, 'getPayment']);
+    });
+});
+
+Route::prefix('pay')->group(function () {
+    Route::any('/response', [PaymentController::class, 'response']);
 });

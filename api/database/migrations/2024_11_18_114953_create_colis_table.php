@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Enums\ColisStatusEnum;
 use App\Models\Tarif;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->string('nom')->nullable();
             $table->string('hour')->nullable();
             $table->string('hours')->nullable();
-            $table->string('statut')->nullable();
+            $table->string('statut')->default(ColisStatusEnum::UNPAID->value);
             $table->string('nature')->nullable();
             $table->string('country')->nullable();
             $table->text('fragilite')->nullable();
@@ -38,6 +39,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->noActionOnDelete();
             $table->foreignIdFor(Tarif::class)->constrained()->noActionOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
