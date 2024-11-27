@@ -14,16 +14,16 @@ class Mailing extends Mailable
     use Queueable, SerializesModels;
 
     protected EmailTemplateEnum $template;
-    protected string $subject;
+    protected string $title;
     protected array $data;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(EmailTemplateEnum $template, string $subject, array $data)
+    public function __construct(EmailTemplateEnum $template, string $title, array $data)
     {
         $this->template = $template;
-        $this->subject = $subject;
+        $this->title = $title;
         $this->data = $data;
     }
 
@@ -33,7 +33,7 @@ class Mailing extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subject,
+            subject: $this->title,
         );
     }
 

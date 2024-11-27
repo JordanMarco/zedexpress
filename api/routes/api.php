@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function (Request $request) {
+Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('account-type')->group(function () {
         Route::get('/', [AccountTypeController::class, 'index']);

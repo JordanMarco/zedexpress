@@ -92,7 +92,6 @@ class ColisController extends Controller
         $colis->save();
     }
 
-
     public function send($id)
     {
         $colis = Colis::findOrFail($id);
