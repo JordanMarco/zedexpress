@@ -14,4 +14,12 @@ class Colis extends Model
     public function tarif() {
         return $this->belongsTo(Tarif::class);
     }
+
+    public function receiver() {
+        return $this->belongsTo(User::class, 'receiver_id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

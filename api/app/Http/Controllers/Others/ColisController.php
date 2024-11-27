@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Others;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Mailing;
 use App\Models\Colis;
 use App\Models\Enums\AccountTypeEnum;
 use App\Models\Enums\ColisStatusEnum;
+use App\Models\Enums\EmailTemplateEnum;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ColisController extends Controller
 {
@@ -39,7 +42,7 @@ class ColisController extends Controller
 
     public function remove(Colis $colis)
     {
-        if ($colis->statut == ColisStatusEnum::WAITING->value) {
+        if ($colis->statut === ColisStatusEnum::WAITING->value) {
             return response()->json(['translate' => 'errors.action-not-permitted'], 400);
         }
 
@@ -48,13 +51,14 @@ class ColisController extends Controller
 
         $colis->save();
 
-        // $details = [
-        //     'title' => 'Votre colis a été livré avec succès',
-        //     'body' => 'Nous somme ravi d avoir traité avec vous, nous espérons vous revoir bientot',
-        //     'colis1' => $colis->user->first_name,
-        //     'colis2' => $colis->user->last_name,
-        // ];
-        // Mail::to($colis->user->email)->send(new Colis2Mail($details));
+        $details = [
+            'title' => 'Votre colis a été livré avec succès',
+            'body' => 'Nous somme ravi d avoir traité avec vous, nous espérons vous revoir bientot',
+            'colis1' => $colis->user->first_name,
+            'colis2' => $colis->user->last_name,
+        ];
+
+        Mail::to($colis->user->email)->send(new Mailing(EmailTemplateEnum::WITHDRAWAL, "retrait du colis", ['details' => $details]));
 
         return response()->json($colis);
     }
@@ -83,17 +87,16 @@ class ColisController extends Controller
 
         $colis->fill($request->all());
         $colis->valeur_euro = (($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30;
-        $details = [
-            'title' => 'Votre colis est en cours de traitement',
-            'body' => 'Nous somme ravi d avoir traité avec vous, nous espérons vous revoir bientot',
-            'colis' => $colis->date_entree
-        ];
-        // send store email
+
         $colis->save();
     }
 
     public function send(Colis $colis)
     {
+        if ($colis->statut === ColisStatusEnum::UNPAID->value) {
+            return response()->json(['message' => "le colis n'est pas payé"], 400);
+        }
+
         $colis->statut = "Envoyé";
 
         $details = [
@@ -101,28 +104,15 @@ class ColisController extends Controller
             'body' => 'Nous somme ravi d avoir traité avec vous, nous espérons vous revoir bientot',
             'colis1' => $colis->receiver->first_name,
             'colis2' => $colis->receiver->last_name,
-            'colis11' => $colis->user->first_name,
-            'colis22' => $colis->user->last_name,
             'colis5' => $colis->user->address,
             'colis6' => $colis->user->country,
             'colis3' => $colis->nom,
             'colis4' => $colis->contenance,
-            'colis7' => $colis->receiver->login,
-            'colis8' => $colis->receiver->password_eph,
             'colis9' => $colis->date_arrivee,
         ];
-        // Send email
-        if (!isset($colis->receiver->email)) {
-            $name = $colis->receiver->first_name;
-            return back()->withErrors([
-                "message" => "Le destinataire $name n'a pas d'adresse email"
-            ]);
-        }
-        // Mail::to($colis->receiver->email)->send(new ColisMail($details));
 
-        $colis->receiver->password_eph = "";
-
-        $colis->hour = Carbon::now()->format('d/m/y') . " - " . Carbon::now('Europe/Brussels')->format('H:i:s');
+        Mail::to($colis->receiver->email)->send(new Mailing(EmailTemplateEnum::DEPOSITE, "Envoie de votre colis", ['details' => $details]));
+        $colis->hours = Carbon::today()->format('d/m/y') . " - " . Carbon::now('Europe/Brussels')->format('H:i:s');
         $colis->save();
 
         return response()->json($colis);

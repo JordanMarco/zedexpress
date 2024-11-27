@@ -32,10 +32,10 @@ return new class extends Migration
             $table->dateTime('date_arrive')->nullable();
             $table->unsignedDouble('hauteur')->nullable();
             $table->unsignedDouble('largeur')->nullable();
-            $table->bigInteger('receiver_id')->nullable();
             $table->unsignedDouble('longueur')->nullable();
             $table->unsignedInteger('quantite')->nullable();
             $table->unsignedDouble('valeur_euro')->nullable();
+            $table->foreignIdFor(User::class, 'receiver_id')->constrained()->noActionOnDelete();
             $table->foreignIdFor(User::class)->constrained()->noActionOnDelete();
             $table->foreignIdFor(Tarif::class)->constrained()->noActionOnDelete();
             $table->timestamps();
