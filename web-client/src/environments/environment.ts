@@ -8,15 +8,6 @@ export const environment = {
   name: 'production',
   ssk: 'we-sv-rtw--eüd-§$-fd',
   ssv: 'öer:gerv:vjdf+*dfe#e-ee,',
-  firebase: {
-    apiKey: '********************************',
-    authDomain: '********************************',
-    projectId: '********************************',
-    storageBucket: '********************************',
-    messagingSenderId: '********************************',
-    appId: '********************************',
-    measurementId: '********************************',
-  },
 };
 
 

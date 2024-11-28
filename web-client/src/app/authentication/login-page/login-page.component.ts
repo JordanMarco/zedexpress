@@ -1,7 +1,9 @@
 import { Component, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ILoginResponse, Login } from 'src/app/shared/models/User';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SessionService } from 'src/app/shared/services/session-service';
 
 @Component({
   selector: 'app-login-page',
@@ -17,21 +19,22 @@ export class LoginPageComponent {
     private authservice: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private sessionService: SessionService
   ) {
      const bodyElement = this.renderer.selectRootElement('body', true);
      this.renderer.setAttribute(bodyElement, 'class', 'cover1 justify-center');
   }
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['spruko@admin.com', [Validators.required, Validators.email]],
-      password: ['sprukoadmin', Validators.required],
+      username: ['', [Validators.required]],
+      password: ['', Validators.required],
     });
   }
 
   // firebase
-  email = 'spruko@admin.com';
-  password = 'sprukoadmin';
+  identifier = '';
+  password = '';
   errorMessage = ''; // validation _error handle
   _error: { name: string; message: string } = { name: '', message: '' }; // for firbase _error handle
 
@@ -41,25 +44,23 @@ export class LoginPageComponent {
   }
 
   login() {
-    // this.disabled = "btn-loading"
-    this.clearErrorMessage();
-    if (this.validateForm(this.email, this.password)) {
+    this.clearErrorMessage()
+    if (this.validateForm(this.identifier, this.password)) {
       this.authservice
-        .loginWithEmail(this.email, this.password)
-        .then(() => {
-          this.router.navigate(['/dashboard/sales']);
-          console.clear();
+        .login(new Login(this.identifier, this.password) ).subscribe({
+          next: (res: ILoginResponse) => {
+            this.router.navigate(['/dashboard/sales']);
+            this.sessionService.localLogin(res.user, res.token);
+          },
+          error: () => {},
+          complete: () => {}
         })
-        .catch((_error: any) => {
-          this._error = _error;
-          this.router.navigate(['/']);
-        });
     }
   }
 
-  validateForm(email: string, password: string) {
-    if (email.length === 0) {
-      this.errorMessage = 'please enter email id';
+  validateForm(identifier: string, password: string) {
+    if (identifier.length === 0) {
+      this.errorMessage = 'please enter identifier id';
       return false;
     }
 
@@ -85,16 +86,7 @@ export class LoginPageComponent {
     return this.loginForm.controls;
   }
 
-  Submit() {
-    if (
-      this.loginForm.controls['username'].value === 'spruko@admin.com' &&
-      this.loginForm.controls['password'].value === 'sprukoadmin'
-    ) {
-      this.router.navigate(['/dashboard/sales']);
-    } else {
-      this.error = 'Please check email and passowrd';
-    }
-  }
+  
 
   public togglePassword() {
     this.showPassword = !this.showPassword;
