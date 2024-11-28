@@ -35,7 +35,7 @@ return new class extends Migration
             $table->unsignedDouble('longueur')->nullable();
             $table->unsignedInteger('quantite')->nullable();
             $table->unsignedDouble('valeur_euro')->nullable();
-            $table->foreignIdFor(User::class, 'receiver_id')->constrained()->noActionOnDelete();
+            $table->foreignIdFor(User::class, 'receiver_id')->constrained('users')->noActionOnDelete();
             $table->foreignIdFor(User::class)->constrained()->noActionOnDelete();
             $table->foreignIdFor(Tarif::class)->constrained()->noActionOnDelete();
             $table->timestamps();
