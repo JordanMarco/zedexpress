@@ -16,7 +16,14 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { environment } from 'src/environments/environment';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule, HttpClient} from '@angular/common/http';
 
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http,'/assets/i18n', '');
+}
 @NgModule({
   declarations: [AppComponent, CustomLayoutComponent, ContentLayoutComponent],
   imports: [
@@ -26,6 +33,14 @@ import { ColorPickerModule } from 'ngx-color-picker';
     BrowserAnimationsModule,
     StoreModule.forRoot({ data: dataReaducer }),
     ToastrModule.forRoot(),
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  }),
     AngularFireModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,

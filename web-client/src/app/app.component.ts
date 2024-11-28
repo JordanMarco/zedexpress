@@ -1,4 +1,5 @@
 import { Component, Renderer2 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,18 @@ import { Component, Renderer2 } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private translateService: TranslateService) {
+    translateService.addLangs(['en', 'fr']);
+    translateService.setDefaultLang('en');
+    const lang = this.sessionService.getLanguage();
+    if (lang) { 
+      translateService.use(lang.match(/en|fr/) ? lang : 'en');
+    } else {
+      const browserLang = translateService.getBrowserLang();
+      if (browserLang)
+        translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+    }
+  }
 
   ngOnInit() {
     // Use Renderer2 to append an element to the html element
