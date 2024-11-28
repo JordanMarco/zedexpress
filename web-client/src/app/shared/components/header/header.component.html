@@ -1,0 +1,1063 @@
+<!-- Start::Header -->
+<header class="header custom-sticky !top-0 !w-full">
+  <nav class="main-header" aria-label="Global">
+    <div class="header-content">
+      <div class="header-left">
+        <!-- Navigation Toggle -->
+        <div class="">
+          <button
+            type="button"
+            class="sidebar-toggle !w-100 !h-100"
+            (click)="toggleSidebar()"
+          >
+            <span class="sr-only">Toggle Navigation</span>
+            <i class="ri-arrow-right-circle-line header-icon"></i>
+          </button>
+        </div>
+        <!-- End Navigation Toggle -->
+      </div>
+
+      <div class="responsive-logo">
+        <a
+          class="responsive-logo-dark"
+          routerLink="/dashboard/sales"
+          aria-label="Brand"
+          ><img
+            src="./assets/img/brand-logos/desktop-logo.png"
+            alt="logo"
+            class="mx-auto"
+        /></a>
+        <a
+          class="responsive-logo-light"
+          routerLink="/dashboard/sales"
+          aria-label="Brand"
+          ><img
+            src="./assets/img/brand-logos/desktop-dark.png"
+            alt="logo"
+            class="mx-auto"
+        /></a>
+      </div>
+
+      <div class="header-right">
+        <div class="responsive-headernav">
+          <div class="header-nav-right">
+            <div
+              class="header-country hs-dropdown ti-dropdown hidden sm:block"
+              data-hs-dropdown-placement="bottom-right"
+            >
+              <button
+                id="dropdown-flag"
+                type="button"
+                class="hs-dropdown-toggle ti-dropdown-toggle p-0 flex-shrink-0 h-[2.375rem] w-[2.375rem] border-0 rounded-full shadow-none focus:ring-gray-400 text-xs dark:focus:ring-white/10"
+              >
+                <img
+                  src="./assets/img/flags/10.png"
+                  alt="flag-img"
+                  class="h-[1.375rem] w-[1.375rem]"
+                />
+              </button>
+              <div
+                class="hs-dropdown-menu ti-dropdown-menu min-w-[10rem]"
+                aria-labelledby="dropdown-flag"
+              >
+                <div
+                  class="ti-dropdown-divider divide-y divide-gray-200 dark:divide-white/10"
+                >
+                  <div class="py-2 first:pt-0 last:pb-0">
+                    <div class="ti-dropdown-item">
+                      <div
+                        class="flex items-center space-x-2 rtl:space-x-reverse w-full"
+                      >
+                        <div class="h-[1.375rem] w-[1.375rem] rounded-sm">
+                          <img src="./assets/img/flags/10.png" alt="flag-img" />
+                        </div>
+                        <div>
+                          <p class="text-xs font-medium">USA</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ti-dropdown-item">
+                      <div
+                        class="flex items-center space-x-2 rtl:space-x-reverse w-full"
+                      >
+                        <div class="h-[1.375rem] w-[1.375rem] rounded-sm">
+                          <img src="./assets/img/flags/1.png" alt="flag-img" />
+                        </div>
+                        <div>
+                          <p class="text-xs font-medium">Argentina</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ti-dropdown-item">
+                      <div
+                        class="flex items-center space-x-2 rtl:space-x-reverse w-full"
+                      >
+                        <div class="h-[1.375rem] w-[1.375rem] rounded-sm">
+                          <img src="./assets/img/flags/2.png" alt="flag-img" />
+                        </div>
+                        <div>
+                          <p class="text-xs font-medium">Canada</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ti-dropdown-item">
+                      <div
+                        class="flex items-center space-x-2 rtl:space-x-reverse w-full"
+                      >
+                        <div class="h-[1.375rem] w-[1.375rem] rounded-sm">
+                          <img src="./assets/img/flags/3.png" alt="flag-img" />
+                        </div>
+                        <div>
+                          <p class="text-xs font-medium">France</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ti-dropdown-item">
+                      <div
+                        class="flex items-center space-x-2 rtl:space-x-reverse w-full"
+                      >
+                        <div class="h-[1.375rem] w-[1.375rem] rounded-sm">
+                          <img src="./assets/img/flags/4.png" alt="flag-img" />
+                        </div>
+                        <div>
+                          <p class="text-xs font-medium">Germany</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ti-dropdown-item">
+                      <div
+                        class="flex items-center space-x-2 rtl:space-x-reverse w-full"
+                      >
+                        <div class="h-[1.375rem] w-[1.375rem] rounded-sm">
+                          <img src="./assets/img/flags/5.png" alt="flag-img" />
+                        </div>
+                        <div>
+                          <p class="text-xs font-medium">Italy</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="header-search">
+              <button
+                aria-label="button"
+                type="button"
+                data-hs-overlay="#search-modal"
+                class="inline-flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] rounded-full font-medium bg-gray-100 hover:bg-gray-200 text-gray-500 align-middle focus:outline-none focus:ring-0 focus:ring-gray-400 focus:ring-offset-0 focus:ring-offset-white transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-white/70 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+              >
+                <i class="ri-search-2-line header-icon"></i>
+              </button>
+            </div>
+            <div class="header-theme-mode hidden sm:block" appToggleTheme>
+              <a
+                aria-label="anchor"
+                class="hs-dark-mode-active:hidden flex hs-dark-mode group flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] rounded-full font-medium bg-gray-100 hover:bg-gray-200 text-gray-500 align-middle focus:outline-none focus:ring-0 focus:ring-gray-400 focus:ring-offset-0 focus:ring-offset-white transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-white/70 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                href="javascript:;"
+                data-hs-theme-click-value="dark"
+                (click)="themeChange('dark', 'dark')"
+              >
+                <i class="ri-moon-line header-icon"></i>
+              </a>
+              <a
+                aria-label="anchor"
+                class="hs-dark-mode-active:flex hidden hs-dark-mode group flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] rounded-full font-medium bg-gray-100 hover:bg-gray-200 text-gray-500 align-middle focus:outline-none focus:ring-0 focus:ring-gray-400 focus:ring-offset-0 focus:ring-offset-white transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-white/70 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                href="javascript:;"
+                data-hs-theme-click-value="light"
+                (click)="themeChange('light', 'light')"
+              >
+                <i class="ri-sun-line header-icon"></i>
+              </a>
+            </div>
+            <div class="header-fullscreen hidden lg:block">
+              <a
+                aria-label="anchor"
+                href="javascript:void(0);"
+                appFullscreen
+                class="inline-flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] rounded-full font-medium bg-gray-100 hover:bg-gray-200 text-gray-500 align-middle focus:outline-none focus:ring-0 focus:ring-gray-400 focus:ring-offset-0 focus:ring-offset-white transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-white/70 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+              >
+                <i class="ri-fullscreen-line header-icon full-screen-open"></i>
+                <i
+                  class="ri-fullscreen-line header-icon fullscreen-exit-line hidden"
+                ></i>
+              </a>
+            </div>
+            <div
+              class="header-cart hs-dropdown ti-dropdown hidden lg:block"
+              data-hs-dropdown-placement="bottom-right"
+            >
+              <button
+                id="dropdown-cart"
+                type="button"
+                class="hs-dropdown-toggle ti-dropdown-toggle p-0 border-0 flex-shrink-0 h-[2.375rem] w-[2.375rem] rounded-full shadow-none focus:ring-gray-400 text-xs dark:focus:ring-white/10"
+              >
+                <i class="ri-shopping-basket-line header-icon"></i>
+                <span
+                  class="flex absolute h-5 w-5 top-0 ltr:right-0 rtl:left-0 -mt-1 ltr:-mr-1 rtl:-ml-1"
+                >
+                  <span
+                    class="relative inline-flex rounded-full h-5 w-5 bg-danger text-white justify-center items-center"
+                    id="cart-data2"
+                    >4</span
+                  >
+                </span>
+              </button>
+              <div
+                (click)="handleCardClick($event)"
+                class="hs-dropdown-menu ti-dropdown-menu w-[20rem] border-0"
+                aria-labelledby="dropdown-cart"
+              >
+                <div
+                  class="ti-dropdown-header !bg-primary border-b dark:border-white/10 flex justify-between items-center"
+                >
+                  <p class="ti-dropdown-header-title !text-white font-semibold">
+                    Shopping Cart
+                  </p>
+                  <a
+                    href="javascript:void(0)"
+                    class="badge bg-black/20 text-white rounded-sm"
+                    id="cart-data"
+                    >4 Items</a
+                  >
+                </div>
+                <div
+                  class="ti-dropdown-divider divide-y divide-gray-200 dark:divide-white/10"
+                >
+                  <div class="py-2 first:pt-0 last:pb-0" id="allCartsContainer">
+                    <div class="ti-dropdown-item relative header-box" id="row1">
+                      <a
+                        routerLink="/ecommerce/cart"
+                        class="flex items-center space-x-3 rtl:space-x-reverse w-full"
+                      >
+                        <img
+                          src="./assets/img/ecommerce/products/1.png"
+                          alt="product-img"
+                          class="avatar p-2 shadow-none shrink-0 items-center justify-center rounded-sm bg-gray-100 dark:bg-black/20 !ring-transparent"
+                        />
+                        <div>
+                          <p
+                            class="text-sm font-medium text-gray-800 dark:text-white"
+                          >
+                            Black Heals For Women
+                          </p>
+                          <div class="flex space-x-2 rtl:space-x-reverse">
+                            <h5 class="text-xs">$699</h5>
+                            <span
+                              class="my-auto line-through text-xs text-gray-400 dark:text-white/70"
+                              >$999</span
+                            >
+                          </div>
+                        </div>
+                      </a>
+                      <a
+                        aria-label="anchor"
+                        href="javascript:void(0);"
+                        class="header-remove-btn ltr:ml-auto rtl:mr-auto flex-shrink-0 inline-flex items-center justify-center text-lg text-gray-500/20 dark:text-white/20 hover:text-gray-800 dark:hover:text-white"
+                      >
+                        <i
+                          class="ri-close-circle-line"
+                          (click)="removeRow('row1')"
+                        ></i>
+                      </a>
+                    </div>
+                    <div class="ti-dropdown-item relative header-box" id="row2">
+                      <a
+                        routerLink="/ecommerce/cart"
+                        class="flex items-center space-x-3 rtl:space-x-reverse w-full"
+                      >
+                        <img
+                          src="./assets/img/ecommerce/products/2.png"
+                          alt="product-img"
+                          class="avatar p-2 shadow-none shrink-0 items-center justify-center rounded-sm bg-gray-100 dark:bg-black/20 !ring-transparent"
+                        />
+                        <div>
+                          <p
+                            class="text-sm font-medium text-gray-800 dark:text-white"
+                          >
+                            Tshirt For Men
+                          </p>
+                          <div class="flex space-x-2 rtl:space-x-reverse">
+                            <h5 class="text-xs">$245</h5>
+                            <span
+                              class="my-auto line-through text-xs text-gray-400 dark:text-white/70"
+                              >$599</span
+                            >
+                          </div>
+                        </div>
+                      </a>
+                      <a
+                        aria-label="anchor"
+                        href="javascript:void(0);"
+                        class="header-remove-btn ltr:ml-auto rtl:mr-auto flex-shrink-0 inline-flex items-center justify-center text-lg text-gray-500/20 dark:text-white/20 hover:text-gray-800 dark:hover:text-white"
+                      >
+                        <i
+                          class="ri-close-circle-line"
+                          (click)="removeRow('row2')"
+                        ></i>
+                      </a>
+                    </div>
+                    <div class="ti-dropdown-item relative header-box" id="row3">
+                      <a
+                        routerLink="/ecommerce/cart"
+                        class="flex items-center space-x-3 rtl:space-x-reverse w-full"
+                      >
+                        <img
+                          src="./assets/img/ecommerce/products/9.png"
+                          alt="product-img"
+                          class="avatar p-2 shadow-none shrink-0 items-center justify-center rounded-sm bg-gray-100 dark:bg-black/20 !ring-transparent"
+                        />
+                        <div>
+                          <p
+                            class="text-sm font-medium text-gray-800 dark:text-white"
+                          >
+                            Travel Bag For Womens
+                          </p>
+                          <div class="flex space-x-2 rtl:space-x-reverse">
+                            <h5 class="text-xs">$299</h5>
+                            <span
+                              class="my-auto line-through text-xs text-gray-400 dark:text-white/70"
+                              >$399</span
+                            >
+                          </div>
+                        </div>
+                      </a>
+                      <a
+                        aria-label="anchor"
+                        href="javascript:void(0);"
+                        class="header-remove-btn ltr:ml-auto rtl:mr-auto flex-shrink-0 inline-flex items-center justify-center text-lg text-gray-500/20 dark:text-white/20 hover:text-gray-800 dark:hover:text-white"
+                      >
+                        <i
+                          class="ri-close-circle-line"
+                          (click)="removeRow('row3')"
+                        ></i>
+                      </a>
+                    </div>
+                    <div class="ti-dropdown-item relative header-box" id="row4">
+                      <a
+                        routerLink="/ecommerce/cart"
+                        class="flex items-center space-x-3 rtl:space-x-reverse w-full"
+                      >
+                        <img
+                          src="./assets/img/ecommerce/products/10.png"
+                          alt="product-img"
+                          class="avatar p-2 shadow-none shrink-0 items-center justify-center rounded-sm bg-gray-100 dark:bg-black/20 !ring-transparent"
+                        />
+                        <div>
+                          <p
+                            class="text-sm font-medium text-gray-800 dark:text-white"
+                          >
+                            Leather Wallet For Grils
+                          </p>
+                          <div class="flex space-x-2 rtl:space-x-reverse">
+                            <h5 class="text-xs">$100</h5>
+                            <span
+                              class="my-auto line-through text-xs text-gray-400 dark:text-white/70"
+                              >$150</span
+                            >
+                          </div>
+                        </div>
+                      </a>
+                      <a
+                        aria-label="anchor"
+                        href="javascript:void(0);"
+                        class="header-remove-btn ltr:ml-auto rtl:mr-auto flex-shrink-0 inline-flex items-center justify-center text-lg text-gray-500/20 dark:text-white/20 hover:text-gray-800 dark:hover:text-white"
+                      >
+                        <i
+                          class="ri-close-circle-line"
+                          (click)="removeRow('row4')"
+                        ></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="py-2 first:pt-0 last:pb-0 px-5">
+                    <div class="flex justify-between">
+                      <div>
+                        <span
+                          class="text-xs font-semibold text-gray-800 dark:text-white"
+                          >Total</span
+                        >
+                      </div>
+                      <div class="text-end font-medium">
+                        <span
+                          class="text-xs font-semibold text-gray-800 dark:text-white"
+                          >$40,020</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="py-2 first:pt-0 px-5">
+                    <a
+                      class="w-full ti-btn ti-btn-primary p-2"
+                      routerLink="/ecommerce/checkout"
+                    >
+                      Proceed Checkout
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="header-notification hs-dropdown ti-dropdown hidden sm:block"
+              data-hs-dropdown-placement="bottom-right"
+            >
+              <button
+                id="dropdown-notification"
+                type="button"
+                class="hs-dropdown-toggle ti-dropdown-toggle p-0 border-0 flex-shrink-0 h-[2.375rem] w-[2.375rem] rounded-full shadow-none focus:ring-gray-400 text-xs dark:focus:ring-white/10"
+              >
+                <i class="ri-notification-2-line header-icon animate-bell"></i>
+                <span
+                  class="flex absolute h-5 w-5 top-0 ltr:right-0 rtl:left-0 -mt-1 ltr:-mr-1 rtl:-ml-1"
+                >
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success/80 opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-5 w-5 bg-success text-white justify-center items-center"
+                    id="notify-data"
+                    >4</span
+                  >
+                </span>
+              </button>
+              <div
+                (click)="handleCardClick($event)"
+                class="hs-dropdown-menu ti-dropdown-menu w-[20rem] border-0"
+                aria-labelledby="dropdown-notification"
+              >
+                <div
+                  class="ti-dropdown-header !bg-primary border-b dark:border-white/10 flex justify-between items-center"
+                >
+                  <p class="ti-dropdown-header-title !text-white font-semibold">
+                    Notifications
+                  </p>
+                  <a
+                    href="javascript:void(0)"
+                    class="badge bg-black/20 text-white rounded-sm"
+                    >Mark All Read</a
+                  >
+                </div>
+                <div
+                  class="ti-dropdown-divider divide-y divide-gray-200 dark:divide-white/10"
+                >
+                  <div
+                    class="py-2 first:pt-0 last:pb-0"
+                    id="allNotifyContainer"
+                  >
+                    <div class="ti-dropdown-item relative header-box" id="not1">
+                      <a
+                        routerLink="/mail/mail"
+                        class="flex space-x-3 rtl:space-x-reverse"
+                      >
+                        <div
+                          class="ltr:mr-2 rtl:ml-2 avatar rounded-full ring-0"
+                        >
+                          <img
+                            src="./assets/img/users/17.jpg"
+                            alt="img"
+                            class="rounded-sm"
+                          />
+                        </div>
+                        <div class="relative w-full">
+                          <h5
+                            class="text-sm text-gray-800 dark:text-white font-semibold mb-1"
+                          >
+                            Elon Isk
+                          </h5>
+                          <p class="text-xs mb-1 max-w-[200px] truncate">
+                            Hello there! How are you doing? Call me when...
+                          </p>
+                          <p class="text-xs text-gray-400 dark:text-white/70">
+                            2 min
+                          </p>
+                        </div>
+                      </a>
+                      <a
+                        aria-label="anchor"
+                        href="javascript:void(0);"
+                        class="header-remove-btn ltr:ml-auto rtl:mr-auto text-lg text-gray-500/20 dark:text-white/20 hover:text-gray-800 dark:hover:text-white"
+                      >
+                        <i
+                          class="ri-close-circle-line"
+                          (click)="removeRow('not1')"
+                        ></i>
+                      </a>
+                    </div>
+                    <div class="ti-dropdown-item relative header-box" id="not2">
+                      <a
+                        routerLink="/mail/mail"
+                        class="flex items-center space-x-3 rtl:space-x-reverse"
+                      >
+                        <div
+                          class="ltr:mr-2 rtl:ml-2 avatar rounded-full ring-0"
+                        >
+                          <img
+                            src="./assets/img/users/2.jpg"
+                            alt="img"
+                            class="rounded-sm"
+                          />
+                        </div>
+                        <div class="relative w-full">
+                          <h5
+                            class="text-sm text-gray-800 dark:text-white font-semibold mb-1"
+                          >
+                            Shakira Sen
+                          </h5>
+                          <p class="text-xs mb-1 max-w-[200px] truncate">
+                            I would like to discuss about that assets...
+                          </p>
+                          <p class="text-xs text-gray-400 dark:text-white/70">
+                            09:43
+                          </p>
+                        </div>
+                      </a>
+                      <a
+                        aria-label="anchor"
+                        href="javascript:void(0);"
+                        class="header-remove-btn ltr:ml-auto rtl:mr-auto text-lg text-gray-500/20 dark:text-white/20 hover:text-gray-800 dark:hover:text-white"
+                      >
+                        <i
+                          class="ri-close-circle-line"
+                          (click)="removeRow('not2')"
+                        ></i>
+                      </a>
+                    </div>
+                    <div class="ti-dropdown-item relative header-box" id="not3">
+                      <a
+                        routerLink="/mail/mail"
+                        class="flex items-center space-x-3 rtl:space-x-reverse"
+                      >
+                        <div
+                          class="ltr:mr-2 rtl:ml-2 avatar rounded-full ring-0"
+                        >
+                          <img
+                            src="./assets/img/users/21.jpg"
+                            alt="img"
+                            class="rounded-sm"
+                          />
+                        </div>
+                        <div class="relative w-full">
+                          <h5
+                            class="text-sm text-gray-800 dark:text-white font-semibold mb-1"
+                          >
+                            Sebastian
+                          </h5>
+                          <p class="text-xs mb-1 max-w-[200px] truncate">
+                            Shall we go to the cafe at downtown...
+                          </p>
+                          <p class="text-xs text-gray-400 dark:text-white/70">
+                            yesterday
+                          </p>
+                        </div>
+                      </a>
+                      <a
+                        aria-label="anchor"
+                        href="javascript:void(0);"
+                        class="header-remove-btn ltr:ml-auto rtl:mr-auto text-lg text-gray-500/20 dark:text-white/20 hover:text-gray-800 dark:hover:text-white"
+                      >
+                        <i
+                          class="ri-close-circle-line"
+                          (click)="removeRow('not3')"
+                        ></i>
+                      </a>
+                    </div>
+                    <div class="ti-dropdown-item relative header-box" id="not4">
+                      <a
+                        routerLink="/mail/mail"
+                        class="flex items-center space-x-3 rtl:space-x-reverse"
+                      >
+                        <div
+                          class="ltr:mr-2 rtl:ml-2 avatar rounded-full ring-0"
+                        >
+                          <img
+                            src="./assets/img/users/11.jpg"
+                            alt="img"
+                            class="rounded-sm"
+                          />
+                        </div>
+                        <div class="relative w-full">
+                          <h5
+                            class="text-sm text-gray-800 dark:text-white font-semibold mb-1"
+                          >
+                            Charlie Davieson
+                          </h5>
+                          <p class="text-xs mb-1 max-w-[200px] truncate">
+                            Lorem ipsum dolor sit amet, consectetur
+                          </p>
+                          <p class="text-xs text-gray-400 dark:text-white/70">
+                            yesterday
+                          </p>
+                        </div>
+                      </a>
+                      <a
+                        aria-label="anchor"
+                        href="javascript:void(0);"
+                        class="header-remove-btn ltr:ml-auto rtl:mr-auto text-lg text-gray-500/20 dark:text-white/20 hover:text-gray-800 dark:hover:text-white"
+                      >
+                        <i
+                          class="ri-close-circle-line"
+                          (click)="removeRow('not4')"
+                        ></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="py-2 first:pt-0 px-5">
+                    <a
+                      class="w-full ti-btn ti-btn-primary p-2"
+                      routerLink="/mail/mail"
+                    >
+                      View All
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="header-apps hs-dropdown ti-dropdown hidden md:block"
+              data-hs-dropdown-placement="bottom-right"
+            >
+              <button
+                aria-label="button"
+                id="dropdown-apps"
+                type="button"
+                class="hs-dropdown-toggle ti-dropdown-toggle p-0 border-0 flex-shrink-0 h-[2.375rem] w-[2.375rem] rounded-full shadow-none focus:ring-gray-400 text-xs dark:focus:ring-white/10"
+              >
+                <i class="ri-bookmark-line header-icon"></i>
+              </button>
+              <div
+                (click)="handleCardClick($event)"
+                class="hs-dropdown-menu ti-dropdown-menu w-[20rem] border-0"
+                aria-labelledby="dropdown-apps"
+              >
+                <div
+                  class="ti-dropdown-header !bg-primary border-b dark:border-white/10 flex justify-between items-center text-center"
+                >
+                  <p class="ti-dropdown-header-title font-semibold !text-white">
+                    Related Apps
+                  </p>
+                </div>
+                <div
+                  class="ti-dropdown-divider divide-y divide-gray-200 dark:divide-white/10"
+                >
+                  <div class="grid grid-cols-3 gap-0 p-4 pt-2">
+                    <a
+                      routerLink="/mail/mail"
+                      class="block pt-0 p-2 text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                    >
+                      <i
+                        class="ri ri-mail-line leading-none text-2xl avatar ring-0 bg-primary/20 text-primary rounded-sm p-3 my-3 align-middle flex justify-center mx-auto"
+                      ></i>
+                      <div
+                        class="text-xs font-semibold text-gray-800 dark:text-white"
+                      >
+                        Mail Inbox
+                      </div>
+                    </a>
+                    <a
+                      routerLink="/mail/chat"
+                      class="block pt-0 p-2 text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                    >
+                      <i
+                        class="ri ri-chat-2-line leading-none text-2xl avatar ring-0 bg-secondary/20 text-secondary rounded-sm p-3 my-3 align-middle flex justify-center mx-auto"
+                      ></i>
+                      <div
+                        class="text-xs font-semibold text-gray-800 dark:text-white"
+                      >
+                        Chat
+                      </div>
+                    </a>
+                    <a
+                      routerLink="/page/tasks"
+                      class="block pt-0 p-2 text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                    >
+                      <i
+                        class="ri ri-task-line leading-none text-2xl avatar ring-0 bg-warning/20 text-warning rounded-sm p-3 my-3 align-middle flex justify-center mx-auto"
+                      ></i>
+                      <div
+                        class="text-xs font-semibold text-gray-800 dark:text-white"
+                      >
+                        Task
+                      </div>
+                    </a>
+                    <a
+                      routerLink="/advanced/calender"
+                      class="block pt-0 p-2 text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                    >
+                      <i
+                        class="ri ri-calendar-event-line leading-none text-2xl avatar ring-0 bg-danger/20 text-danger rounded-sm p-3 my-3 align-middle flex justify-center mx-auto"
+                      ></i>
+                      <div
+                        class="text-xs font-semibold text-gray-800 dark:text-white"
+                      >
+                        Calendar
+                      </div>
+                    </a>
+                    <a
+                      routerLink="/filemanager/filemanager"
+                      class="block pt-0 p-2 text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                    >
+                      <i
+                        class="ri ri-file-copy-2-line leading-none text-2xl avatar ring-0 bg-info/20 text-info rounded-sm p-3 my-3 align-middle flex justify-center mx-auto"
+                      ></i>
+                      <div
+                        class="text-xs font-semibold text-gray-800 dark:text-white"
+                      >
+                        FileManager
+                      </div>
+                    </a>
+                    <a
+                      routerLink="/page/contacts"
+                      class="block pt-0 p-2 text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20"
+                    >
+                      <i
+                        class="ri ri-group-line leading-none text-2xl avatar ring-0 bg-success/20 text-success rounded-sm p-3 my-3 align-middle flex justify-center mx-auto"
+                      ></i>
+                      <div
+                        class="text-xs font-semibold text-gray-800 dark:text-white"
+                      >
+                        Contacts
+                      </div>
+                    </a>
+                  </div>
+                  <div class="py-2 first:pt-0 px-5">
+                    <a
+                      class="w-full ti-btn ti-btn-primary p-2"
+                      href="javascript:void(0);"
+                    >
+                      View All
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="header-profile hs-dropdown ti-dropdown"
+              data-hs-dropdown-placement="bottom-right"
+            >
+              <button
+                id="dropdown-profile"
+                type="button"
+                class="hs-dropdown-toggle ti-dropdown-toggle gap-2 p-0 flex-shrink-0 h-8 w-8 rounded-full shadow-none focus:ring-gray-400 text-xs dark:focus:ring-white/10"
+              >
+                <img
+                  class="inline-block rounded-full ring-2 ring-white dark:ring-white/10"
+                  src="./assets/img/users/1.jpg"
+                  alt="Image Description"
+                />
+              </button>
+
+              <div
+                class="hs-dropdown-menu ti-dropdown-menu border-0 w-[20rem]"
+                aria-labelledby="dropdown-profile"
+              >
+                <div class="ti-dropdown-header !bg-primary flex">
+                  <div class="ltr:mr-3 rtl:ml-3">
+                    <img
+                      class="avatar shadow-none rounded-full !ring-transparent"
+                      src="./assets/img/users/1.jpg"
+                      alt="profile-img"
+                    />
+                  </div>
+                  <div>
+                    <p class="ti-dropdown-header-title !text-white">
+                      Json Taylor
+                    </p>
+                    <p class="ti-dropdown-header-content !text-white/50">
+                      Web Designer
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-2 ti-dropdown-divider">
+                  <a routerLink="/profile/home" class="ti-dropdown-item">
+                    <i class="ti ti-user-circle text-lg"></i>
+                    Profile
+                  </a>
+                  <a routerLink="/mail/mail" class="ti-dropdown-item">
+                    <i class="ti ti-inbox text-lg"></i>
+                    Inbox
+                  </a>
+                  <a routerLink="/page/tasks" class="ti-dropdown-item">
+                    <i class="ti ti-clipboard-check text-lg"></i>
+                    Task Manager
+                  </a>
+                  <a
+                    routerLink="/profile/profilesettings"
+                    class="ti-dropdown-item"
+                  >
+                    <i class="ti ti-adjustments-horizontal text-lg"></i>
+                    Settings
+                  </a>
+                  <a routerLink="/dashboard/crypto" class="ti-dropdown-item">
+                    <i class="ti ti-wallet text-lg"></i>
+                    Bal: $7,12,950
+                  </a>
+                  <a routerLink="/signin/basic" class="ti-dropdown-item">
+                    <i class="ti ti-logout text-lg"></i>
+                    Log Out
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="switcher-icon">
+              <button
+                aria-label="button"
+                type="button"
+                class="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] rounded-full font-medium bg-gray-100 hover:bg-gray-200 text-gray-500 align-middle focus:outline-none focus-visible:outline-none focus:ring-0 focus:ring-gray-400 focus:ring-offset-0 focus:ring-offset-white transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-white/70 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                data-hs-overlay="#hs-overlay-switcher"
+              >
+                <i class="ri-settings-5-line header-icon animate-spin"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- End::Header -->
+
+<!-- ========== Search Modal ========== -->
+<div id="search-modal" class="hs-overlay serachmodal ti-modal hidden">
+  <div class="ti-modal-box">
+    <div class="ti-modal-content">
+      <div class="ti-modal-body">
+        <div class="header-search">
+          <label for="icon" class="sr-only">Search</label>
+          <div class="relative">
+            <div class="search-btn">
+              <i class="ri ri-search-2-line search-btn-icon"></i>
+            </div>
+            <input
+              type="text"
+              id="icon"
+              name="icon"
+              class="py-2 ltr:pl-11 rtl:pr-11 ti-form-input focus:z-10"
+              placeholder="Search"
+            />
+            <div class="voice-search">
+              <i class="ri ri-mic-2-line voice-btn-icon"></i>
+            </div>
+            <div class="search-dropdown">
+              <i class="ri ri-more-2-line search-dropdown-btn-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5">
+          <p
+            class="font-semibold text-[13px] text-gray-400 dark:text-gray-200 mb-2"
+          >
+            Are You Looking For...
+          </p>
+          <div
+            class="badge rounded-sm bg-secondary/20 text-secondary relative header-box me-1"
+            id="badge1"
+          >
+            <a
+              routerLink="/page/team"
+              class="w-full my-auto items-center flex space-x-2 rtl:space-x-reverse"
+            >
+              <span class="inline-block text-secondary mr-1"
+                ><i class="ri ri-user-line text-sm"></i
+              ></span>
+              Team
+            </a>
+            <a
+              href="javascript:void(0);"
+              class="header-remove-btn flex-shrink-0 h-4 w-4 inline-flex items-center justify-center rounded-full text-secondary hover:bg-secondary hover:text-secondary focus:outline-none focus:bg-secondary focus:text-white"
+              (click)="removeRow('badge1')"
+            >
+              <span class="sr-only">Remove badge</span>
+              <svg
+                class="h-4 w-4 hover:fill-white"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div
+            id="badge2"
+            class="badge rounded-sm bg-secondary/20 text-secondary relative header-box me-1"
+          >
+            <a
+              routerLink="/form-module/form-elements"
+              class="w-full my-auto items-center flex space-x-2 rtl:space-x-reverse"
+            >
+              <span class="inline-block text-secondary mr-1"
+                ><i class="ri ri-file-text-line text-sm"></i
+              ></span>
+              Forms
+            </a>
+            <a
+              href="javascript:void(0);"
+              (click)="removeRow('badge2')"
+              class="header-remove-btn flex-shrink-0 h-4 w-4 inline-flex items-center justify-center rounded-full text-secondary hover:bg-secondary hover:text-secondary focus:outline-none focus:bg-secondary focus:text-white"
+            >
+              <span class="sr-only">Remove badge</span>
+              <svg
+                class="h-4 w-4 hover:fill-white"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div
+            id="badge3"
+            class="badge rounded-sm bg-secondary/20 text-secondary relative header-box me-1"
+          >
+            <a
+              routerLink="/maps/leaflet"
+              class="w-full my-auto items-center flex space-x-2 rtl:space-x-reverse"
+            >
+              <span class="inline-block text-secondary mr-1"
+                ><i class="ri ri-map-pin-line text-sm"></i
+              ></span>
+              Maps
+            </a>
+            <a
+              href="javascript:void(0);"
+              (click)="removeRow('badge3')"
+              class="header-remove-btn flex-shrink-0 h-4 w-4 inline-flex items-center justify-center rounded-full text-secondary hover:bg-secondary hover:text-secondary focus:outline-none focus:bg-secondary focus:text-white"
+            >
+              <span class="sr-only">Remove badge</span>
+              <svg
+                class="h-4 w-4 hover:fill-white"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div
+            id="badge4"
+            class="badge rounded-sm bg-secondary/20 text-secondary relative header-box me-1"
+          >
+            <a
+              routerLink="/widgets"
+              class="w-full my-auto items-center flex space-x-2 rtl:space-x-reverse"
+            >
+              <span class="inline-block text-secondary mr-1"
+                ><i class="ri ri-server-line text-sm"></i
+              ></span>
+              Widgets
+            </a>
+            <a
+              href="javascript:void(0);"
+              (click)="removeRow('badge4')"
+              class="header-remove-btn flex-shrink-0 h-4 w-4 inline-flex items-center justify-center rounded-full text-secondary hover:bg-secondary hover:text-secondary focus:outline-none focus:bg-secondary focus:text-white"
+            >
+              <span class="sr-only">Remove badge</span>
+              <svg
+                class="h-4 w-4 hover:fill-white"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="mt-5">
+          <p class="font-semibold text-sm text-gray-500 mb-2">
+            Recent Search :
+          </p>
+          <div
+            id="not1"
+            class="p-2 border dark:border-white/10 rounded-sm flex items-center text-gray-500 mb-1 relative header-box"
+          >
+            <a
+              routerLink="/advanced/notifications" (click)="removetheModal()"
+              class="w-full my-auto items-center flex"
+            >
+              <span class="text-sm">Notifications</span>
+            </a>
+            <a
+              aria-label="anchor"
+              href="javascript:void(0);"
+              class="ltr:ml-auto rtl:mr-auto flex-shrink-0 h-4 w-4 inline-flex items-center justify-center rounded-full text-gray-500 focus:outline-none header-remove-btn"
+            >
+              <i class="ri-close-line" (click)="removeRow('not1')"></i>
+            </a>
+          </div>
+          <div
+            id="not2"
+            class="p-2 border dark:border-white/10 rounded-sm flex items-center text-gray-500 mb-1 relative header-box"
+          >
+            <a
+              routerLink="/components/alerts" (click)="removetheModal()"
+              class="w-full my-auto items-center flex"
+            >
+              <span class="text-sm">Alerts</span>
+            </a>
+            <a
+              aria-label="anchor"
+              href="javascript:void(0);"
+              class="ltr:ml-auto rtl:mr-auto flex-shrink-0 h-4 w-4 inline-flex items-center justify-center rounded-full text-gray-500 focus:outline-none header-remove-btn"
+            >
+              <i class="ri-close-line" (click)="removeRow('not2')"></i>
+            </a>
+          </div>
+          <div
+            id="not3"
+            class="p-2 border dark:border-white/10 rounded-sm flex items-center text-gray-500 relative header-box"
+          >
+            <a 
+              routerLink="/tables/basictables" (click)="removetheModal()"
+              class="w-full my-auto items-center flex"
+            >
+              <span class="text-sm">Tables</span>
+            </a>
+            <a
+              aria-label="anchor"
+              href="javascript:void(0);"
+              class="ltr:ml-auto rtl:mr-auto flex-shrink-0 h-4 w-4 inline-flex items-center justify-center rounded-full text-gray-500 focus:outline-none header-remove-btn"
+            >
+              <i class="ri-close-line" (click)="removeRow('not3')"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="ti-modal-footer">
+        <div class="inline-flex rounded-md shadow-sm">
+          <button
+            type="button"
+            class="ti-btn-group py-1 ti-btn-soft-primary dark:border-white/10"
+          >
+            Search
+          </button>
+          <button
+            type="button"
+            class="ti-btn-group py-1 ti-btn-primary dark:border-white/10"
+          >
+            Clear Recents
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ========== END Search Modal ========== -->
