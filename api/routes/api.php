@@ -7,7 +7,6 @@ use App\Http\Controllers\Others\IncidentsController;
 use App\Http\Controllers\Others\PaymentController;
 use App\Http\Controllers\Others\TarifsController;
 use App\Http\Controllers\Others\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::prefix('account-type')->group(function () {
         Route::get('/', [AccountTypeController::class, 'index']);
