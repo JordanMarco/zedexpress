@@ -11,6 +11,7 @@ import { NotificationService } from './notification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './auth.service';
 import { EventService } from './event.service';
+import { AccountCode } from '../enums/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class SessionService {
     private authService: AuthService,
     public notificationService: NotificationService,
     public translateService: TranslateService,
-    private customNavigationService: CustomNavigationService
+    private customNavigationService: CustomNavigationService,
   ) {}
 
   public storeUser(user: IUser): void {
@@ -50,14 +51,13 @@ export class SessionService {
     localStorage.setItem(CURRENT_ROLE, JSON.stringify(role));
   }
 
-  public getCurrentRole(): IAccountType {  
+  public getCurrentRole(): IAccountType {
     return JSON.parse(localStorage.getItem(CURRENT_ROLE)!);
   }
 
   public deleteCurrentRole(): void {
     return localStorage.removeItem(CURRENT_ROLE)!;
   }
-
 
   public deleteAccessToken(): void {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
@@ -66,7 +66,7 @@ export class SessionService {
   public localLogin(user: IUser, token: string): void {
     this.storeUser(user);
     this.storeAccessToken(token);
-    this.storeCurrentRole(user.accountType)
+    this.storeCurrentRole(user.accountType);
   }
 
   public storeLanguage(lang: string): void {
@@ -80,7 +80,6 @@ export class SessionService {
   public deleteLanguage(): string {
     return localStorage.removeItem(LANG)!;
   }
-
 
   public logout(redirect = true): void {
     this.authService.logout().subscribe({
@@ -97,7 +96,7 @@ export class SessionService {
     this.deleteUser();
     this.deleteAccessToken();
     this.deleteCurrentRole();
-    if(redirect) this.customNavigationService.goTo('/login')
+    if (redirect) this.customNavigationService.goTo('/login');
   }
 
   public isLoggedIn(): boolean {
@@ -106,4 +105,13 @@ export class SessionService {
     return user !== null && token !== null;
   }
 
+  hasAccounType(accountCode: AccountCode, country?: string): boolean {
+    const accountType = this.getUser().accountType;
+    if (country)
+      return (
+        country === accountType.country && accountCode === accountType.code
+      );
+
+    return accountCode === accountType.code;
+  }
 }

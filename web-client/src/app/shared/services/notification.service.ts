@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { toastPosition } from '../enums/enums';
+import { ToastPosition } from '../enums/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +11,14 @@ export class NotificationService {
   public success(message: string): void {
     this.toastr.success(message, undefined, {
       closeButton: true,
-      positionClass: toastPosition.topRight,
+      positionClass: ToastPosition.topRight,
     });
   }
 
   public warning(message: string): void {
     this.toastr.warning(message, undefined, {
       closeButton: true,
-      positionClass: toastPosition.topRight,
+      positionClass: ToastPosition.topRight,
       timeOut: 15000,
     });
   }
@@ -26,14 +26,14 @@ export class NotificationService {
   public danger(message: string): void {
     this.toastr.error(message, undefined, {
       closeButton: true,
-      positionClass: toastPosition.topRight,
+      positionClass: ToastPosition.topRight,
     });
   }
 
   public info(message: string): void {
     this.toastr.info(message, undefined, {
       closeButton: true,
-      positionClass: toastPosition.topRight,
+      positionClass: ToastPosition.topRight,
       timeOut: 10000,
     });
   }
