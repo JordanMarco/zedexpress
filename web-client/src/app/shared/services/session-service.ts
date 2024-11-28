@@ -1,35 +1,16 @@
 import { Injectable } from '@angular/core';
-
 import { CustomNavigationService } from './custom-navigation.service';
 import {
   ACCESS_TOKEN_KEY,
   CURRENT_ROLE,
   USER_KEY,
   LANG,
-} from 'src/app/core/utils/constant';
-import { AdminRole, DefaultRole, IRole, IUser } from '../models/User';
-import { Country, Currency } from '../models/Common';
-import {
-  AdminRoleType,
-  GroupType,
-  PostLoginAtions,
-  UserType,
-} from '../enums/enums';
-import {
-  RestAuthentificationService,
-  CurrencyService,
-  UseCaseTotpService,
-  UserService,
-} from '../rest-services/rest-services';
-import { EventService } from './event.service';
-import { ServicesService } from './services.service';
-import { PushNotificationService } from './push-notification.service';
-import { ILoginResponse } from '../models/Login';
+} from 'src/app/shared/utils/constants';
+import { IAccountType, IUser } from '../models/User';
 import { NotificationService } from './notification.service';
 import { TranslateService } from '@ngx-translate/core';
-import { LoginPostActionParams } from '../utils/type';
-import { PreLoginInfosComponent } from 'src/app/shared-components/login/pre-login-infos/pre-login-infos.component';
-import { LoginModalComponent } from 'src/app/shared-components/login/login-modal/login-modal.component';
+import { AuthService } from './auth.service';
+import { EventService } from './event.service';
 
 @Injectable({
   providedIn: 'root',
@@ -37,19 +18,15 @@ import { LoginModalComponent } from 'src/app/shared-components/login/login-modal
 export class SessionService {
   constructor(
     public navigationService: CustomNavigationService,
-    private currencyService: CurrencyService,
     private eventService: EventService,
-    private services: ServicesService,
-    private userService: UserService,
-    private pushNotivationService: PushNotificationService,
-    public authService: RestAuthentificationService,
+    private authService: AuthService,
     public notificationService: NotificationService,
     public translateService: TranslateService,
-    public totpService: UseCaseTotpService
+    private customNavigationService: CustomNavigationService
   ) {}
 
   public storeUser(user: IUser): void {
-    this.services.eventService.publish('user:updated', user);
+    this.eventService.publish('user:updated', user);
     localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
@@ -69,11 +46,11 @@ export class SessionService {
     return localStorage.getItem(ACCESS_TOKEN_KEY)!;
   }
 
-  public storeCurrentRole(role: IRole): void {
+  public storeCurrentRole(role: IAccountType): void {
     localStorage.setItem(CURRENT_ROLE, JSON.stringify(role));
   }
 
-  public getCurrentRole(): IRole {  
+  public getCurrentRole(): IAccountType {  
     return JSON.parse(localStorage.getItem(CURRENT_ROLE)!);
   }
 
@@ -89,6 +66,7 @@ export class SessionService {
   public localLogin(user: IUser, token: string): void {
     this.storeUser(user);
     this.storeAccessToken(token);
+    this.storeCurrentRole(user.accountType)
   }
 
   public storeLanguage(lang: string): void {
@@ -115,10 +93,11 @@ export class SessionService {
     });
   }
 
-  clearStorage(): void {
+  clearStorage(redirect = false): void {
     this.deleteUser();
     this.deleteAccessToken();
     this.deleteCurrentRole();
+    if(redirect) this.customNavigationService.goTo('/login')
   }
 
   public isLoggedIn(): boolean {

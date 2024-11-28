@@ -14,7 +14,7 @@ export class SidebarComponent {
   // Addding sticky-pin
   scrolled = false;
   screenWidth: number;
-  eventTriggered: boolean = false;
+  eventTriggered = false;
   public localdata = localStorage;
 
   @HostListener('window:scroll', [])
