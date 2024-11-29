@@ -14,16 +14,17 @@ export class LoginPageComponent {
   public showPassword = false;
   disabled = '';
   active: any;
+  isLoading = false;
 
   constructor(
     private authservice: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
     private renderer: Renderer2,
-    private sessionService: SessionService
+    private sessionService: SessionService,
   ) {
-     const bodyElement = this.renderer.selectRootElement('body', true);
-     this.renderer.setAttribute(bodyElement, 'class', 'cover1 justify-center');
+    const bodyElement = this.renderer.selectRootElement('body', true);
+    this.renderer.setAttribute(bodyElement, 'class', 'cover1 justify-center');
   }
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -32,9 +33,6 @@ export class LoginPageComponent {
     });
   }
 
-  // firebase
-  identifier = '';
-  password = '';
   errorMessage = ''; // validation _error handle
   _error: { name: string; message: string } = { name: '', message: '' }; // for firbase _error handle
 
@@ -44,38 +42,27 @@ export class LoginPageComponent {
   }
 
   login() {
-    this.clearErrorMessage()
-    if (this.validateForm(this.identifier, this.password)) {
-      this.authservice
-        .login(new Login(this.identifier, this.password) ).subscribe({
-          next: (res: ILoginResponse) => {
-            this.router.navigate(['/dashboard/sales']);
-            this.sessionService.localLogin(res.user, res.token);
-          },
-          error: () => {},
-          complete: () => {}
-        })
-    }
-  }
-
-  validateForm(identifier: string, password: string) {
-    if (identifier.length === 0) {
-      this.errorMessage = 'please enter identifier id';
-      return false;
-    }
-
-    if (password.length === 0) {
-      this.errorMessage = 'please enter password';
-      return false;
-    }
-
-    if (password.length < 6) {
-      this.errorMessage = 'password should be at least 6 char';
-      return false;
-    }
-
-    this.errorMessage = '';
-    return true;
+    this.clearErrorMessage();
+    this.isLoading = true;
+    this.authservice
+      .login(
+        new Login(
+          this.loginForm.value.username,
+          this.loginForm.value.password,
+        ),
+      )
+      .subscribe({
+        next: (res: ILoginResponse) => {
+          this.router.navigate(['/dashboard/sales']);
+          this.sessionService.localLogin(res.user, res.token);
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
   }
 
   //angular
@@ -85,8 +72,6 @@ export class LoginPageComponent {
   get form() {
     return this.loginForm.controls;
   }
-
-  
 
   public togglePassword() {
     this.showPassword = !this.showPassword;

@@ -1,4 +1,8 @@
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,12 +17,17 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { StorageService } from './shared/services/storage.service';
-
+import { ErrorInterceptor } from './authentication/interceptors/error.interceptor';
+import { TokenInterceptor } from './authentication/interceptors/token.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http,'/assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 @NgModule({
   declarations: [AppComponent, CustomLayoutComponent, ContentLayoutComponent],
@@ -32,22 +41,34 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
-  }),
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     LeafletModule,
-    ColorPickerModule
+    ColorPickerModule,
   ],
-  
-  providers: [ {
-    provide: APP_INITIALIZER,
-    useFactory: (ds: StorageService) => () => ds.init(),
-    deps: [StorageService],
-    multi: true,
-  }],
+
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (ds: StorageService) => () => ds.init(),
+      deps: [StorageService],
+      multi: true,
+    },
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
-export class AppModule {} 
+export class AppModule {}
