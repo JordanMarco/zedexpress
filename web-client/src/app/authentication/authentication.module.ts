@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { RegisterPageComponent } from './register-page/register-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { MaterialModuleModule } from '../materialModule/material-module/material-module.module';
 
 @NgModule({
-  declarations: [LoginPageComponent, RegisterPageComponent],
+  declarations: [LoginPageComponent],
   imports: [
     CommonModule,
     AuthenticationRoutingModule,
-    AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
+    MaterialModuleModule
   ],
 })
 export class AuthenticationModule {}

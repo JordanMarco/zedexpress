@@ -74,7 +74,7 @@ export function dynamicBgTrasnsparentPrimaryColor(
 }
 
 export function localStorageBackUp() {
-  let html = document.querySelector('html');
+  const html = document.querySelector('html');
   if (localStorage.getItem('data-header-styles') == 'dark') {
     if (html?.setAttribute('class', 'dark')) {
       const light = document.getElementById(

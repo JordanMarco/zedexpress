@@ -61,7 +61,7 @@
               name="theme-style"
               class="ti-form-radio"
               id="switcher-light-theme"
-             (click)="themeChange('light','light')" [checked]="localdata['synto-theme-mode']!='dark'"
+             (click)="themeChange('light','light')" [checked]="localdata['synto-theme-mode']!=='dark'"
             />
             <label
               for="switcher-light-theme"
@@ -74,7 +74,7 @@
               name="theme-style"
               class="ti-form-radio"
               id="switcher-dark-theme"
-             (click)="themeChange('dark','dark')" [checked]="localdata['synto-theme-mode']=='dark'"
+             (click)="themeChange('dark','dark')" [checked]="localdata['synto-theme-mode']==='dark'"
             />
             <label
               for="switcher-dark-theme"
@@ -94,7 +94,7 @@
               class="ti-form-radio"
               id="switcher-ltr"
               (click)="DirectionsChange('ltr')"
-              [checked]="localdata['synto-dir'] != 'rtl'"
+              [checked]="localdata['synto-dir'] !== 'rtl'"
             />
             <label
               for="switcher-ltr"
@@ -109,7 +109,7 @@
               class="ti-form-radio"
               id="switcher-rtl"
               (click)="DirectionsChange('rtl')"
-              [checked]="localdata['synto-dir'] == 'rtl'"
+              [checked]="localdata['synto-dir'] === 'rtl'"
             />
             <label
               for="switcher-rtl"
@@ -129,7 +129,7 @@
               class="ti-form-radio"
               id="switcher-vertical"
               (click)="NavigationChange('vertical')"
-              [checked]="localdata['synto-nav-mode'] != 'horizontal'"
+              [checked]="localdata['synto-nav-mode'] !== 'horizontal'"
             />
             <label
               for="switcher-vertical"
@@ -143,7 +143,7 @@
               name="navigation-style"
               class="ti-form-radio"
               id="switcher-horizontal"
-              [checked]="localdata['synto-nav-mode'] == 'horizontal'"
+              [checked]="localdata['synto-nav-mode'] === 'horizontal'"
               (click)="NavigationChange('horizontal')"
 
             />
@@ -165,7 +165,7 @@
               class="ti-form-radio"
               id="switcher-menu-click"
               (click)="Menus('menu-click-closed', 'menu-click')"
-              [checked]="localdata['synto-menu-style'] == 'menu-click'"
+              [checked]="localdata['synto-menu-style'] === 'menu-click'"
 
             />
             <label
@@ -181,7 +181,7 @@
               class="ti-form-radio"
               id="switcher-menu-hover"
               (click)="Menus('menu-hover-closed', 'menu-hover')"
-              [checked]="localdata['synto-menu-style'] == 'menu-hover'"
+              [checked]="localdata['synto-menu-style'] === 'menu-hover'"
             />
             <label
               for="switcher-menu-hover"
@@ -196,7 +196,7 @@
               class="ti-form-radio"
               id="switcher-icon-click"
               (click)="Menus('icon-click-closed', 'icon-click')"
-              [checked]="localdata['synto-menu-style'] == 'icon-click'"
+              [checked]="localdata['synto-menu-style'] === 'icon-click'"
             />
             <label
               for="switcher-icon-click"
@@ -211,7 +211,7 @@
               class="ti-form-radio"
               id="switcher-icon-hover"
               (click)="Menus('icon-hover-closed', 'icon-hover')"
-             [checked]="localdata['synto-menu-style'] == 'menu-hover'"
+             [checked]="localdata['synto-menu-style'] === 'menu-hover'"
             />
             <label
               for="switcher-icon-hover"
@@ -235,7 +235,7 @@
               class="ti-form-radio"
               id="switcher-regular"
               (click)="PageChange('regular')"
-              [checked]="localdata['synto-page-mode'] != 'classic'"
+              [checked]="localdata['synto-page-mode'] !== 'classic'"
             />
             <label
               for="switcher-regular"
@@ -250,7 +250,7 @@
               class="ti-form-radio"
               id="switcher-classic"
               (click)="PageChange('classic')"
-              [checked]="localdata['synto-page-mode'] == 'classic'"
+              [checked]="localdata['synto-page-mode'] === 'classic'"
             />
             <label
               for="switcher-classic"
@@ -270,7 +270,7 @@
               class="ti-form-radio"
               id="switcher-full-width"
               (click)="WidthChange('full-width')"
-              [checked]="localdata['synto-width-mode'] != 'boxed'"
+              [checked]="localdata['synto-width-mode'] !== 'boxed'"
             />
             <label
               for="switcher-full-width"
@@ -285,7 +285,7 @@
               class="ti-form-radio"
               id="switcher-boxed"
               (click)="WidthChange('boxed')"
-              [checked]="localdata['synto-width-mode'] == 'boxed'"
+              [checked]="localdata['synto-width-mode'] === 'boxed'"
             />
             <label
               for="switcher-boxed"
@@ -305,7 +305,7 @@
               class="ti-form-radio"
               id="switcher-menu-fixed"
               (click)="MenuChange('fixed')"
-              [checked]="localdata['synto-menu-mode'] != 'scrollable'"
+              [checked]="localdata['synto-menu-mode'] !== 'scrollable'"
             />
             <label
               for="switcher-menu-fixed"
@@ -320,7 +320,7 @@
               class="ti-form-radio"
               id="switcher-menu-scroll"
               (click)="MenuChange('scrollable')"
-              [checked]="localdata['synto-menu-mode'] == 'scrollable'"
+              [checked]="localdata['synto-menu-mode'] === 'scrollable'"
             />
             <label
               for="switcher-menu-scroll"
@@ -340,7 +340,7 @@
               class="ti-form-radio"
               id="switcher-header-fixed"
               (click)="HeaderChange('fixed')"
-              [checked]="localdata['synto-header-mode'] != 'scrollable'"
+              [checked]="localdata['synto-header-mode'] !== 'scrollable'"
             />
             <label
               for="switcher-header-fixed"
@@ -356,7 +356,7 @@
               class="ti-form-radio"
               id="switcher-header-scroll"
               (click)="HeaderChange('scrollable')"
-              [checked]="localdata['synto-header-mode'] == 'scrollable'"
+              [checked]="localdata['synto-header-mode'] === 'scrollable'"
             />
             <label
               for="switcher-header-scroll"
@@ -383,7 +383,7 @@
               name="menu-colors"
               id="switcher-menu-light"
               (click)="menuTheme('light')"
-              [checked]="localdata['synto-menu-mode'] == 'light'"
+              [checked]="localdata['synto-menu-mode'] === 'light'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -399,7 +399,7 @@
               name="menu-colors"
               id="switcher-menu-dark"
               (click)="menuTheme('dark')"
-              [checked]="localdata['synto-menu-mode'] == 'dark'"
+              [checked]="localdata['synto-menu-mode'] === 'dark'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -415,7 +415,7 @@
               name="menu-colors"
               id="switcher-menu-primary"
               (click)="menuTheme('color')"
-              [checked]="localdata['synto-menu-mode'] == 'color'"
+              [checked]="localdata['synto-menu-mode'] === 'color'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -431,7 +431,7 @@
               name="menu-colors"
               id="switcher-menu-gradient"
               (click)="menuTheme('gradient')"
-              [checked]="localdata['synto-menu-mode'] == 'gradient'"
+              [checked]="localdata['synto-menu-mode'] === 'gradient'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -447,7 +447,7 @@
               name="menu-colors"
               id="switcher-menu-transparent"
               (click)="menuTheme('transparent')"
-              [checked]="localdata['synto-menu-mode'] == 'transparent'"
+              [checked]="localdata['synto-menu-mode'] === 'transparent'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -472,7 +472,7 @@
               name="header-colors"
               id="switcher-header-light"
               (click)="headerTheme('light')"
-              [checked]="localdata['synto-header-mode'] == 'light'"
+              [checked]="localdata['synto-header-mode'] === 'light'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -488,7 +488,7 @@
               name="header-colors"
               id="switcher-header-dark"
               (click)="headerTheme('dark')"
-              [checked]="localdata['synto-header-mode'] == 'dark'"
+              [checked]="localdata['synto-header-mode'] === 'dark'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -504,7 +504,7 @@
               name="header-colors"
               id="switcher-header-primary"
               (click)="headerTheme('color')"
-              [checked]="localdata['synto-header-mode'] == 'color'"
+              [checked]="localdata['synto-header-mode'] === 'color'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -520,7 +520,7 @@
               name="header-colors"
               id="switcher-header-gradient"
               (click)="headerTheme('gradient')"
-              [checked]="localdata['synto-header-mode'] == 'gradient'"
+              [checked]="localdata['synto-header-mode'] === 'gradient'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -536,7 +536,7 @@
               name="header-colors"
               id="switcher-header-transparent"
               (click)="headerTheme('transparent')"
-              [checked]="localdata['synto-header-mode'] == 'transparent'"
+              [checked]="localdata['synto-header-mode'] === 'transparent'"
             />
             <span
               class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
@@ -571,7 +571,7 @@
               name="theme-primary"
               id="switcher-primary1"
               (click)="primary('92 144 163')"
-              [checked]="localdata['synto-primary-mode'] == '92 144 163'"
+              [checked]="localdata['synto-primary-mode'] === '92 144 163'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -581,7 +581,7 @@
               name="theme-primary"
               id="switcher-primary2"
               (click)="primary('172 172 80')"
-              [checked]="localdata['synto-primary-mode'] == '172 172 80'"
+              [checked]="localdata['synto-primary-mode'] === '172 172 80'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -591,7 +591,7 @@
               name="theme-primary"
               id="switcher-primary3"
               (click)="primary('165 94 131')"
-              [checked]="localdata['synto-primary-mode'] == '165 94 131'"
+              [checked]="localdata['synto-primary-mode'] === '165 94 131'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -601,7 +601,7 @@
               name="theme-primary"
               id="switcher-primary4"
               (click)="primary('87 68 117')"
-              [checked]="localdata['synto-primary-mode'] == '87 68 117'"
+              [checked]="localdata['synto-primary-mode'] === '87 68 117'"
             />
           </div>
           <div for="lightPrimaryColorID"
@@ -637,7 +637,7 @@
                   'dark'
                 )
               "
-              [checked]="localdata['synto-background-mode-dark'] == '50 62 93'"
+              [checked]="localdata['synto-background-mode-dark'] === '50 62 93'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -653,7 +653,7 @@
                   'dark'
                 )
               "
-              [checked]="localdata['synto-background-mode-dark'] == '81 93 50'"
+              [checked]="localdata['synto-background-mode-dark'] === '81 93 50'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -669,7 +669,7 @@
                   'dark'
                 )
               "
-              [checked]="localdata['synto-background-mode-dark'] == '79 50 93'"
+              [checked]="localdata['synto-background-mode-dark'] === '79 50 93'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -685,7 +685,7 @@
                   'dark'
                 )
               "
-              [checked]="localdata['synto-background-mode-dark'] == '50 87 93'"
+              [checked]="localdata['synto-background-mode-dark'] === '50 87 93'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -701,7 +701,7 @@
                   'dark'
                 )
               "
-              [checked]="localdata['synto-background-mode-dark'] == '93 50 50'"
+              [checked]="localdata['synto-background-mode-dark'] === '93 50 50'"
             />
           </div>
           <div
@@ -734,7 +734,7 @@
               name="theme-images"
               id="switcher-bg-img"
               (click)="ImageTheme('bgimg1')"
-              [checked]="localdata['synto-image'] == 'bgimg1'"
+              [checked]="localdata['synto-image'] === 'bgimg1'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -744,7 +744,7 @@
               name="theme-images"
               id="switcher-bg-img1"
               (click)="ImageTheme('bgimg2')"
-              [checked]="localdata['synto-image'] == 'bgimg2'"
+              [checked]="localdata['synto-image'] === 'bgimg2'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -754,7 +754,7 @@
               name="theme-images"
               id="switcher-bg-img2"
               (click)="ImageTheme('bgimg3')"
-              [checked]="localdata['synto-image'] == 'bgimg3'"
+              [checked]="localdata['synto-image'] === 'bgimg3'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -764,7 +764,7 @@
               name="theme-images"
               id="switcher-bg-img3"
               (click)="ImageTheme('bgimg4')"
-              [checked]="localdata['synto-image'] == 'bgimg4'"
+              [checked]="localdata['synto-image'] === 'bgimg4'"
             />
           </div>
           <div class="ti-form-radio switch-select">
@@ -774,7 +774,7 @@
               name="theme-images"
               id="switcher-bg-img4"
               (click)="ImageTheme('bgimg5')"
-              [checked]="localdata['synto-image'] == 'bgimg5'"
+              [checked]="localdata['synto-image'] === 'bgimg5'"
             />
           </div>
         </div>

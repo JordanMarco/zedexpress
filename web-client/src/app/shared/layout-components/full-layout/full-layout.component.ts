@@ -39,7 +39,7 @@ export class FullLayoutComponent {
     });
   }
   clearToggle() {
-    let html = this.elementRef.nativeElement.ownerDocument.documentElement;
+    const html = this.elementRef.nativeElement.ownerDocument.documentElement;
     html?.setAttribute('toggled', 'close');
     document.querySelector('#responsive-overlay')?.classList.remove('active');
   }

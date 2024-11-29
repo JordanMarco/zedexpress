@@ -77,8 +77,8 @@
                               <!-- 3rd Level menu -->
                               <ul class="slide-menu child2" [ngStyle]="{
                                 display: childrenItem.active ? 'block' : 'none',
-                                right: localdata['synto-dir'] == 'rtl' ? 'auto' : '',
-                                left: localdata['synto-dir'] == 'rtl' ? '100%' : ''
+                                right: localdata['synto-dir'] === 'rtl' ? 'auto' : '',
+                                left: localdata['synto-dir'] === 'rtl' ? '100%' : ''
                               }" *ngIf="childrenItem.children" [ngClass]="{'open': childrenItem.active}">
                                   <ng-container *ngFor="let childrenSubItem of childrenItem.children">
                                       <li class="slide" activeMenuItems [ngClass]="{'is-expanded': childrenSubItem.active}">

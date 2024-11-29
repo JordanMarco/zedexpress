@@ -1,18 +1,15 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+const basePath = 'https://api.kimbocare.ch';
 export const environment = {
-  production: true,
-  firebase: {
-    apiKey: '********************************',
-    authDomain: '********************************',
-    projectId: '********************************',
-    storageBucket: '********************************',
-    messagingSenderId: '********************************',
-    appId: '********************************',
-    measurementId: '********************************',
-  },
+  production: false,
+  basePath,
+  name: 'production',
+  ssk: 'we-sv-rtw--eüd-§$-fd',
+  ssv: 'öer:gerv:vjdf+*dfe#e-ee,',
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

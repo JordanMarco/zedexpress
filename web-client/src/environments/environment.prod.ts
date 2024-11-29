@@ -1,12 +1,8 @@
+const basePath = 'https://api.kimbocare.ch';
 export const environment = {
   production: true,
-  firebase: {
-    apiKey: '********************************',
-    authDomain: '********************************',
-    projectId: '********************************',
-    storageBucket: '********************************',
-    messagingSenderId: '********************************',
-    appId: '********************************',
-    measurementId: '********************************',
-  },
+  basePath,
+  name: 'production',
+  ssk: 'we-sv-rtw--eüd-§$-fd',
+  ssv: 'öer:gerv:vjdf+*dfe#e-ee,',
 };

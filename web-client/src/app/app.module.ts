@@ -1,4 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,14 +13,22 @@ import { ContentLayoutComponent } from './shared/layout-components/content-layou
 import { StoreModule } from '@ngrx/store';
 import { dataReaducer } from './shared/ngrx/e-commerce/shop.reducers';
 import { ToastrModule } from 'ngx-toastr';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { environment } from 'src/environments/environment';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
+import { StorageService } from './shared/services/storage.service';
+import { ErrorInterceptor } from './authentication/interceptors/error.interceptor';
+import { TokenInterceptor } from './authentication/interceptors/token.interceptor';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [AppComponent, CustomLayoutComponent, ContentLayoutComponent],
   imports: [
@@ -26,17 +38,37 @@ import { ColorPickerModule } from 'ngx-color-picker';
     BrowserAnimationsModule,
     StoreModule.forRoot({ data: dataReaducer }),
     ToastrModule.forRoot(),
-    AngularFireModule,
-    AngularFireDatabaseModule,
-    AngularFirestoreModule,
-    AngularFireAuthModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     LeafletModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    ColorPickerModule
+    ColorPickerModule,
   ],
-  
-  providers: [],
+
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (ds: StorageService) => () => ds.init(),
+      deps: [StorageService],
+      multi: true,
+    },
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
-export class AppModule {} 
+export class AppModule {}

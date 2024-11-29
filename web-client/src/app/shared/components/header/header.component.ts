@@ -36,7 +36,7 @@ export class HeaderComponent {
   }
 
   toggleSidebar() {
-    let html = this.elementRef.nativeElement.ownerDocument.documentElement;
+    const html = this.elementRef.nativeElement.ownerDocument.documentElement;
     if(window.innerWidth <= 992){
       html?.setAttribute('toggled', html?.getAttribute('toggled') == 'open' ? 'close' : 'open');
       if(html?.getAttribute('toggled') == 'open'){
@@ -75,7 +75,7 @@ export class HeaderComponent {
 
   ngOnDestroy(): void {
     const windowObject: any = window;
-    let html = this.elementRef.nativeElement.ownerDocument.documentElement;
+    const html = this.elementRef.nativeElement.ownerDocument.documentElement;
     if (windowObject.innerWidth <= '991') {
       html?.setAttribute('toggled', 'open');
     }

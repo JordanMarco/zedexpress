@@ -1,7 +1,9 @@
 import { Component, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ILoginResponse, Login } from 'src/app/shared/models/User';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SessionService } from 'src/app/shared/services/session-service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,26 +14,25 @@ export class LoginPageComponent {
   public showPassword = false;
   disabled = '';
   active: any;
+  isLoading = false;
 
   constructor(
     private authservice: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private sessionService: SessionService,
   ) {
-     const bodyElement = this.renderer.selectRootElement('body', true);
-     this.renderer.setAttribute(bodyElement, 'class', 'cover1 justify-center');
+    const bodyElement = this.renderer.selectRootElement('body', true);
+    this.renderer.setAttribute(bodyElement, 'class', 'cover1 justify-center');
   }
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['spruko@admin.com', [Validators.required, Validators.email]],
-      password: ['sprukoadmin', Validators.required],
+      username: ['', [Validators.required]],
+      password: ['', Validators.required],
     });
   }
 
-  // firebase
-  email = 'spruko@admin.com';
-  password = 'sprukoadmin';
   errorMessage = ''; // validation _error handle
   _error: { name: string; message: string } = { name: '', message: '' }; // for firbase _error handle
 
@@ -41,40 +42,27 @@ export class LoginPageComponent {
   }
 
   login() {
-    // this.disabled = "btn-loading"
     this.clearErrorMessage();
-    if (this.validateForm(this.email, this.password)) {
-      this.authservice
-        .loginWithEmail(this.email, this.password)
-        .then(() => {
+    this.isLoading = true;
+    this.authservice
+      .login(
+        new Login(
+          this.loginForm.value.username,
+          this.loginForm.value.password,
+        ),
+      )
+      .subscribe({
+        next: (res: ILoginResponse) => {
           this.router.navigate(['/dashboard/sales']);
-          console.clear();
-        })
-        .catch((_error: any) => {
-          this._error = _error;
-          this.router.navigate(['/']);
-        });
-    }
-  }
-
-  validateForm(email: string, password: string) {
-    if (email.length === 0) {
-      this.errorMessage = 'please enter email id';
-      return false;
-    }
-
-    if (password.length === 0) {
-      this.errorMessage = 'please enter password';
-      return false;
-    }
-
-    if (password.length < 6) {
-      this.errorMessage = 'password should be at least 6 char';
-      return false;
-    }
-
-    this.errorMessage = '';
-    return true;
+          this.sessionService.localLogin(res.user, res.token);
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
   }
 
   //angular
@@ -83,17 +71,6 @@ export class LoginPageComponent {
 
   get form() {
     return this.loginForm.controls;
-  }
-
-  Submit() {
-    if (
-      this.loginForm.controls['username'].value === 'spruko@admin.com' &&
-      this.loginForm.controls['password'].value === 'sprukoadmin'
-    ) {
-      this.router.navigate(['/dashboard/sales']);
-    } else {
-      this.error = 'Please check email and passowrd';
-    }
   }
 
   public togglePassword() {
