@@ -39,11 +39,11 @@ export class TarifService {
   /**
    * Met à jour un tarif existant.
    * @param id L'identifiant du tarif à mettre à jour.
-   * @param data Les nouvelles données du tarif.
+   * @param tarif Les nouvelles données du tarif.
    * @returns Observable avec les informations du tarif mis à jour.
    */
-  update(id: number, data: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/${id}`, data);
+  update(id: number, tarif: Tarif): Observable<ITarif> {
+    return this.http.put<ITarif>(`${this.baseUrl}/${id}`, tarif);
   }
 
   /**
