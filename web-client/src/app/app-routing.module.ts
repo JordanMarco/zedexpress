@@ -21,7 +21,7 @@ const routes: Routes = [
         (m) => m.AuthenticationModule
       ),
     canActivate: [guestGuard()]
-  }
+  },
 ];
 
 @NgModule({
