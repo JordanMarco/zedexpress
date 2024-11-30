@@ -36,7 +36,7 @@ class ColisFactory extends Factory
             'date_arrive' => $this->faker->dateTimeBetween('+1 week', '+2 weeks'),
             'hauteur' => $this->faker->randomFloat(2, 10, 200), // en cm
             'largeur' => $this->faker->randomFloat(2, 10, 200), // en cm
-            'receiver_id' => $this->faker->randomNumber(5, true),
+            'receiver_id' => User::factory(),
             'longueur' => $this->faker->randomFloat(2, 10, 200), // en cm
             'quantite' => $this->faker->numberBetween(1, 100),
             'valeur_euro' => $this->faker->randomFloat(2, 10, 1000),
