@@ -64,36 +64,40 @@
                   class="ti-dropdown-divider divide-y divide-gray-200 dark:divide-white/10"
                 >
                   <div class="py-2 first:pt-0 last:pb-0">
-                    <div class="ti-dropdown-item">
-                      <div
+                    <div class="ti-dropdown-item {{currentLang === 'en'?'bg-gray-200': ''}}">
+                      <button
+                        (click)="handleLanguageChange('EN')"
+                        type="button"
                         class="flex items-center space-x-2 rtl:space-x-reverse w-full"
                       >
                         <div class="h-[1.375rem] w-[1.375rem] rounded-sm">
-                          <img src="./assets/img/flags/10.png" alt="flag-img" />
+                          <img src="./assets/img/flags/us.png" alt="flag-img" />
                         </div>
                         <div>
-                          <p class="text-xs font-medium">USA</p>
+                          <p class="text-xs font-medium">US</p>
                         </div>
-                      </div>
+                      </button>
                     </div>
-                  
-                    <div class="ti-dropdown-item">
-                      <div
+
+                    <div class="ti-dropdown-item {{currentLang === 'fr'?'bg-gray-200': ''}}">
+                      <button
+                        (click)="handleLanguageChange('FR')"
+                        type="button"
                         class="flex items-center space-x-2 rtl:space-x-reverse w-full"
                       >
                         <div class="h-[1.375rem] w-[1.375rem] rounded-sm">
-                          <img src="./assets/img/flags/3.png" alt="flag-img" />
+                          <img src="./assets/img/flags/fr.png" alt="flag-img" />
                         </div>
                         <div>
-                          <p class="text-xs font-medium">France</p>
+                          <p class="text-xs font-medium">FR</p>
                         </div>
-                      </div>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-         
+
             <div class="header-theme-mode hidden sm:block" appToggleTheme>
               <a
                 aria-label="anchor"
@@ -127,7 +131,7 @@
                 ></i>
               </a>
             </div>
-         
+
             <div
               class="header-profile hs-dropdown ti-dropdown"
               data-hs-dropdown-placement="bottom-right"
@@ -158,22 +162,21 @@
                   </div>
                   <div>
                     <p class="ti-dropdown-header-title !text-white">
-                      {{user ? user.last_name +' '+ user.first_name : ''}}
+                      {{ user ? user.last_name + " " + user.first_name : "" }}
                     </p>
                     <p class="ti-dropdown-header-content !text-white/50">
-                      {{user ? user.accountType.label : ''}}
+                      {{ user ? user.account?.label! : "" }}
                     </p>
                   </div>
                 </div>
                 <div class="mt-2 ti-dropdown-divider">
-                  <a class="ti-dropdown-item" (click)="logout()">
+                  <a class="ti-dropdown-item cursor-pointer" (click)="logout()">
                     <i class="ti ti-logout text-lg"></i>
                     Log Out
                   </a>
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -181,4 +184,3 @@
   </nav>
 </header>
 <!-- End::Header -->
-

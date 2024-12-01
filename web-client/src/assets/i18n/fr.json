@@ -39,7 +39,7 @@
     "passwords-do-not-match": "Les mots de passe ne correspondent pas.",
     "required": "Ce champ est obligatoire.",
     "stripe-initialization-error": "Impossible d'initialiser le service Stripe pour le paiement.",
-    "token-extraction": "Impossible d'obtenir le jeton d'autorisation.",
+    "token-extraction": "Impossible d'obtenir le jeton d'autorisation. Veuillez vérifier vos informations de connexion et réessayer.",
     "top-up-amount-too-high": "Le montant maximum que vous pouvez recharger est de {{maxAmount}}.",
     "top-up-amount-too-low": "Le montant minimum que vous pouvez recharger est de {{minAmount}}.",
     "amount-too-low": "Le montant minimum est de {{minAmount}}.",

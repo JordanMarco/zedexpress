@@ -1,8 +1,10 @@
 import { Component, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ILoginResponse, Login } from 'src/app/shared/models/User';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { SessionService } from 'src/app/shared/services/session-service';
 
 @Component({
@@ -22,6 +24,8 @@ export class LoginPageComponent {
     private formBuilder: FormBuilder,
     private renderer: Renderer2,
     private sessionService: SessionService,
+    private notificationService: NotificationService,
+    private translateService: TranslateService
   ) {
     const bodyElement = this.renderer.selectRootElement('body', true);
     this.renderer.setAttribute(bodyElement, 'class', 'cover1 justify-center');
@@ -58,6 +62,7 @@ export class LoginPageComponent {
         },
         error: () => {
           this.isLoading = false;
+          this.notificationService.danger(this.translateService.instant('errors.token-extraction'))
         },
         complete: () => {
           this.isLoading = false;
