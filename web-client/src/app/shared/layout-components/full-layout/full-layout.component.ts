@@ -43,6 +43,7 @@ export class FullLayoutComponent {
     html?.setAttribute('toggled', 'close');
     document.querySelector('#responsive-overlay')?.classList.remove('active');
   }
+  
   ngOnInit(): void {
     this.navServices.items.subscribe((items) => {
       this.menuItems = items;

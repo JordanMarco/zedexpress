@@ -131,12 +131,12 @@ export class NavService implements OnDestroy {
     },
     //Pack
     {
-      title: 'Packs managment',
+      title: 'Packages managment',
       icon: 'red-packet-line',
       active: false,
       badgeClass: 'badge badge-sm bg-secondary badge-hide',
       badgeValue: 'new',
-      path: '/packs',
+      path: '/packages',
       selected: false,
       type: 'link',
     },
