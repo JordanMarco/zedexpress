@@ -100,6 +100,16 @@
     "invalid-invoice-transation-type": "Ce type de transaction n'a pas de facture.",
     "error-google-admin-auth": "Votre compte administrateur ne peut pas se connecter avec cette méthode."
   },
+  "MENU": {
+    "MAIN": "MAIN",
+    "DASHBOARD": "Tableau de bord",
+    "USERS": "Gestion des utilisateurs",
+    "MESSAGES": "Gestion des messages",
+    "CLIENTS": "Gestion les clients",
+    "PACKAGES": "Gérer les colis",
+    "CATEGORIES": "Gérer les catégories",
+    "INCIDENTS": "Gérer les incidents"
+  },
   "COMMON": {
     "SEARCH": "Rechercher",
     "SEARCH_PLACEHOLDER": "Rechercher des utilisateurs...",

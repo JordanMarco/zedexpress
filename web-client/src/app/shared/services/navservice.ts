@@ -1,7 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Subject, BehaviorSubject, fromEvent } from 'rxjs';
-import { takeUntil, debounceTime } from 'rxjs/operators';
+import { Subject, BehaviorSubject, fromEvent, Observable } from 'rxjs';
+import { takeUntil, debounceTime, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 // Menu
 export interface Menu {
   headTitle?: string;
@@ -51,7 +52,10 @@ export class NavService implements OnDestroy {
   public fullScreen = false;
   active: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private translateService: TranslateService) {
+    this.translateService.onLangChange.subscribe(() => {
+      this.items.next(this.items.value);
+    });
     this.setScreenWidth(window.innerWidth);
     fromEvent(window, 'resize')
       .pipe(debounceTime(1000), takeUntil(this.unsubscriber))
@@ -87,18 +91,19 @@ export class NavService implements OnDestroy {
 
   MENUITEMS: Menu[] = [
     // Dashboard
-    { headTitle: 'MAIN' },
+    { title: 'MENU.MAIN', headTitle: 'MAIN' },
     {
-      title: 'Dashboards',
+      title: 'MENU.DASHBOARD',
       icon: 'home-8-line',
-      type: 'sub',
+      type: 'link',
+      path: '/dashboard',
       selected: false,
       active: false,
       children: [{ path: '/dashboard', title: 'Sales', type: 'link' }],
     },
     //Users
     {
-      title: 'Users managment',
+      title: 'MENU.USERS',
       icon: 'group-line',
       active: false,
       badgeClass: 'badge badge-sm bg-secondary badge-hide',
@@ -109,7 +114,7 @@ export class NavService implements OnDestroy {
     },
     //Messages
     {
-      title: 'Messages managment',
+      title: 'MENU.MESSAGES',
       icon: 'chat-4-line',
       active: false,
       badgeClass: 'badge badge-sm bg-secondary badge-hide',
@@ -120,7 +125,7 @@ export class NavService implements OnDestroy {
     },
     //Clients
     {
-      title: 'Clients managment',
+      title: 'MENU.CLIENTS',
       icon: 'service-line',
       active: false,
       badgeClass: 'badge badge-sm bg-secondary badge-hide',
@@ -131,7 +136,7 @@ export class NavService implements OnDestroy {
     },
     //Pack
     {
-      title: 'Packages managment',
+      title: 'MENU.PACKAGES',
       icon: 'red-packet-line',
       active: false,
       badgeClass: 'badge badge-sm bg-secondary badge-hide',
@@ -142,7 +147,7 @@ export class NavService implements OnDestroy {
     },
      //Categories
      {
-      title: 'Categories managment',
+      title: 'MENU.CATEGORIES',
       icon: 'apps-2-line',
       active: false,
       badgeClass: 'badge badge-sm bg-secondary badge-hide',
@@ -153,7 +158,7 @@ export class NavService implements OnDestroy {
     },
      //Incidents
      {
-      title: 'Incidents managment',
+      title: 'MENU.INCIDENTS',
       icon: 'fire-line',
       active: false,
       badgeClass: 'badge badge-sm bg-secondary badge-hide',
@@ -165,4 +170,13 @@ export class NavService implements OnDestroy {
   ];
   // Array
   items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
+
+  getMenuItems(): Observable<Menu[]> {
+    return this.items.asObservable().pipe(
+      map(items => items.map(item => ({
+        ...item,
+        title: this.translateService.instant(item.title!)
+      })))
+    );
+  }
 }

@@ -40,11 +40,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError(err => {
           if (
             err &&
-            (err.status === 401 || err.statusText === 'Unauthorized')
+            (err.status === 403 || err.statusText === 'Forbidden')
           ) {
             return this.forbidden();
           }
-          if (err && (err.status === 403 || err.statusText === 'Forbidden')) {
+          if (err && (err.status === 401 || err.statusText === 'Unauthorized')) {
             this.notificationService.warning(
               this.translateService.instant('errors.unauthorized-request')
             );

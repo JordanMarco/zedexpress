@@ -1,4 +1,10 @@
-import { Component, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+  HostListener,
+} from '@angular/core';
 import { Menu, NavService } from '../../services/navservice';
 import { Subscription, fromEvent } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -19,7 +25,6 @@ export class SidebarComponent {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-
     const navScrollElement =
       this.elementRef.nativeElement.querySelector('.nav-scroll');
     this.scrolled = window.scrollY > 10;
@@ -66,15 +71,17 @@ export class SidebarComponent {
     private sanitizer: DomSanitizer,
     public router: Router,
     public renderer: Renderer2,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
   ) {
     this.screenWidth = window.innerWidth;
   }
 
   ngOnInit() {
-    this.menuitemsSubscribe$ = this.navServices.items.subscribe((items) => {
-      this.menuItems = items;
-    });
+    this.menuitemsSubscribe$ = this.navServices
+      .getMenuItems()
+      .subscribe((menuItem: Menu[]) => {
+        this.menuItems = menuItem;
+      });
 
     this.ParentActive();
     this.router.events.subscribe((event) => {
@@ -82,7 +89,7 @@ export class SidebarComponent {
         this.ParentActive();
       }
     });
-    if(window.innerWidth <= 992){
+    if (window.innerWidth <= 992) {
       document.documentElement?.setAttribute('toggled', 'close');
     }
     const WindowResize = fromEvent(window, 'resize');
@@ -95,8 +102,12 @@ export class SidebarComponent {
     }
     switcherArrowFn();
     checkHoriMenu();
-    if (document.documentElement.getAttribute('data-nav-layout') == 'horizontal' && window.innerWidth > 992) {
-      this.closeNavActive()
+    if (
+      document.documentElement.getAttribute('data-nav-layout') ==
+        'horizontal' &&
+      window.innerWidth > 992
+    ) {
+      this.closeNavActive();
     }
   }
 
@@ -177,12 +188,11 @@ export class SidebarComponent {
   }
 
   ParentActive() {
-    this.menuItems.map((element: any) => {
+    this.menuItems?.map((element: any) => {
       if (element.children) {
         element.active = false;
         element.selected = false;
         element.children.map((ele: any) => {
-
           if (ele.path == this.router.url) {
             element.active = true;
             element.selected = true;
@@ -207,7 +217,7 @@ export class SidebarComponent {
   getSanitizedSVG(svgContent: string, menu: any): SafeHtml {
     const svg = this.renderer.createElement(
       'svg',
-      'http://www.w3.org/2000/svg'
+      'http://www.w3.org/2000/svg',
     );
     svg.innerHTML = svgContent;
     svg.classList.add('side-menu__icon');
@@ -239,9 +249,8 @@ export class SidebarComponent {
 
     // Check if the event hasn't been triggered and the screen width is less than or equal to your breakpoint
     if (!this.eventTriggered && this.screenWidth <= 992) {
-      document.documentElement?.setAttribute('toggled', 'close')
+      document.documentElement?.setAttribute('toggled', 'close');
 
-      
       // Trigger your event or perform any action here
       this.eventTriggered = true; // Set the flag to true to prevent further triggering
     } else if (this.screenWidth > 992) {

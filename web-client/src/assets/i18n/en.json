@@ -100,6 +100,16 @@
     "invalid-invoice-transation-type": "This type of transaction has no invoice.",
     "error-google-admin-auth": "Your administrator account cannot connect using this method."
   },
+  "MENU": {
+    "MAIN": "MAIN",
+    "DASHBOARD": "Dashboard",
+    "USERS": "User Management",
+    "MESSAGES": "Message Management",
+    "CLIENTS": "Client Management",
+    "PACKAGES": "Manage Packages",
+    "CATEGORIES": "Manage Categories",
+    "INCIDENTS": "Manage Incidents"
+  },
   "COMMON": {
     "SEARCH": "Search",
     "SEARCH_PLACEHOLDER": "Search users...",
@@ -192,7 +202,7 @@
     "INCIDENT_DELETED": "Incident deleted successfully"
   },
   "ERRORS": {
-   "LOAD_USERS": "Error loading users",
+    "LOAD_USERS": "Error loading users",
     "CREATE_USER": "Error creating user",
     "UPDATE_USER": "Error updating user",
     "DELETE_USER": "Error deleting user",
