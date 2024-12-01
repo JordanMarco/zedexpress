@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Others\AccountTypeController;
+use App\Http\Controllers\Others\ClientController;
 use App\Http\Controllers\Others\ColisController;
 use App\Http\Controllers\Others\IncidentsController;
 use App\Http\Controllers\Others\PaymentController;
@@ -65,6 +66,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{colis}', [ColisController::class, 'destroy']);
     });
 
+    Route::prefix('clients')->group(function () {
+        Route::get('/', [ClientController::class, 'index']);
+    });
 
     Route::prefix('pay')->group(function () {
         Route::post('/{colis}', [PaymentController::class, 'pay']);

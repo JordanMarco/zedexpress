@@ -14,11 +14,13 @@ class IncidentsController extends Controller
     public function index(Request $request)
     {
         $withPaginate = $request->input('with_paginate', true);
+        $search = '%' . $request->input('search', '') . '%';
+        $perPage = $request->input('per_page', 10);
 
         if ($withPaginate) {
-            $incidents = Incident::where("message", 1)->paginate(10);
+            $incidents = Incident::where("message", 1)->where('titre', 'LIKE', $search)->paginate($perPage);
         } else {
-            $incidents = Incident::where("message", 1)->get();
+            $incidents = Incident::where("message", 1)->where('titre', 'LIKE', $search)->get();
         }
 
         return response()->json($incidents);
