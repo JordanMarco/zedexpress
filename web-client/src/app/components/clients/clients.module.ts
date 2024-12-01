@@ -6,11 +6,13 @@ import { ClientsComponent } from './clients.component';
 import { MaterialModuleModule } from 'src/app/materialModule/material-module/material-module.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/sharedmodule';
+import { ClientFormComponent } from './components/client-form/client-form.component';
 
 
 @NgModule({
   declarations: [
-    ClientsComponent
+    ClientsComponent,
+    ClientFormComponent
   ],
   imports: [
     CommonModule,

@@ -137,11 +137,31 @@
     "SEARCH_PLACEHOLDER": "Rechercher des messages...",
     "CONFIRM_DELETE": "Êtes-vous sûr de vouloir supprimer ce message ?"
   },
+  "CLIENTS": {
+    "TITLE": "Gestion des clients",
+    "ADD_CLIENT": "Ajouter un client",
+    "EDIT_CLIENT": "Modifier un client",
+    "DELETE_CONFIRMATION": "Supprimer un client",
+    "DELETE_MESSAGE": "Êtes-vous sûr de vouloir supprimer {{name}} ?",
+    "FIRST_NAME": "Prénom",
+    "LAST_NAME": "Nom",
+    "USERNAME": "Nom d'utilisateur",
+    "PASSWORD": "Mot de passe",
+    "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+    "NATIONAL_ID": "Identifiant national",
+    "PHONE": "Téléphone",
+    "EMAIL": "Email",
+    "ADDRESS": "Adresse",
+    "COUNTRY": "Pays"
+  },
   "SUCCESS": {
     "USER_CREATED": "Utilisateur créé avec succès",
     "USER_UPDATED": "Utilisateur mis à jour avec succès",
     "USER_DELETED": "Utilisateur supprimé avec succès",
-    "DELETE_SUCCESS": "Message supprimé avec succès"
+    "DELETE_SUCCESS": "Message supprimé avec succès",
+    "CLIENT_CREATED": "Client créé avec succès",
+    "CLIENT_UPDATED": "Client mis à jour avec succès",
+    "CLIENT_DELETED": "Client supprimé avec succès"
   },
   "ERRORS": {
     "LOAD_USERS": "Erreur lors du chargement des utilisateurs",
@@ -149,7 +169,11 @@
     "UPDATE_USER": "Erreur lors de la mise à jour de l'utilisateur",
     "DELETE_USER": "Erreur lors de la suppression de l'utilisateur",
     "DELETE_ERROR": "Erreur lors de la suppression du message",
-    "LOAD_ERROR": "Erreur lors du chargement des messages"
+    "LOAD_ERROR": "Erreur lors du chargement des messages",
+    "LOAD_CLIENTS": "Erreur lors du chargement des clients",
+    "CREATE_CLIENT": "Erreur lors de la création du client",
+    "UPDATE_CLIENT": "Erreur lors de la mise à jour du client",
+    "DELETE_CLIENT": "Erreur lors de la suppression du client"
   },
   "login": {
     "username": "Enter your user name",
