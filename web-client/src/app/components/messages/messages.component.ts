@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { debounceTime, Subject } from 'rxjs';
+import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-confirmation/delete-confirmation.component';
 import { Message } from 'src/app/shared/models/message.model';
 import { MessageService } from 'src/app/shared/services/message.service';
 
@@ -14,10 +16,18 @@ import { MessageService } from 'src/app/shared/services/message.service';
 })
 export class MessagesComponent {
   displayedColumns: string[] = ['id', 'client', 'packageName', 'subject', 'content', 'status', 'actions'];
-  dataSource = new MatTableDataSource<Message>([]);
+  dataSource = new MatTableDataSource<Message>([{
+    id: 9,
+    client: 'kklfs',
+    packageName: 'klfsd',
+    subject: 'llfkds',
+    content: 'lfkds',
+    status: 'RESOLVED'
+  }]);
   totalMessages = 0;
   isLoading = false;
   searchValue = '';
+  $inputSubject = new Subject<string>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -29,6 +39,11 @@ export class MessagesComponent {
   ) {}
 
   ngOnInit() {
+    this.$inputSubject
+    .pipe(debounceTime(1000)) // Adjust the debounce time to your needs (e.g., 300ms)
+    .subscribe(searchValue => {
+      this.applyFilter()
+    });
     this.loadMessages();
   }
 
@@ -91,8 +106,12 @@ export class MessagesComponent {
     });
   }
 
-  applyFilter(event: Event) {
-    this.searchValue = (event.target as HTMLInputElement).value;
+  search(event: Event): void {
+    this.searchValue = event.target ? (event.target as HTMLInputElement).value : '';
+    this.$inputSubject.next(this.searchValue);
+  }
+
+  applyFilter() {
     this.paginator.firstPage();
     this.loadMessages();
   }

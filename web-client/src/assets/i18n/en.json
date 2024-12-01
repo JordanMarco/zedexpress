@@ -126,6 +126,7 @@
     "COUNTRY": "Country",
     "ACCOUNT_TYPE": "Account Type"
   },
+  
   "SUCCESS": {
     "USER_CREATED": "User created successfully",
     "USER_UPDATED": "User updated successfully",

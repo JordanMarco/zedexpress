@@ -126,16 +126,30 @@
     "COUNTRY": "Pays",
     "ACCOUNT_TYPE": "Type de compte"
   },
+  "MESSAGES": {
+    "TITLE": "Gérer les messages",
+    "SUBTITLE": "Gérer les messages des clients à partir de cette interface",
+    "CLIENT": "Client",
+    "PACKAGE_NAME": "Nom du colis",
+    "SUBJECT": "Objet",
+    "CONTENT": "Contenu",
+    "STATUS": "Statut",
+    "SEARCH_PLACEHOLDER": "Rechercher des messages...",
+    "CONFIRM_DELETE": "Êtes-vous sûr de vouloir supprimer ce message ?"
+  },
   "SUCCESS": {
     "USER_CREATED": "Utilisateur créé avec succès",
     "USER_UPDATED": "Utilisateur mis à jour avec succès",
-    "USER_DELETED": "Utilisateur supprimé avec succès"
+    "USER_DELETED": "Utilisateur supprimé avec succès",
+    "DELETE_SUCCESS": "Message supprimé avec succès"
   },
   "ERRORS": {
     "LOAD_USERS": "Erreur lors du chargement des utilisateurs",
     "CREATE_USER": "Erreur lors de la création de l'utilisateur",
     "UPDATE_USER": "Erreur lors de la mise à jour de l'utilisateur",
-    "DELETE_USER": "Erreur lors de la suppression de l'utilisateur"
+    "DELETE_USER": "Erreur lors de la suppression de l'utilisateur",
+    "DELETE_ERROR": "Erreur lors de la suppression du message",
+    "LOAD_ERROR": "Erreur lors du chargement des messages"
   },
   "login": {
     "username": "Enter your user name",
