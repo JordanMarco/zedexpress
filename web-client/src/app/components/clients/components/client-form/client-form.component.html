@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>{{ (data ? 'CLIENTS.EDIT_CLIENT' : 'CLIENTS.ADD_CLIENT') | translate }}</h2>
+
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.FIRST_NAME' | translate }}</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.LAST_NAME' | translate }}</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.USERNAME' | translate }}</mat-label>
+        <input matInput formControlName="username" type="email">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row" *ngIf="!data">
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.PASSWORD' | translate }}</mat-label>
+        <input matInput formControlName="password" type="password">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.CONFIRM_PASSWORD' | translate }}</mat-label>
+        <input matInput formControlName="confirmPassword" type="password">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.NATIONAL_ID' | translate }}</mat-label>
+        <input matInput formControlName="nationalId">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.PHONE' | translate }}</mat-label>
+        <input matInput formControlName="phone">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.EMAIL' | translate }}</mat-label>
+        <input matInput formControlName="email" type="email">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.ADDRESS' | translate }}</mat-label>
+        <input matInput formControlName="address">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'CLIENTS.COUNTRY' | translate }}</mat-label>
+        <mat-select formControlName="country">
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{country}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{ 'COMMON.CANCEL' | translate }}</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!clientForm.valid || isLoading">
+      {{ (data ? 'COMMON.UPDATE' : 'COMMON.SAVE') | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>
+
+<div class="loading-overlay" *ngIf="isLoading">
+  <mat-spinner diameter="30"></mat-spinner>
+</div>

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WidgetComponent } from './widget/widget.component';
+import { IncidentsComponent } from './incidents.component';
 
 const routes: Routes = [
   {
-    path: 'widgets',
+    path: 'incidents',
     children: [
-      { path: '', title: 'Synto - Tailwind Angular Admin Template', component: WidgetComponent },
+      { path: '', component: IncidentsComponent },
     ],
   },
 ];
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WidgetsRoutingModule { }
+export class IncidentsRoutingModule { }

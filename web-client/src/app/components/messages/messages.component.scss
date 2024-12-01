@@ -1,0 +1,43 @@
+.message-list-container {
+    padding: 20px;
+    position: relative;
+  
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  
+    .search-field {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+  
+      &.resolved {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+      }
+  
+      &.pending {
+        background-color: #fff3e0;
+        color: #ef6c00;
+      }
+    }
+  }
+  
+  .mat-column-actions {
+    width: 100px;
+    text-align: center;
+  }
+  
+  .mat-column-status {
+    width: 120px;
+  }

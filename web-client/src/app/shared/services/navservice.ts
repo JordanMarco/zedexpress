@@ -27,7 +27,7 @@ export interface Menu {
 export class NavService implements OnDestroy {
   private unsubscriber: Subject<any> = new Subject();
   public screenWidth: BehaviorSubject<number> = new BehaviorSubject(
-    window.innerWidth
+    window.innerWidth,
   );
 
   // Search Box
@@ -92,24 +92,76 @@ export class NavService implements OnDestroy {
       title: 'Dashboards',
       icon: 'home-8-line',
       type: 'sub',
-      selected : false,
+      selected: false,
       active: false,
-      children: [
-        { path: '/dashboard/sales', title: 'Sales', type: 'link' },
-      ],
+      children: [{ path: '/dashboard/sales', title: 'Sales', type: 'link' }],
     },
-    //Widgets
+    //Users
     {
-      title: 'Widgets',
+      title: 'Users managment',
+      icon: 'group-line',
+      active: false,
+      badgeClass: 'badge badge-sm bg-secondary badge-hide',
+      badgeValue: 'new',
+      path: '/users',
+      selected: false,
+      type: 'link',
+    },
+    //Messages
+    {
+      title: 'Messages managment',
+      icon: 'chat-4-line',
+      active: false,
+      badgeClass: 'badge badge-sm bg-secondary badge-hide',
+      badgeValue: 'new',
+      path: '/messages',
+      selected: false,
+      type: 'link',
+    },
+    //Clients
+    {
+      title: 'Clients managment',
+      icon: 'service-line',
+      active: false,
+      badgeClass: 'badge badge-sm bg-secondary badge-hide',
+      badgeValue: 'new',
+      path: '/clients',
+      selected: false,
+      type: 'link',
+    },
+    //Pack
+    {
+      title: 'Packages managment',
+      icon: 'red-packet-line',
+      active: false,
+      badgeClass: 'badge badge-sm bg-secondary badge-hide',
+      badgeValue: 'new',
+      path: '/packages',
+      selected: false,
+      type: 'link',
+    },
+     //Categories
+     {
+      title: 'Categories managment',
       icon: 'apps-2-line',
       active: false,
       badgeClass: 'badge badge-sm bg-secondary badge-hide',
       badgeValue: 'new',
-      path: '/widgets',
-      selected : false,
+      path: '/categories',
+      selected: false,
       type: 'link',
     },
-
+     //Incidents
+     {
+      title: 'Incidents managment',
+      icon: 'fire-line',
+      active: false,
+      badgeClass: 'badge badge-sm bg-secondary badge-hide',
+      badgeValue: 'new',
+      path: '/incidents',
+      selected: false,
+      type: 'link',
+    },
   ];
   // Array
   items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
