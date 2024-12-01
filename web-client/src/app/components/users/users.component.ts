@@ -6,9 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
+import { UserService as RestUserService } from 'src/app/shared/rest-services/user.service';
 import { debounceTime, Subject } from 'rxjs';
+import { IUser } from 'src/app/shared/models/User';
 
 @Component({
   selector: 'app-users',
@@ -17,107 +18,7 @@ import { debounceTime, Subject } from 'rxjs';
 })
 export class UsersComponent {
   displayedColumns: string[] = ['id', 'lastName', 'firstName', 'username', 'accountType', 'country', 'actions'];
-  dataSource = new MatTableDataSource<User>([{
-    id: 1,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'Switzerland',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  },
-  {
-    id: 2,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'suisse',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  },{
-    id: 3,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'suisse',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  },{
-    id: 4,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'suisse',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  }, {
-    id: 5,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'suisse',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  },{
-    id: 6,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'suisse',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  },{
-    id: 7,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'Switzerland',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  },{
-    id: 8,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'Switzerland',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  },{
-    id: 9,
-    lastName: 'Nankeng Meli',
-    firstName: 'Baudouin',
-    username: 'MegaMel',
-    accountType: 'Administrator',
-    country: 'Switzerland',
-    nationalId: '4545484458',
-    address: 'Dschang',
-    phone: '690846155',
-    email: 'melibaudouin@gmail.com'
-  }]);
+  dataSource = new MatTableDataSource<IUser>();
   totalUsers = 0;
   isLoading = false;
   searchValue = '';
@@ -126,11 +27,12 @@ export class UsersComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
+    private restUserService: RestUserService,
     private userService: UserService,
     private dialog: MatDialog,
     private toastr: ToastrService,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.$inputSubject
@@ -138,19 +40,16 @@ export class UsersComponent {
       .subscribe(searchValue => {
         this.applyFilter()
       });
+    this.fetch(1);
     this.loadUsers();
   }
 
   loadUsers() {
     this.isLoading = true;
-    this.userService.getUsers({
-      page: this.paginator?.pageIndex || 0,
-      pageSize: this.paginator?.pageSize || 10,
-      search: this.searchValue
-    }).subscribe({
-      next: (response) => {
-        this.dataSource.data = response.users;
-        this.totalUsers = response.total;
+    this.restUserService.index((this.paginator?.pageIndex ?? 0) + 1, this.paginator?.pageSize, this.searchValue).subscribe({
+      next: (res) => {
+        this.dataSource.data = res.data;
+        this.totalUsers = res.total;
         this.isLoading = false;
       },
       error: () => {
@@ -160,7 +59,7 @@ export class UsersComponent {
     });
   }
 
-  openUserForm(user?: User) {
+  openUserForm(user?: IUser) {
     const dialogRef = this.dialog.open(UserFormComponent, {
       width: '600px',
       data: user
@@ -173,7 +72,7 @@ export class UsersComponent {
     });
   }
 
-  confirmDelete(user: User) {
+  confirmDelete(user: IUser) {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
       width: '400px',
       data: user
@@ -208,5 +107,13 @@ export class UsersComponent {
   applyFilter() {
     this.paginator.firstPage();
     this.loadUsers();
+  }
+
+  fetch(page: number, search: string = '') {
+    this.restUserService.index().subscribe({
+      next: (res) => {
+        console.log(res);
+      }
+    })
   }
 }

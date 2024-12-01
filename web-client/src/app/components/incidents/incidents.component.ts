@@ -4,11 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { Incident } from 'src/app/shared/models/incident.model';
-import { IncidentService } from 'src/app/shared/services/incident.service';
 import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-confirmation/delete-confirmation.component';
 import { debounceTime, Subject } from 'rxjs';
 import { IncidentFormComponent } from './components/incident-form/incident-form.component';
+import { Incident } from 'src/app/shared/models/incident.model';
+import { incidentService } from 'src/app/shared/rest-services/incident.service';
+import { IIncident } from 'src/app/shared/models/incident';
 
 @Component({
   selector: 'app-incidents',
@@ -17,18 +18,7 @@ import { IncidentFormComponent } from './components/incident-form/incident-form.
 })
 export class IncidentsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'clientName', 'parcelName', 'title', 'reason', 'status', 'actions'];
-  dataSource = new MatTableDataSource<Incident>([
-    {
-      id: 1,
-      title: 'sdda',
-      parcelId: 0,
-      parcelName: 'dsad',
-      clientName: 'dasd',
-      reason: 'dasd',
-      status: 'PENDING',
-      createdAt: new Date
-    }
-  ]);
+  dataSource = new MatTableDataSource<Incident>();
   totalIncidents = 0;
   isLoading = false;
   searchValue = '';
@@ -36,7 +26,7 @@ export class IncidentsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private incidentService: IncidentService,
+    private incidentService: incidentService,
     private dialog: MatDialog,
     private toastr: ToastrService,
     private translate: TranslateService
@@ -53,13 +43,13 @@ export class IncidentsComponent implements OnInit {
 
   loadIncidents() {
     this.isLoading = true;
-    this.incidentService.getIncidents({
-      page: this.paginator?.pageIndex || 0,
-      pageSize: this.paginator?.pageSize || 10,
-      search: this.searchValue
-    }).subscribe({
+    this.incidentService.index(
+      (this.paginator?.pageIndex ?? 0) + 1,
+      this.paginator?.pageSize || 10,
+      this.searchValue
+    ).subscribe({
       next: (response) => {
-        this.dataSource.data = response.incidents;
+        this.dataSource.data = response.data;
         this.totalIncidents = response.total;
         this.isLoading = false;
       },
@@ -98,7 +88,7 @@ export class IncidentsComponent implements OnInit {
 
   private deleteIncident(id: number) {
     this.isLoading = true;
-    this.incidentService.deleteIncident(id).subscribe({
+    this.incidentService.destroy(id).subscribe({
       next: () => {
         this.toastr.success(this.translate.instant('SUCCESS.INCIDENT_DELETED'));
         this.loadIncidents();
@@ -110,20 +100,20 @@ export class IncidentsComponent implements OnInit {
     });
   }
 
-  previewPDF(incident: Incident) {
-    const pdfDataUri = this.incidentService.generatePDF(incident);
+  previewPDF(incident: IIncident) {
+    const pdfDataUri = this.incidentService.generatePDF(incident.id);
     window.open(pdfDataUri);
   }
 
-  downloadPDF(incident: Incident) {
-    const pdfDataUri = this.incidentService.generatePDF(incident);
+  downloadPDF(incident: IIncident) {
+    const pdfDataUri = this.incidentService.generatePDF(incident.id);
     const link = document.createElement('a');
     link.href = pdfDataUri;
     link.download = `incident-${incident.id}.pdf`;
     link.click();
   }
 
-  
+
   search(event: Event): void {
     this.searchValue = event.target ? (event.target as HTMLInputElement).value : '';
     this.$inputSubject.next(this.searchValue);
@@ -131,6 +121,6 @@ export class IncidentsComponent implements OnInit {
 
   applyFilter() {
     this.paginator.firstPage();
-    this.loadIncidents();  
+    this.loadIncidents();
   }
 }

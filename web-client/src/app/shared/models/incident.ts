@@ -1,3 +1,6 @@
+import { IClient } from "./client";
+import { IColis } from "./colis";
+
 export interface IIncident {
   id: number;
   titre?: string;
@@ -5,6 +8,8 @@ export interface IIncident {
   message?: number;
   motif?: string;
   client_id: number;
+  client?: IClient;
+  colis?: IColis;
   created_at?: Date;
   updated_at?: Date;
 }

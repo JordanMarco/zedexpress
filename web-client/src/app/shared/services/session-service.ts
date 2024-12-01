@@ -66,7 +66,7 @@ export class SessionService {
   public localLogin(user: IUser, token: string): void {
     this.storeUser(user);
     this.storeAccessToken(token);
-    this.storeCurrentRole(user.accountType);
+    this.storeCurrentRole(user.account!);
   }
 
   public storeLanguage(lang: string): void {
@@ -106,12 +106,12 @@ export class SessionService {
   }
 
   hasAccounType(accountCode: AccountCode, country?: string): boolean {
-    const accountType = this.getUser().accountType;
+    const accountType = this.getUser().account;
     if (country)
       return (
-        country === accountType.country && accountCode === accountType.code
+        country === accountType!.country && accountCode === accountType!.code
       );
 
-    return accountCode === accountType.code;
+    return accountCode === accountType!.code;
   }
 }

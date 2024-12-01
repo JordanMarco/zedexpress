@@ -8,9 +8,9 @@ import { IUser, User } from '../models/User';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly baseUrl: string = `${environment.basePath}/user`;
+  private readonly baseUrl: string = `${environment.basePath}/api/user`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Récupère la liste des utilisateurs avec ou sans pagination.
@@ -19,11 +19,11 @@ export class UserService {
    * @param withPaginate Indique si la pagination doit être activée.
    * @returns Observable avec la liste des utilisateurs.
    */
-  public index(page?:number, accountId?: number, withPaginate: boolean = true): Observable<any> {
+  public index(page: number = 1, size: number = 10, search: string = '', accountId?: number, withPaginate: boolean = true): Observable<any> {
     let params = new HttpParams();
-    if (page) {
-      params = params.set('page', page);
-    }
+    params = params.set('page', page);
+    params = params.set('per_page', size);
+    params = params.set('search', search);
     if (accountId) {
       params = params.set('account_id', accountId);
     }

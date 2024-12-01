@@ -8,20 +8,20 @@ import { ITarif, Tarif } from '../models/tarif';
   providedIn: 'root',
 })
 export class TarifService {
-  private readonly baseUrl: string = `${environment.basePath}/tarif`;
+  private readonly baseUrl: string = `${environment.basePath}/api/tarif`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Récupère la liste des tarifs avec ou sans pagination.
    * @param withPaginate Indique si la pagination doit être activée.
    * @returns Observable avec la liste des tarifs.
    */
-  index(page?:number, withPaginate: boolean = true): Observable<any> {
+  index(page: number = 1, size: number = 10, search: string = '', withPaginate: boolean = true): Observable<any> {
     let params = new HttpParams();
-    if (page) {
-      params = params.set('page', page);
-    }
+    params = params.set('page', page);
+    params = params.set('per_page', size);
+    params = params.set('search', search);
     params = params.set('with_paginate', withPaginate);
 
     return this.http.get<any>(this.baseUrl, { params });

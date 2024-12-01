@@ -9,7 +9,7 @@ export interface IUser {
   email: string;
   language_code?: string;
   account_id: number;
-  accountType?: IAccountType;
+  account?: IAccountType;
   email_verified_at?: Date | null;
   created_at?: Date;
   updated_at?: Date;

@@ -7,8 +7,9 @@ import { ToastrService } from 'ngx-toastr';
 import { debounceTime, Subject } from 'rxjs';
 import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-confirmation/delete-confirmation.component';
 import { Category } from 'src/app/shared/models/category.model';
-import { CategoryService } from 'src/app/shared/services/category.service';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { TarifService } from 'src/app/shared/rest-services/tarif.service';
+import { Tarif } from 'src/app/shared/models/tarif';
 
 @Component({
   selector: 'app-categories',
@@ -17,13 +18,7 @@ import { CategoryFormComponent } from './components/category-form/category-form.
 })
 export class CategoriesComponent {
   displayedColumns: string[] = ['id', 'label', 'amount', 'actions'];
-  dataSource = new MatTableDataSource<Category>([
-    {
-      id: 1,
-      label: 'label',
-      amount: 150
-    }
-  ]);
+  dataSource = new MatTableDataSource<Tarif>();
   totalCategories = 0;
   isLoading = false;
   searchValue = '';
@@ -32,7 +27,7 @@ export class CategoriesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private categoryService: CategoryService,
+    private tarifService: TarifService,
     private dialog: MatDialog,
     private toastr: ToastrService,
     private translate: TranslateService
@@ -49,13 +44,12 @@ export class CategoriesComponent {
 
   loadCategories() {
     this.isLoading = true;
-    this.categoryService.getCategories({
-      page: this.paginator?.pageIndex || 0,
-      pageSize: this.paginator?.pageSize || 10,
-      search: this.searchValue
-    }).subscribe({
+    this.tarifService.index((this.paginator?.pageIndex ?? 0) + 1,
+      this.paginator?.pageSize || 10,
+      this.searchValue
+    ).subscribe({
       next: (response) => {
-        this.dataSource.data = response.categories;
+        this.dataSource.data = response.data;
         this.totalCategories = response.total;
         this.isLoading = false;
       },
@@ -94,7 +88,7 @@ export class CategoriesComponent {
 
   private deleteCategory(id: number) {
     this.isLoading = true;
-    this.categoryService.deleteCategory(id).subscribe({
+    this.tarifService.destroy(id).subscribe({
       next: () => {
         this.toastr.success(this.translate.instant('SUCCESS.CATEGORY_DELETED'));
         this.loadCategories();
