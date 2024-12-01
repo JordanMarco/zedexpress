@@ -94,7 +94,7 @@ export class NavService implements OnDestroy {
       type: 'sub',
       selected: false,
       active: false,
-      children: [{ path: '/dashboard/sales', title: 'Sales', type: 'link' }],
+      children: [{ path: '/dashboard', title: 'Sales', type: 'link' }],
     },
     //Users
     {

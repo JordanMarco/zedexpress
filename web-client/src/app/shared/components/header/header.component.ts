@@ -1,6 +1,8 @@
 /* eslint-disable no-constant-condition */
 import { Component, ElementRef } from '@angular/core';
 import { NavService } from '../../services/navservice';
+import { SessionService } from '../../services/session-service';
+import { IUser } from '../../models/User';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +11,10 @@ import { NavService } from '../../services/navservice';
 })
 
 export class HeaderComponent {
+  user!: IUser;
   constructor(public navServices: NavService,
-    private elementRef: ElementRef) {
+    private elementRef: ElementRef, private sessionService: SessionService) {
+      this.user = this.sessionService.getUser()
   }
 
   themeChange(type: string, type1: string) {
@@ -105,5 +109,9 @@ export class HeaderComponent {
   removetheModal() {
     const element: any = document.querySelector('.serachmodal');
     element.click();
+  }
+
+  logout(): void{
+    this.sessionService.logout()
   }
 }

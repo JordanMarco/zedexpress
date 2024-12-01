@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/sharedmodule';
-import { CustomLayoutComponent } from './shared/layout-components/custom-layout/custom-layout.component';
-import { ContentLayoutComponent } from './shared/layout-components/content-layout/content-layout.component';
 import { StoreModule } from '@ngrx/store';
 import { dataReaducer } from './shared/ngrx/e-commerce/shop.reducers';
 import { ToastrModule } from 'ngx-toastr';
@@ -31,7 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, CustomLayoutComponent, ContentLayoutComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

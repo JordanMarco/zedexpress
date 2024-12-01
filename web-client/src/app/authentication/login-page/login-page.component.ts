@@ -53,7 +53,7 @@ export class LoginPageComponent {
       )
       .subscribe({
         next: (res: ILoginResponse) => {
-          this.router.navigate(['/dashboard/sales']);
+          this.router.navigate(['/dashboard']); 
           this.sessionService.localLogin(res.user, res.token);
         },
         error: () => {
