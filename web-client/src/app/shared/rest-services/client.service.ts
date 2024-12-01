@@ -9,7 +9,6 @@ import { IUser, User } from '../models/User';
 })
 export class ClientService {
   private readonly baseUrl: string = `${environment.basePath}/api/clients`;
-  private readonly userBaseUrl: string = `${environment.basePath}/api/user`;
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +30,14 @@ export class ClientService {
     params = params.set('with_paginate', withPaginate);
 
     return this.http.get<any>(this.baseUrl, { params });
+  }
+
+  public store(user: User): Observable<IUser> {
+    return this.http.post<IUser>(this.baseUrl, user);
+  }
+
+  public update(id: number, user: User): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/${id}`, user);
   }
 
 }
