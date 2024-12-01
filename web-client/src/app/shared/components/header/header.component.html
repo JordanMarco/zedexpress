@@ -158,10 +158,10 @@
                   </div>
                   <div>
                     <p class="ti-dropdown-header-title !text-white">
-                      Json Taylor
+                      {{user ? user.last_name +' '+ user.first_name : ''}}
                     </p>
                     <p class="ti-dropdown-header-content !text-white/50">
-                      Web Designer
+                      {{user ? user.accountType.label : ''}}
                     </p>
                   </div>
                 </div>
