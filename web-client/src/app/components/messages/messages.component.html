@@ -16,7 +16,7 @@
           <input matInput (keyup)="search($event)" [placeholder]="'COMMON.SEARCH_PLACEHOLDER' | translate">
         </mat-form-field>
 
-        <div class="mat-elevation-z8">
+        <div class="">
           <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef>#</th>
@@ -50,9 +50,6 @@
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>{{ 'COMMON.ACTIONS' | translate }}</th>
               <td mat-cell *matCellDef="let message">
-                <button mat-icon-button color="primary" (click)="updateStatus(message)">
-                  <mat-icon>{{ message.status === 'PENDING' ? 'check_circle' : 'undo' }}</mat-icon>
-                </button>
                 <button mat-icon-button color="warn" (click)="confirmDelete(message)">
                   <mat-icon>delete</mat-icon>
                 </button>

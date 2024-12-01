@@ -7,7 +7,8 @@
 
 <div class="user-list-container">
   <div class="flex w-full justify-end my-4">
-    <button mat-raised-button color="primary" (click)="openCategoryForm()">
+    <button mat-raised-button color="primary" style="text-transform: uppercase;" (click)="openCategoryForm()">
+      <mat-icon>add</mat-icon>
       {{ 'CATEGORIES.ADD_CATEGORY' | translate }}
     </button>
   </div>
@@ -24,7 +25,7 @@
           <input matInput (keyup)="search($event)" [placeholder]="'COMMON.SEARCH_PLACEHOLDER' | translate">
         </mat-form-field>
 
-        <div class="mat-elevation-z8">
+        <div class="">
           <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef>#</th>
