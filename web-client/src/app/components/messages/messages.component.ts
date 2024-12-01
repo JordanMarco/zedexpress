@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { Message } from 'src/app/shared/models/message.model';
+import { MessageService } from 'src/app/shared/services/message.service';
 
 @Component({
   selector: 'app-messages',
