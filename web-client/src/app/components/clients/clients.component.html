@@ -1,1 +1,23 @@
-<p>clients works!</p>
+<app-page-header
+  [title]="'USERS.TITLE' | translate"
+  [title1]="'USERS.TITLE' | translate"
+  activeitem="Pages"
+></app-page-header>
+
+
+<div class="user-list-container">
+  <div class="flex w-full justify-end my-4">
+    <button mat-raised-button color="primary" (click)="openUserForm()">
+      {{ 'USERS.ADD_USER' | translate }}
+    </button>
+  </div>
+</div>
+
+<!-- Start::row-1 -->
+<div class="grid grid-cols-12 gap-6">
+  <div class="col-span-12">
+    <div class="box invoice-list">
+    
+    </div>
+  </div>
+</div>

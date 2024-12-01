@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ClientsRoutingModule } from './clients-routing.module';
 import { ClientsComponent } from './clients.component';
+import { MaterialModuleModule } from 'src/app/materialModule/material-module/material-module.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/sharedmodule';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { ClientsComponent } from './clients.component';
   ],
   imports: [
     CommonModule,
-    ClientsRoutingModule
+    ClientsRoutingModule,
+    MaterialModuleModule,
+    TranslateModule,
+    SharedModule
   ]
 })
 export class ClientsModule { }
