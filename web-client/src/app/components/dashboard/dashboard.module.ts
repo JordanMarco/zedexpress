@@ -8,6 +8,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SharedModule } from 'src/app/shared/sharedmodule';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     SalesComponent,
@@ -21,6 +22,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     SharedModule,
     NgxChartsModule,
     NgSelectModule,
+    TranslateModule
   ],
 })
 export class DashboardModule {}

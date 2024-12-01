@@ -214,5 +214,21 @@
   "login": {
     "username": "Enter your user name",
     "password": "Password here"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "active_item": "Home",
+    "total_users": "Total Users",
+    "total_agents": "Total Agents",
+    "total_clients": "Total Clients",
+    "total_colis": "Total packages",
+    "total_unpaid_colis": "Total unpaid packages",
+    "total_paid_colis": "Total paid packages",
+    "five_recent": "The 5 most recent packages",
+    "client": "Sender",
+    "receiver": "Recipient",
+    "colis_name": "Package name",
+    "status": "Status",
+    "created_at": "Creation date"
   }
 }
