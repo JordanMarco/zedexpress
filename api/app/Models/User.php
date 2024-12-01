@@ -50,9 +50,13 @@ class User extends Authenticatable
         return $this->hasMany(Colis::class);
     }
 
-
     public function account(): BelongsTo
     {
         return $this->belongsTo(AccountType::class, 'account_id');
+    }
+
+    public function receiveColis(): HasMany
+    {
+        return $this->hasMany(Colis::class, 'receiver_id');
     }
 }

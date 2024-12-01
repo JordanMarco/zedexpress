@@ -16,11 +16,12 @@ class IncidentsController extends Controller
         $withPaginate = $request->input('with_paginate', true);
         $search = '%' . $request->input('search', '') . '%';
         $perPage = $request->input('per_page', 10);
+        $message = $request->input('message', 1);
 
         if ($withPaginate) {
-            $incidents = Incident::where("message", 1)->where('titre', 'LIKE', $search)->paginate($perPage);
+            $incidents = Incident::where("message", $message)->where('titre', 'LIKE', $search)->paginate($perPage);
         } else {
-            $incidents = Incident::where("message", 1)->where('titre', 'LIKE', $search)->get();
+            $incidents = Incident::where("message", $message)->where('titre', 'LIKE', $search)->get();
         }
 
         return response()->json($incidents);

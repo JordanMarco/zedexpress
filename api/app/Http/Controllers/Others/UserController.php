@@ -108,12 +108,16 @@ class UserController extends Controller
     public function destroy(User $user)
     {
 
-        if ($user->accountType->code === AccountTypeEnum::ADMIN->value || Auth::id() === $user->id) {
-            return response()->json(['translate' => 'errors.unauthorize']);
+        if ($user->account->code === AccountTypeEnum::ADMIN->value || Auth::id() === $user->id) {
+            return response()->json(['translate' => 'errors.unauthorize'], 401);
         }
 
         if ($user->colis()->count() > 0) {
-            return response()->json(['translate' => 'errors.existing-colis']);
+            return response()->json(['translate' => 'errors.existing-colis'], 400);
+        }
+
+        if ($user->receiveColis()->count() > 0) {
+            return response()->json(['translate' => 'errors.existing-colis'], 400);
         }
 
         $user->delete();
