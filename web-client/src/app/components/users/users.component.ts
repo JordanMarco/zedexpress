@@ -1,175 +1,212 @@
-import { Component } from '@angular/core';
-const DATA = [
-  {
-    id: '#IN5252155',
-    src: './assets/img/users/2.jpg',
-    name: 'Socrates Itumay',
-    mail: 'socratesitumany@abc.com',
-    createddate: '25-09-2022',
-    duedate: '15-10-2022',
-    status: 'paid',
-    background: 'success',
-    text: 'success',
-    paymode: 'card',
-    price: '$999',
-    address: 'P.O. Box 283 8562 Fusce Rd., 20620',
-  },
-  {
-    id: '#IN2363363',
-    src: './assets/img/users/3.jpg',
-    name: 'Json Taylor',
-    mail: 'jsontaylor2416@gmail.com',
-    createddate: '12-09-2022',
-    duedate: '20-10-2022',
-    status: 'Overdue',
-    background: 'danger',
-    text: 'danger',
-    paymode: 'Net Banking',
-    price: '$2526',
-  },
-  {
-    id: '#IN125252',
-    src: './assets/img/users/4.jpg',
-    name: 'Suzika Stallone',
-    mail: 'suzikastallone3214@gmail.com',
-    createddate: '12-09-2022',
-    duedate: '20-10-2022',
-    status: 'Due',
-    background: 'warning',
-    text: 'warning',
-    paymode: 'UPI ID',
-    price: '$2526',
-  },
-  {
-    id: '#IN5656',
-    src: './assets/img/users/5.jpg',
-    name: 'Selena Deoyl',
-    mail: 'selenadeoyl114@gmail.com',
-    createddate: '12-09-2022',
-    duedate: '20-10-2022',
-    status: 'Unpaid',
-    background: 'secondary',
-    text: 'secondary',
-    paymode: 'Paypal',
-    price: '$2526',
-  },
-  {
-    id: '#IN25252',
-    src: './assets/img/users/9.jpg',
-    name: 'Roman Killon',
-    mail: 'romankillon143@gmail.com',
-    createddate: '12-09-2022',
-    duedate: '20-10-2022',
-    status: 'Draft',
-    background: 'primary',
-    text: 'primary',
-    paymode: 'Paypal',
-    price: '$2526',
-  },
-  {
-    id: '#IN5252155',
-    src: './assets/img/users/10.jpg',
-    name: 'Charlie Davieson',
-    mail: 'charliedavieson@gmail.com',
-    createddate: '25-09-2022',
-    duedate: '15-10-2022',
-    status: 'Paid',
-    background: 'success',
-    text: 'success',
-    paymode: 'Card',
-    price: '$999',
-  },
-  {
-    id: '#IN2363363',
-    src: './assets/img/users/11.jpg',
-    name: 'Joseph Samurai',
-    mail: 'josephsamurai@gmail.com',
-    createddate: '12-09-2022',
-    duedate: '20-10-2022',
-    status: 'Overdue',
-    background: 'danger',
-    text: 'danger',
-    paymode: 'Net Banking',
-    price: '$2526',
-  },
-  {
-    id: '#IN125252',
-    src: './assets/img/users/12.jpg',
-    name: 'Kevin Powell',
-    mail: 'kevinpowell@gmail.com',
-    createddate: '12-09-2022',
-    duedate: '20-10-2022',
-    status: 'Due',
-    background: 'warning',
-    text: 'warning',
-    paymode: 'UPI ID',
-    price: '$2526',
-  },
-  {
-    id: '#IN5656',
-    src: './assets/img/users/6.jpg',
-    name: 'Darla Jung',
-    mail: 'darlajung555@gmail.com',
-    createddate: '12-09-2022',
-    duedate: '20-10-2022',
-    status: 'Unpaid',
-    background: 'secondary',
-    text: 'secondary',
-    paymode: 'Paypal',
-    price: '$2526',
-  },
-  {
-    id: '#IN25252',
-    src: './assets/img/users/7.jpg',
-    name: 'Kiara Advensh',
-    mail: 'kiaraadvensh87@gmail.com',
-    createddate: '12-09-2022',
-    duedate: '20-10-2022',
-    status: 'Draft',
-    background: 'primary',
-    text: 'primary',
-    paymode: 'Paypal',
-    price: '$2526',
-  },
-];
+import { Component, ViewChild } from '@angular/core';
+import { DeleteConfirmationComponent } from '../../shared/components/delete-confirmation/delete-confirmation.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
+import { User } from 'src/app/shared/models/user.model';
+import { UserService } from 'src/app/shared/services/user.service';
+import { debounceTime, Subject } from 'rxjs';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent {
-  datePickerConfig = {
-    format: 'DD-MM-YY',
-  };
+  displayedColumns: string[] = ['id', 'lastName', 'firstName', 'username', 'accountType', 'country', 'actions'];
+  dataSource = new MatTableDataSource<User>([{
+    id: 1,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'Switzerland',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  },
+  {
+    id: 2,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'suisse',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  },{
+    id: 3,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'suisse',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  },{
+    id: 4,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'suisse',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  }, {
+    id: 5,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'suisse',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  },{
+    id: 6,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'suisse',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  },{
+    id: 7,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'Switzerland',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  },{
+    id: 8,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'Switzerland',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  },{
+    id: 9,
+    lastName: 'Nankeng Meli',
+    firstName: 'Baudouin',
+    username: 'MegaMel',
+    accountType: 'Administrator',
+    country: 'Switzerland',
+    nationalId: '4545484458',
+    address: 'Dschang',
+    phone: '690846155',
+    email: 'melibaudouin@gmail.com'
+  }]);
+  totalUsers = 0;
+  isLoading = false;
+  searchValue = '';
+  $inputSubject = new Subject<string>();
 
-  updateFormat() {
-    this.datePickerConfig = {
-      ...this.datePickerConfig,
-      format: 'DD-MM-YY',
-    };
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(
+    private userService: UserService,
+    private dialog: MatDialog,
+    private toastr: ToastrService,
+    private translate: TranslateService
+  ) {}
+
+  ngOnInit() {
+    this.$inputSubject
+      .pipe(debounceTime(1000)) // Adjust the debounce time to your needs (e.g., 300ms)
+      .subscribe(searchValue => {
+        this.applyFilter()
+      });
+    this.loadUsers();
   }
-  Payments = DATA;
 
-  click = (id: string) => {
-    const data = this.Payments.filter((x: { id: string }) => {
-      return x.id != id;
+  loadUsers() {
+    this.isLoading = true;
+    this.userService.getUsers({
+      page: this.paginator?.pageIndex || 0,
+      pageSize: this.paginator?.pageSize || 10,
+      search: this.searchValue
+    }).subscribe({
+      next: (response) => {
+        this.dataSource.data = response.users;
+        this.totalUsers = response.total;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.toastr.error(this.translate.instant('ERRORS.LOAD_USERS'));
+        this.isLoading = false;
+      }
     });
-    this.Payments = data;
-  };
-
-  isSelected = false;
-
-  selectAll(event: Event): void {
-    this.isSelected = (event.target as HTMLInputElement).checked;
   }
 
-  input = 1;
-  minus() {
-    this.input++;
+  openUserForm(user?: User) {
+    const dialogRef = this.dialog.open(UserFormComponent, {
+      width: '600px',
+      data: user
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUsers();
+      }
+    });
   }
-  plus = () => {
-    if (this.input > 0) {
-      this.input--;
-    }
-  };
+
+  confirmDelete(user: User) {
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '400px',
+      data: user
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && user.id) {
+        this.deleteUser(user.id);
+      }
+    });
+  }
+
+  private deleteUser(id: number) {
+    this.isLoading = true;
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
+        this.toastr.success(this.translate.instant('SUCCESS.USER_DELETED'));
+        this.loadUsers();
+      },
+      error: () => {
+        this.toastr.error(this.translate.instant('ERRORS.DELETE_USER'));
+        this.isLoading = false;
+      }
+    });
+  }
+
+  search(event: Event): void {
+    this.searchValue = event.target ? (event.target as HTMLInputElement).value : '';
+    this.$inputSubject.next(this.searchValue);
+  }
+
+  applyFilter() {
+    this.paginator.firstPage();
+    this.loadUsers();
+  }
 }

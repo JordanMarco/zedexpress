@@ -9,7 +9,48 @@
 @import "../node_modules/@angular/cdk/overlay-prebuilt.css";
 @import "../node_modules/ngx-toastr/toastr.css";
 
+.user-list-container {
+  position: relative;
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .search-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+
+  mat-form-field {
+    flex: 1;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
 // dark styles start
 

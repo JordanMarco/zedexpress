@@ -100,6 +100,43 @@
     "invalid-invoice-transation-type": "Ce type de transaction n'a pas de facture.",
     "error-google-admin-auth": "Votre compte administrateur ne peut pas se connecter avec cette méthode."
   },
+  "COMMON": {
+    "SEARCH": "Rechercher",
+    "SEARCH_PLACEHOLDER": "Rechercher des utilisateurs...",
+    "ACTIONS": "Actions",
+    "SAVE": "Enregistrer",
+    "UPDATE": "Mettre à jour",
+    "DELETE": "Supprimer",
+    "CANCEL": "Annuler"
+  },
+  "USERS": {
+    "TITLE": "Gestion des utilisateurs",
+    "ADD_USER": "Ajouter un utilisateur",
+    "EDIT_USER": "Modifier un utilisateur",
+    "DELETE_CONFIRMATION": "Supprimer un utilisateur",
+    "DELETE_MESSAGE": "Êtes-vous sûr de vouloir supprimer {{name}} ?",
+    "FIRST_NAME": "Prénom",
+    "LAST_NAME": "Nom",
+    "USERNAME": "Nom d'utilisateur",
+    "PASSWORD": "Mot de passe",
+    "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+    "NATIONAL_ID": "Identifiant national",
+    "PHONE": "Téléphone",
+    "ADDRESS": "Adresse",
+    "COUNTRY": "Pays",
+    "ACCOUNT_TYPE": "Type de compte"
+  },
+  "SUCCESS": {
+    "USER_CREATED": "Utilisateur créé avec succès",
+    "USER_UPDATED": "Utilisateur mis à jour avec succès",
+    "USER_DELETED": "Utilisateur supprimé avec succès"
+  },
+  "ERRORS": {
+    "LOAD_USERS": "Erreur lors du chargement des utilisateurs",
+    "CREATE_USER": "Erreur lors de la création de l'utilisateur",
+    "UPDATE_USER": "Erreur lors de la mise à jour de l'utilisateur",
+    "DELETE_USER": "Erreur lors de la suppression de l'utilisateur"
+  },
   "login": {
     "username": "Enter your user name",
     "password": "Password here"

@@ -100,6 +100,43 @@
     "invalid-invoice-transation-type": "This type of transaction has no invoice.",
     "error-google-admin-auth": "Your administrator account cannot connect using this method."
   },
+  "COMMON": {
+    "SEARCH": "Search",
+    "SEARCH_PLACEHOLDER": "Search users...",
+    "ACTIONS": "Actions",
+    "SAVE": "Save",
+    "UPDATE": "Update",
+    "DELETE": "Delete",
+    "CANCEL": "Cancel"
+  },
+  "USERS": {
+    "TITLE": "User Management",
+    "ADD_USER": "Add User",
+    "EDIT_USER": "Edit User",
+    "DELETE_CONFIRMATION": "Delete User",
+    "DELETE_MESSAGE": "Are you sure you want to delete {{name}}?",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "NATIONAL_ID": "National ID",
+    "PHONE": "Phone",
+    "ADDRESS": "Address",
+    "COUNTRY": "Country",
+    "ACCOUNT_TYPE": "Account Type"
+  },
+  "SUCCESS": {
+    "USER_CREATED": "User created successfully",
+    "USER_UPDATED": "User updated successfully",
+    "USER_DELETED": "User deleted successfully"
+  },
+  "ERRORS": {
+    "LOAD_USERS": "Error loading users",
+    "CREATE_USER": "Error creating user",
+    "UPDATE_USER": "Error updating user",
+    "DELETE_USER": "Error deleting user"
+  },
   "login": {
     "username": "Enter your user name",
     "password": "Password here"

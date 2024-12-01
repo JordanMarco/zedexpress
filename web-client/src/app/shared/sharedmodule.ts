@@ -16,6 +16,10 @@ import { HoverEffectSidebarDirective } from './directives/hover-effect-sidebar.d
 import { SidemenuToggleDirective } from './directives/sidemenuToggle';
 import { AuthService } from './services/auth.service';
 import { ToggleThemeDirective } from './directives/toggle-theme.directive';
+import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -30,13 +34,17 @@ import { ToggleThemeDirective } from './directives/toggle-theme.directive';
     ToggleThemeDirective,
     HoverEffectSidebarDirective,
     SidemenuToggleDirective,
+    DeleteConfirmationComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SimplebarAngularModule,
     ColorPickerModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    TranslateModule
   ],
 
   exports: [
@@ -47,6 +55,7 @@ import { ToggleThemeDirective } from './directives/toggle-theme.directive';
     FullscreenDirective,
     FooterComponent,
     SidemenuToggleDirective,
+    DeleteConfirmationComponent
   ],
   providers: [AuthService],
 })

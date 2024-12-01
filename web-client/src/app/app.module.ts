@@ -26,8 +26,9 @@ import { StorageService } from './shared/services/storage.service';
 import { ErrorInterceptor } from './authentication/interceptors/error.interceptor';
 import { TokenInterceptor } from './authentication/interceptors/token.interceptor';
 
+
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 @NgModule({
   declarations: [AppComponent, CustomLayoutComponent, ContentLayoutComponent],
