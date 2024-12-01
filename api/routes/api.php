@@ -70,6 +70,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('clients')->group(function () {
         Route::get('/', [ClientController::class, 'index']);
+        Route::post('/', [ClientController::class, 'store']);
+        Route::put('/{client}', [ClientController::class, 'update']);
     });
 
     Route::prefix('pay')->group(function () {
