@@ -50,8 +50,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index']);
         Route::post('/', [UserController::class, 'store']);
-        Route::put('/{agent}', [UserController::class, 'update']);
-        Route::delete('/{agent}', [UserController::class, 'destroy']);
+        Route::put('/{user}', [UserController::class, 'update']);
+        Route::delete('/{user}', [UserController::class, 'destroy']);
     });
 
     Route::prefix('colis')->group(function () {

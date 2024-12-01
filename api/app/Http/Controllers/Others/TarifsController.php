@@ -12,11 +12,13 @@ class TarifsController extends Controller
     public function index(Request $request)
     {
         $withPaginate = $request->input('with_paginate', true);
+        $search = '%' . $request->input('search', '') . '%';
+        $perPage = $request->input('per_page', 10);
 
         if ($withPaginate) {
-            $tarifs = Tarif::paginate(10);
+            $tarifs = Tarif::where('libelle', 'LIKE', $search)->paginate($perPage);
         } else {
-            $tarifs = Tarif::all();
+            $tarifs = Tarif::where('libelle', 'LIKE', $search)->get();
         }
 
         return response()->json($tarifs);

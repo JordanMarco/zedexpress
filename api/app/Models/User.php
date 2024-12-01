@@ -22,6 +22,8 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+    protected $with = ['account'];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -49,8 +51,8 @@ class User extends Authenticatable
     }
 
 
-    public function accountType(): BelongsTo
+    public function account(): BelongsTo
     {
-        return $this->belongsTo(AccountType::class);
+        return $this->belongsTo(AccountType::class, 'account_id');
     }
 }

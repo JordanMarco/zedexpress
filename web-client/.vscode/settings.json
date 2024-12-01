@@ -13,4 +13,5 @@
       },
       "editor.formatOnSave": false
     },
-  }
+    "editor.formatOnSave": false
+}

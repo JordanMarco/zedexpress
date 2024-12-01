@@ -1,18 +1,35 @@
 export interface IUser {
-  id: number;
+  id?: number;
   cni?: string | null;
-  phone: string;
-  country: string;
+  phone?: string;
+  country?: string;
   address?: string | null;
   first_name?: string | null;
   last_name?: string | null;
   email: string;
-  language_code: string;
+  language_code?: string;
   account_id: number;
-  accountType: IAccountType;
+  account?: IAccountType;
   email_verified_at?: Date | null;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export class User implements IUser {
+  constructor(
+    public login: string,
+    public email: string,
+    public account_id: number,
+    public password: string,
+    public password_confirmation: string,
+    public country?: string,
+    public language_code?: string,
+    public phone?: string,
+    public address?: string | null,
+    public first_name?: string | null,
+    public last_name?: string | null,
+    public cni?: string | null
+  ){}
 }
 
 export class Login {
