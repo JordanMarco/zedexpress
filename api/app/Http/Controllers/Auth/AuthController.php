@@ -15,12 +15,12 @@ class AuthController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'login' => 'required|exists:users,login',
+            'login' => 'required',
             'password' => 'required'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['translate' => 'errors.validate'], 400);
+            return response()->json(['translate' => 'errors.validate', 'message' => $validator->messages()], 400);
         }
 
         $user = User::where('login', $data['login'])->first();

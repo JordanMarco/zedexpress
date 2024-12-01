@@ -14,16 +14,24 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $search = '%' . $request->input('search', '') . '%';
         $accountId = $request->input('account_id', null);
         $withPaginate = $request->input('with_paginate', true);
+        $perPage = $request->input('per_page', 10);
 
         if ($withPaginate) {
             $users = User::when($accountId, function ($query) use ($accountId) {
                 return $query->where('account_id', $accountId);
-            })->paginate(10);
+            })->where(function ($query) use ($search) {
+                $query->orWhere('first_name', 'LIKE', $search)
+                    ->orWhere('last_name', 'LIKE', $search);
+            })->paginate($perPage);
         } else {
             $users = User::when($accountId, function ($query) use ($accountId) {
                 return $query->where('account_id', $accountId);
+            })->where(function ($query) use ($search) {
+                $query->orWhere('first_name', 'LIKE', $search)
+                    ->orWhere('last_name', 'LIKE', $search);
             })->get();
         }
 
@@ -44,24 +52,24 @@ class UserController extends Controller
             return response()->json(['translate' => 'errors.validate'], 400);
         }
 
-        $agent = new User;
-        $agent->first_name = $request->first_name;
-        $agent->last_name = $request->last_name;
-        $agent->login = $request->login;
-        $agent->account_id = $request->account_id;
-        $agent->country = $request->country;
-        $agent->password = Hash::make($request->password);
-        $agent->cni = $request->cni;
-        $agent->email = $request->email;
-        $agent->phone = $request->phone;
-        $agent->address = $request->address;
+        $user = new User;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->login = $request->login;
+        $user->account_id = $request->account_id;
+        $user->country = $request->country;
+        $user->password = Hash::make($request->password);
+        $user->cni = $request->cni;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
 
-        $agent->save();
+        $user->save();
 
-        return response()->json($agent);
+        return response()->json($user);
     }
 
-    public function update(Request $request, User $agent)
+    public function update(Request $request, User $user)
     {
         $data = $request->all();
         $validator = Validator::make($data, [
@@ -74,40 +82,41 @@ class UserController extends Controller
             return response()->json(['translate' => 'errors.validate'], 400);
         }
 
-        $agent->first_name = $request->first_name;
-        $agent->last_name = $request->last_name;
-        $agent->login = $request->login;
-        $agent->account_id = $request->account_id;
-        $agent->country = $request->country;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->login = $request->login;
+        $user->account_id = $request->account_id;
+        $user->country = $request->country;
 
         if (isset($data['password'])) {
-            $agent->password = Hash::make($request->password);
+            $user->password = Hash::make($request->password);
         }
 
         if (isset($data['account_id'])) {
-            $agent->account_id = $data['account_id'];
+            $user->account_id = $data['account_id'];
         }
 
-        $agent->cni = $request->cni;
-        $agent->email = $request->email;
-        $agent->phone = $request->phone;
-        $agent->address = $request->address;
+        $user->cni = $request->cni;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
 
-        $agent->save();
+        $user->save();
+        return response()->json($user);
     }
 
-    public function destroy(User $agent)
+    public function destroy(User $user)
     {
 
-        if ($agent->accountType->code === AccountTypeEnum::ADMIN->value || Auth::id() === $agent->id) {
+        if ($user->accountType->code === AccountTypeEnum::ADMIN->value || Auth::id() === $user->id) {
             return response()->json(['translate' => 'errors.unauthorize']);
         }
 
-        if ($agent->colis()->count() > 0) {
+        if ($user->colis()->count() > 0) {
             return response()->json(['translate' => 'errors.existing-colis']);
         }
 
-        $agent->delete();
+        $user->delete();
 
         return response()->noContent();
     }
