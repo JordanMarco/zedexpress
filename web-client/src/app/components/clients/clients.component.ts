@@ -17,7 +17,17 @@ import { debounceTime, Subject } from 'rxjs';
 })
 export class ClientsComponent {
   displayedColumns: string[] = ['id', 'lastName', 'firstName', 'username', 'country', 'phone', 'email', 'address', 'actions'];
-  dataSource = new MatTableDataSource<Client>([]);
+  dataSource = new MatTableDataSource<Client>([{
+    id: 1,
+    firstName: 'dafsd',
+    lastName: 'fsd',
+    username: 'fsd',
+    nationalId: '54545454',
+    phone: '65545455',
+    email: 'fsdffds@gmail.com',
+    address: 'fsdfs',
+    country: 'fsdfds'
+  }]);
   totalClients = 0;
   isLoading = false;
   searchValue = '';

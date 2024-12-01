@@ -7,6 +7,7 @@ import { MaterialModuleModule } from 'src/app/materialModule/material-module/mat
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/sharedmodule';
 import { ClientFormComponent } from './components/client-form/client-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +19,8 @@ import { ClientFormComponent } from './components/client-form/client-form.compon
     CommonModule,
     ClientsRoutingModule,
     MaterialModuleModule,
+    FormsModule,
+    ReactiveFormsModule,
     TranslateModule,
     SharedModule
   ]
