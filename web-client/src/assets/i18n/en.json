@@ -186,6 +186,35 @@
     "PREVIEW_PDF": "Preview PDF",
     "DOWNLOAD_PDF": "Download PDF"
   },
+  "PARCELS": {
+    "TITLE": "Parcel Management",
+    "PICKUP_TITLE": "Parcels for Pickup",
+    "ADD_PARCEL": "New Parcel",
+    "EDIT_PARCEL": "Edit Parcel",
+    "VIEW_PARCEL": "View Parcel",
+    "DELETE_CONFIRMATION": "Delete Parcel",
+    "DELETE_MESSAGE": "Are you sure you want to delete {{name}}?",
+    "CLIENT": "Client",
+    "RECIPIENT": "Recipient",
+    "NAME": "Name",
+    "WEIGHT": "Weight",
+    "WIDTH": "Width",
+    "HEIGHT": "Height",
+    "LENGTH": "Length",
+    "QUANTITY": "Quantity",
+    "DESCRIPTION": "Description",
+    "FRAGILITY": "Fragility",
+    "CATEGORY": "Category",
+    "PRICE": "Price",
+    "AGENCY": "Agency",
+    "ENTRY_DATE": "Entry Date",
+    "DEPARTURE_DATE": "Departure Date",
+    "EXPECTED_ARRIVAL_DATE": "Expected Arrival Date",
+    "STATUS": "Status",
+    "PREVIEW": "Preview",
+    "SEND": "Send",
+    "PICKUP": "Pickup"
+  },
   "SUCCESS": {
     "USER_CREATED": "User created successfully",
     "USER_UPDATED": "User updated successfully",
@@ -199,7 +228,11 @@
     "CATEGORY_DELETED": "Category deleted successfully",
     "INCIDENT_CREATED": "Incident created successfully",
     "INCIDENT_UPDATED": "Incident updated successfully",
-    "INCIDENT_DELETED": "Incident deleted successfully"
+    "INCIDENT_DELETED": "Incident deleted successfully",
+    "PARCEL_CREATED": "Parcel created successfully",
+    "PARCEL_UPDATED": "Parcel updated successfully",
+    "PARCEL_DELETED": "Parcel deleted successfully",
+    "PARCEL_SENT": "Parcel sent successfully"
   },
   "ERRORS": {
     "LOAD_USERS": "Error loading users",
@@ -219,7 +252,13 @@
     "LOAD_INCIDENTS": "Error loading incidents",
     "CREATE_INCIDENT": "Error creating incident",
     "UPDATE_INCIDENT": "Error updating incident",
-    "DELETE_INCIDENT": "Error deleting incident"
+    "DELETE_INCIDENT": "Error deleting incident",
+    "LOAD_PARCELS": "Error loading parcels",
+    "LOAD_PARCELS_PICKUP": "Error loading parcels for pickup",
+    "CREATE_PARCEL": "Error creating parcel",
+    "UPDATE_PARCEL": "Error updating parcel",
+    "DELETE_PARCEL": "Error deleting parcel",
+    "SEND_PARCEL": "Error sending parcel"
   },
   "login": {
     "username": "Enter your user name",

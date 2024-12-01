@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subject, BehaviorSubject, fromEvent, Observable } from 'rxjs';
-import { takeUntil, debounceTime, map } from 'rxjs/operators';
+import { takeUntil, debounceTime, map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 // Menu

@@ -186,6 +186,35 @@
     "LABEL": "Libellé",
     "AMOUNT": "Montant"
   },
+  "PARCELS": {
+    "TITLE": "Gestion des colis",
+    "PICKUP_TITLE": "Colis à récupérer",
+    "ADD_PARCEL": "Nouveau colis",
+    "EDIT_PARCEL": "Modifier le colis",
+    "VIEW_PARCEL": "Voir le colis",
+    "DELETE_CONFIRMATION": "Supprimer le colis",
+    "DELETE_MESSAGE": "Êtes-vous sûr de vouloir supprimer {{name}} ?",
+    "CLIENT": "Client",
+    "RECIPIENT": "Destinataire",
+    "NAME": "Nom",
+    "WEIGHT": "Poids",
+    "WIDTH": "Largeur",
+    "HEIGHT": "Hauteur",
+    "LENGTH": "Longueur",
+    "QUANTITY": "Quantité",
+    "DESCRIPTION": "Description",
+    "FRAGILITY": "Fragilité",
+    "CATEGORY": "Catégorie",
+    "PRICE": "Prix",
+    "AGENCY": "Agence",
+    "ENTRY_DATE": "Date d'entrée",
+    "DEPARTURE_DATE": "Date de départ",
+    "EXPECTED_ARRIVAL_DATE": "Date d'arrivée prévue",
+    "STATUS": "Statut",
+    "PREVIEW": "Aperçu",
+    "SEND": "Envoyer",
+    "PICKUP": "Récupération"
+  },
   "SUCCESS": {
     "USER_CREATED": "Utilisateur créé avec succès",
     "USER_UPDATED": "Utilisateur mis à jour avec succès",
@@ -199,7 +228,11 @@
     "CATEGORY_DELETED": "Catégorie supprimée avec succès",
     "INCIDENT_CREATED": "Incident créé avec succès",
     "INCIDENT_UPDATED": "Incident mis à jour avec succès",
-    "INCIDENT_DELETED": "Incident supprimé avec succès"
+    "INCIDENT_DELETED": "Incident supprimé avec succès",
+    "PARCEL_CREATED": "Colis créé avec succès",
+    "PARCEL_UPDATED": "Colis mis à jour avec succès",
+    "PARCEL_DELETED": "Colis supprimé avec succès",
+    "PARCEL_SENT": "Colis envoyé avec succès"
   },
   "ERRORS": {
     "LOAD_USERS": "Erreur lors du chargement des utilisateurs",
@@ -219,7 +252,13 @@
     "LOAD_INCIDENTS": "Erreur lors du chargement des incidents",
     "CREATE_INCIDENT": "Erreur lors de la création de l'incident",
     "UPDATE_INCIDENT": "Erreur lors de la mise à jour de l'incident",
-    "DELETE_INCIDENT": "Erreur lors de la suppression de l'incident"
+    "DELETE_INCIDENT": "Erreur lors de la suppression de l'incident",
+    "LOAD_PARCELS": "Erreur lors du chargement des colis",
+    "LOAD_PARCELS_PICKUP": "Erreur lors du chargement des colis à récupérer",
+    "CREATE_PARCEL": "Erreur lors de la création du colis",
+    "UPDATE_PARCEL": "Erreur lors de la mise à jour du colis",
+    "DELETE_PARCEL": "Erreur lors de la suppression du colis",
+    "SEND_PARCEL": "Erreur lors de l'envoi du colis"
   },
   "login": {
     "username": "Enter your user name",
