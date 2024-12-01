@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-confirmation/delete-confirmation.component';
-import { Client } from 'src/app/shared/models/client.model';
 import { ClientFormComponent } from './components/client-form/client-form.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import { ClientService } from 'src/app/shared/services/client.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, Subject } from 'rxjs';
+import { clientService } from 'src/app/shared/rest-services/client.service';
+import { UserService } from 'src/app/shared/rest-services/user.service';
+import { IUser } from 'src/app/shared/models/User';
 
 @Component({
   selector: 'app-clients',
@@ -16,18 +17,8 @@ import { debounceTime, Subject } from 'rxjs';
   styleUrls: ['./clients.component.scss']
 })
 export class ClientsComponent {
-  displayedColumns: string[] = ['id', 'lastName', 'firstName', 'username', 'country', 'phone', 'email', 'address', 'actions'];
-  dataSource = new MatTableDataSource<Client>([{
-    id: 1,
-    firstName: 'dafsd',
-    lastName: 'fsd',
-    username: 'fsd',
-    nationalId: '54545454',
-    phone: '65545455',
-    email: 'fsdffds@gmail.com',
-    address: 'fsdfs',
-    country: 'fsdfds'
-  }]);
+  displayedColumns: string[] = ['id', 'lastName', 'firstName', 'username', 'country', 'phone', 'email', 'actions'];
+  dataSource = new MatTableDataSource<IUser>();
   totalClients = 0;
   isLoading = false;
   searchValue = '';
@@ -36,7 +27,8 @@ export class ClientsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private clientService: ClientService,
+    private clientService: clientService,
+    private userService: UserService,
     private dialog: MatDialog,
     private toastr: ToastrService,
     private translate: TranslateService
@@ -53,13 +45,13 @@ export class ClientsComponent {
 
   loadClients() {
     this.isLoading = true;
-    this.clientService.getClients({
-      page: this.paginator?.pageIndex || 0,
-      pageSize: this.paginator?.pageSize || 10,
-      search: this.searchValue
-    }).subscribe({
+    this.clientService.index(
+      (this.paginator?.pageIndex ?? 0) + 1,
+      this.paginator?.pageSize || 10,
+      this.searchValue
+    ).subscribe({
       next: (response) => {
-        this.dataSource.data = response.clients;
+        this.dataSource.data = response.data;
         this.totalClients = response.total;
         this.isLoading = false;
       },
@@ -70,7 +62,7 @@ export class ClientsComponent {
     });
   }
 
-  openClientForm(client?: Client) {
+  openClientForm(client?: IUser) {
     const dialogRef = this.dialog.open(ClientFormComponent, {
       width: '600px',
       data: client
@@ -83,10 +75,10 @@ export class ClientsComponent {
     });
   }
 
-  confirmDelete(client: Client) {
+  confirmDelete(client: IUser) {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
       width: '400px',
-      data: { name: `${client.firstName} ${client.lastName}` }
+      data: { name: `${client.first_name} ${client.last_name}` }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -98,7 +90,7 @@ export class ClientsComponent {
 
   private deleteClient(id: number) {
     this.isLoading = true;
-    this.clientService.deleteClient(id).subscribe({
+    this.userService.destroy(id).subscribe({
       next: () => {
         this.toastr.success(this.translate.instant('SUCCESS.CLIENT_DELETED'));
         this.loadClients();

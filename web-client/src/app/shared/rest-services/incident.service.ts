@@ -8,7 +8,7 @@ import { Incident } from '../models/incident.model';
 @Injectable({
   providedIn: 'root',
 })
-export class incidentService {
+export class IncidentService {
   private readonly baseUrl: string = `${environment.basePath}/api/incidents`;
 
   constructor(private http: HttpClient) { }
@@ -18,9 +18,10 @@ export class incidentService {
    * @param withPaginate Indique si la pagination doit être activée.
    * @returns Observable avec la liste des incidents.
    */
-  index(page: number = 1, size: number = 10, search: string = '', withPaginate: boolean = true): Observable<any> {
+  index(page: number = 1, size: number = 10, search: string = '', message: number = 1, withPaginate: boolean = true): Observable<any> {
     let params = new HttpParams();
     params = params.set('page', page);
+    params = params.set('message', message);
     params = params.set('per_page', size);
     params = params.set('search', search);
     params = params.set('with_paginate', withPaginate);

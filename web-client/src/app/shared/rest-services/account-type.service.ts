@@ -28,8 +28,8 @@ export class AccountTypeService {
    * @param data Les données du type de compte à créer.
    * @returns Observable avec les informations du type de compte créé.
    */
-  store(AccountTy: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, data);
+  store(accountType: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, accountType);
   }
 
   /**
