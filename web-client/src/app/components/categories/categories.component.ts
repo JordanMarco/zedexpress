@@ -8,6 +8,7 @@ import { debounceTime, Subject } from 'rxjs';
 import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-confirmation/delete-confirmation.component';
 import { Category } from 'src/app/shared/models/category.model';
 import { CategoryService } from 'src/app/shared/services/category.service';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
 
 @Component({
   selector: 'app-categories',
