@@ -96,7 +96,7 @@ export class SessionService {
     this.deleteUser();
     this.deleteAccessToken();
     this.deleteCurrentRole();
-    if (redirect) this.customNavigationService.goTo('/login');
+    if (redirect) this.customNavigationService.goTo('/auth/login');
   }
 
   public isLoggedIn(): boolean {

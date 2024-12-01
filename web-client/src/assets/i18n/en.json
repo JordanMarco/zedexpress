@@ -39,7 +39,7 @@
     "passwords-do-not-match": "Passwords don't match.",
     "required": "This field is required.",
     "stripe-initialization-error": "Could not initialize Stripe service for payment.",
-    "token-extraction": "Unable to obtain authorization token.",
+    "token-extraction": "Unable to obtain authorization token. Please check your login information and try again.",
     "top-up-amount-too-high": "Maximum top-up amount is {{maxAmount}}.",
     "top-up-amount-too-low": "Minimum top-up amount is {{minAmount}}.",
     "amount-too-low": "Minimum amount is {{minAmount}}.",

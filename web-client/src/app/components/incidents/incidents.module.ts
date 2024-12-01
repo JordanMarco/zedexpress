@@ -22,7 +22,6 @@ import { IncidentsComponent } from './incidents.component';
     ReactiveFormsModule,
     TranslateModule,
     SharedModule,
-
   ]
 })
 export class IncidentsModule { }

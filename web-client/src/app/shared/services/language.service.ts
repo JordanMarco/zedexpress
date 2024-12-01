@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Language } from '../models/Common';
-import { ServicesService } from './services.service';
-import { environment } from 'src/environments/environment';
+import { Language } from '../models/Common'; 
 import { HttpClient } from '@angular/common/http';
 import { SessionService } from './session-service';
 import { EventService } from './event.service';
@@ -23,6 +21,7 @@ export class LanguageService {
   public changeLanguage(lang: string): void {
     this.deviceLanguage = lang;
     this.translateService.use(this.deviceLanguage);
+    this.sessionServices.storeLanguage(lang)
     this.eventService.publish('change:language');
   }
 
