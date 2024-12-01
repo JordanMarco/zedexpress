@@ -30,6 +30,12 @@ export const content: Routes = [
   {
     path: '',
     loadChildren: () =>
+      import('../../components/packages/packages.module').then((m) => m.PackagesModule),
+  },
+
+  {
+    path: '',
+    loadChildren: () =>
       import('../../components/categories/categories.module').then((m) => m.CategoriesModule),
   },
 
