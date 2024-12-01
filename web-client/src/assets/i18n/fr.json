@@ -154,6 +154,15 @@
     "ADDRESS": "Adresse",
     "COUNTRY": "Pays"
   },
+  "CATEGORIES": {
+    "TITLE": "Gestion des catégories",
+    "ADD_CATEGORY": "Ajouter une catégorie",
+    "EDIT_CATEGORY": "Modifier une catégorie",
+    "DELETE_CONFIRMATION": "Supprimer une catégorie",
+    "DELETE_MESSAGE": "Êtes-vous sûr de vouloir supprimer {{name}} ?",
+    "LABEL": "Libellé",
+    "AMOUNT": "Montant"
+  },
   "SUCCESS": {
     "USER_CREATED": "Utilisateur créé avec succès",
     "USER_UPDATED": "Utilisateur mis à jour avec succès",
@@ -161,7 +170,10 @@
     "DELETE_SUCCESS": "Message supprimé avec succès",
     "CLIENT_CREATED": "Client créé avec succès",
     "CLIENT_UPDATED": "Client mis à jour avec succès",
-    "CLIENT_DELETED": "Client supprimé avec succès"
+    "CLIENT_DELETED": "Client supprimé avec succès",
+    "CATEGORY_CREATED": "Catégorie créée avec succès",
+    "CATEGORY_UPDATED": "Catégorie mise à jour avec succès",
+    "CATEGORY_DELETED": "Catégorie supprimée avec succès"
   },
   "ERRORS": {
     "LOAD_USERS": "Erreur lors du chargement des utilisateurs",
@@ -173,7 +185,11 @@
     "LOAD_CLIENTS": "Erreur lors du chargement des clients",
     "CREATE_CLIENT": "Erreur lors de la création du client",
     "UPDATE_CLIENT": "Erreur lors de la mise à jour du client",
-    "DELETE_CLIENT": "Erreur lors de la suppression du client"
+    "DELETE_CLIENT": "Erreur lors de la suppression du client",
+    "LOAD_CATEGORIES": "Erreur lors du chargement des catégories",
+    "CREATE_CATEGORY": "Erreur lors de la création de la catégorie",
+    "UPDATE_CATEGORY": "Erreur lors de la mise à jour de la catégorie",
+    "DELETE_CATEGORY": "Erreur lors de la suppression de la catégorie"
   },
   "login": {
     "username": "Enter your user name",

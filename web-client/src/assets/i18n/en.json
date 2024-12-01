@@ -154,7 +154,15 @@
     "ADDRESS": "Address",
     "COUNTRY": "Country"
   },
-
+  "CATEGORIES": {
+    "TITLE": "Category Management",
+    "ADD_CATEGORY": "Add Category",
+    "EDIT_CATEGORY": "Edit Category",
+    "DELETE_CONFIRMATION": "Delete Category",
+    "DELETE_MESSAGE": "Are you sure you want to delete {{name}}?",
+    "LABEL": "Label",
+    "AMOUNT": "Amount"
+  },
   "SUCCESS": {
     "USER_CREATED": "User created successfully",
     "USER_UPDATED": "User updated successfully",
