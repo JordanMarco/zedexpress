@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { debounceTime, Subject } from 'rxjs';
 import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-confirmation/delete-confirmation.component';
 import { Category } from 'src/app/shared/models/category.model';
 import { CategoryService } from 'src/app/shared/services/category.service';
@@ -25,6 +26,7 @@ export class CategoriesComponent {
   totalCategories = 0;
   isLoading = false;
   searchValue = '';
+  $inputSubject = new Subject<string>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -36,6 +38,11 @@ export class CategoriesComponent {
   ) {}
 
   ngOnInit() {
+    this.$inputSubject
+    .pipe(debounceTime(1000)) // Adjust the debounce time to your needs (e.g., 300ms)
+    .subscribe(searchValue => {
+      this.applyFilter()
+    });
     this.loadCategories();
   }
 
@@ -98,8 +105,12 @@ export class CategoriesComponent {
     });
   }
 
-  applyFilter(event: Event) {
-    this.searchValue = (event.target as HTMLInputElement).value;
+  search(event: Event): void {
+    this.searchValue = event.target ? (event.target as HTMLInputElement).value : '';
+    this.$inputSubject.next(this.searchValue);
+  }
+
+  applyFilter() {
     this.paginator.firstPage();
     this.loadCategories();
   }
