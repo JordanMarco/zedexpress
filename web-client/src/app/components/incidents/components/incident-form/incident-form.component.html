@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{ (data ? 'INCIDENTS.EDIT_INCIDENT' : 'INCIDENTS.ADD_INCIDENT') | translate }}</h2>
+
+<form [formGroup]="incidentForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'INCIDENTS.TITLE' | translate }}</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'INCIDENTS.PARCEL' | translate }}</mat-label>
+        <mat-select formControlName="parcelId">
+          <mat-option *ngFor="let parcel of parcels" [value]="parcel.id">
+            {{parcel.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>{{ 'INCIDENTS.REASON' | translate }}</mat-label>
+        <textarea matInput formControlName="reason" rows="4"></textarea>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{ 'COMMON.CANCEL' | translate }}</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!incidentForm.valid || isLoading">
+      {{ (data ? 'COMMON.UPDATE' : 'COMMON.SAVE') | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>
+
+<div class="loading-overlay" *ngIf="isLoading">
+  <mat-spinner diameter="30"></mat-spinner>
+</div>
