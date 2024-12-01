@@ -17,7 +17,7 @@ import { IIncident } from 'src/app/shared/models/incident';
   styleUrls: ['./incidents.component.scss']
 })
 export class IncidentsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'clientName', 'parcelName', 'title', 'reason', 'status', 'actions'];
+  displayedColumns: string[] = ['id', 'clientName', 'parcelName', 'title', 'status', 'actions'];
   dataSource = new MatTableDataSource<Incident>();
   totalIncidents = 0;
   isLoading = false;
