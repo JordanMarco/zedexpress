@@ -154,6 +154,19 @@
     "ADDRESS": "Adresse",
     "COUNTRY": "Pays"
   },
+  "INCIDENTS": {
+    "TITLE": "Gestion des incidents",
+    "ADD_INCIDENT": "Ajouter un incident",
+    "EDIT_INCIDENT": "Modifier un incident",
+    "DELETE_CONFIRMATION": "Supprimer un incident",
+    "DELETE_MESSAGE": "Êtes-vous sûr de vouloir supprimer {{name}} ?",
+    "CLIENT": "Client",
+    "PARCEL_NAME": "Nom du colis",
+    "REASON": "Raison",
+    "STATUS": "Statut",
+    "PREVIEW_PDF": "Aperçu PDF",
+    "DOWNLOAD_PDF": "Télécharger le PDF"
+  },
   "CATEGORIES": {
     "TITLE": "Gestion des catégories",
     "ADD_CATEGORY": "Ajouter une catégorie",
@@ -167,21 +180,24 @@
     "USER_CREATED": "Utilisateur créé avec succès",
     "USER_UPDATED": "Utilisateur mis à jour avec succès",
     "USER_DELETED": "Utilisateur supprimé avec succès",
-    "DELETE_SUCCESS": "Message supprimé avec succès",
+    "MESSAGE_DELETE": "Message supprimé avec succès",
     "CLIENT_CREATED": "Client créé avec succès",
     "CLIENT_UPDATED": "Client mis à jour avec succès",
     "CLIENT_DELETED": "Client supprimé avec succès",
     "CATEGORY_CREATED": "Catégorie créée avec succès",
     "CATEGORY_UPDATED": "Catégorie mise à jour avec succès",
-    "CATEGORY_DELETED": "Catégorie supprimée avec succès"
+    "CATEGORY_DELETED": "Catégorie supprimée avec succès",
+    "INCIDENT_CREATED": "Incident créé avec succès",
+    "INCIDENT_UPDATED": "Incident mis à jour avec succès",
+    "INCIDENT_DELETED": "Incident supprimé avec succès"
   },
   "ERRORS": {
     "LOAD_USERS": "Erreur lors du chargement des utilisateurs",
     "CREATE_USER": "Erreur lors de la création de l'utilisateur",
     "UPDATE_USER": "Erreur lors de la mise à jour de l'utilisateur",
     "DELETE_USER": "Erreur lors de la suppression de l'utilisateur",
-    "DELETE_ERROR": "Erreur lors de la suppression du message",
-    "LOAD_ERROR": "Erreur lors du chargement des messages",
+    "DELETE_MESSAGES": "Erreur lors de la suppression du message",
+    "LOAD_MESSAGES": "Erreur lors du chargement des messages",
     "LOAD_CLIENTS": "Erreur lors du chargement des clients",
     "CREATE_CLIENT": "Erreur lors de la création du client",
     "UPDATE_CLIENT": "Erreur lors de la mise à jour du client",
@@ -189,7 +205,11 @@
     "LOAD_CATEGORIES": "Erreur lors du chargement des catégories",
     "CREATE_CATEGORY": "Erreur lors de la création de la catégorie",
     "UPDATE_CATEGORY": "Erreur lors de la mise à jour de la catégorie",
-    "DELETE_CATEGORY": "Erreur lors de la suppression de la catégorie"
+    "DELETE_CATEGORY": "Erreur lors de la suppression de la catégorie",
+    "LOAD_INCIDENTS": "Erreur lors du chargement des incidents",
+    "CREATE_INCIDENT": "Erreur lors de la création de l'incident",
+    "UPDATE_INCIDENT": "Erreur lors de la mise à jour de l'incident",
+    "DELETE_INCIDENT": "Erreur lors de la suppression de l'incident"
   },
   "login": {
     "username": "Enter your user name",

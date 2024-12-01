@@ -8,15 +8,27 @@ import { Incident } from 'src/app/shared/models/incident.model';
 import { IncidentService } from 'src/app/shared/services/incident.service';
 import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-confirmation/delete-confirmation.component';
 import { debounceTime, Subject } from 'rxjs';
+import { IncidentFormComponent } from './components/incident-form/incident-form.component';
 
 @Component({
   selector: 'app-incidents',
   templateUrl: './incidents.component.html',
   styleUrls: ['./incidents.component.scss']
 })
-export class IncidentListComponent implements OnInit {
+export class IncidentsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'clientName', 'parcelName', 'title', 'reason', 'status', 'actions'];
-  dataSource = new MatTableDataSource<Incident>([]);
+  dataSource = new MatTableDataSource<Incident>([
+    {
+      id: 1,
+      title: 'sdda',
+      parcelId: 0,
+      parcelName: 'dsad',
+      clientName: 'dasd',
+      reason: 'dasd',
+      status: 'PENDING',
+      createdAt: new Date
+    }
+  ]);
   totalIncidents = 0;
   isLoading = false;
   searchValue = '';

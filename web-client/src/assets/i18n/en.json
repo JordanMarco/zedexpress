@@ -163,19 +163,53 @@
     "LABEL": "Label",
     "AMOUNT": "Amount"
   },
+  "INCIDENTS": {
+    "TITLE": "Incident Management",
+    "ADD_INCIDENT": "Add Incident",
+    "EDIT_INCIDENT": "Edit Incident",
+    "DELETE_CONFIRMATION": "Delete Incident",
+    "DELETE_MESSAGE": "Are you sure you want to delete {{name}}?",
+    "CLIENT": "Client",
+    "PARCEL_NAME": "Parcel Name",
+    "REASON": "Reason",
+    "STATUS": "Status",
+    "PREVIEW_PDF": "Preview PDF",
+    "DOWNLOAD_PDF": "Download PDF"
+  },
   "SUCCESS": {
     "USER_CREATED": "User created successfully",
     "USER_UPDATED": "User updated successfully",
     "USER_DELETED": "User deleted successfully",
-    "DELETE_SUCCESS": "Message deleted successfully"
+    "MESSAGE_DELETE": "Message deleted successfully",
+    "CLIENT_CREATED": "Client created successfully",
+    "CLIENT_UPDATED": "Client updated successfully",
+    "CLIENT_DELETED": "Client deleted successfully",
+    "CATEGORY_CREATED": "Category created successfully",
+    "CATEGORY_UPDATED": "Category updated successfully",
+    "CATEGORY_DELETED": "Category deleted successfully",
+    "INCIDENT_CREATED": "Incident created successfully",
+    "INCIDENT_UPDATED": "Incident updated successfully",
+    "INCIDENT_DELETED": "Incident deleted successfully"
   },
   "ERRORS": {
-    "LOAD_USERS": "Error loading users",
+   "LOAD_USERS": "Error loading users",
     "CREATE_USER": "Error creating user",
     "UPDATE_USER": "Error updating user",
     "DELETE_USER": "Error deleting user",
-    "DELETE_ERROR": "Error deleting the message",
-    "LOAD_ERROR": "Error loading messages"
+    "DELETE_MESSAGES": "Error deleting the message",
+    "LOAD_MESSAGES": "Error loading messages",
+    "LOAD_CLIENTS": "Error loading clients",
+    "CREATE_CLIENT": "Error creating client",
+    "UPDATE_CLIENT": "Error updating client",
+    "DELETE_CLIENT": "Error deleting client",
+    "LOAD_CATEGORIES": "Error loading categories",
+    "CREATE_CATEGORY": "Error creating category",
+    "UPDATE_CATEGORY": "Error updating category",
+    "DELETE_CATEGORY": "Error deleting category",
+    "LOAD_INCIDENTS": "Error loading incidents",
+    "CREATE_INCIDENT": "Error creating incident",
+    "UPDATE_INCIDENT": "Error updating incident",
+    "DELETE_INCIDENT": "Error deleting incident"
   },
   "login": {
     "username": "Enter your user name",
