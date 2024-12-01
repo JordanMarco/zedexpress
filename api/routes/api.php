@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Others\AccountTypeController;
 use App\Http\Controllers\Others\ClientController;
 use App\Http\Controllers\Others\ColisController;
+use App\Http\Controllers\Others\HomeController;
 use App\Http\Controllers\Others\IncidentsController;
 use App\Http\Controllers\Others\PaymentController;
 use App\Http\Controllers\Others\TarifsController;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/home', [HomeController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::prefix('account-type')->group(function () {
