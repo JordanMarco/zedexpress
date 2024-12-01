@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, Subject } from 'rxjs';
-import { clientService } from 'src/app/shared/rest-services/client.service';
+import { ClientService } from 'src/app/shared/rest-services/client.service';
 import { UserService } from 'src/app/shared/rest-services/user.service';
 import { IUser } from 'src/app/shared/models/User';
 
@@ -27,7 +27,7 @@ export class ClientsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private clientService: clientService,
+    private clientService: ClientService,
     private userService: UserService,
     private dialog: MatDialog,
     private toastr: ToastrService,

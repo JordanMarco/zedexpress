@@ -1,4 +1,5 @@
 import { ColisStatusEnum } from "../enums/enums";
+import { IUser } from "./User";
 
 export interface IColis {
   id: number;
@@ -22,7 +23,9 @@ export interface IColis {
   quantite?: number;
   valeur_euro?: number;
   receiver_id: number;
+  receiver?: IUser;
   user_id: number;
+  user?: IUser;
   tarif_id: number;
   created_at?: Date;
   updated_at?: Date;

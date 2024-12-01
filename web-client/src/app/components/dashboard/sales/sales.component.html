@@ -6,7 +6,7 @@
 
 <!-- Start::row-1 -->
 <div class="grid grid-cols-12 gap-x-5">
-  <div class="col-span-12 md:col-span-6 xxl:col-span-3">
+  <div class="col-span-12 md:col-span-6 xxl:col-span-4">
     <div class="box overflow-hidden">
       <div class="box-body">
         <div class="flex">
@@ -27,25 +27,19 @@
             <h6
               class="text-lg font-medium text-gray-800 mb-2 dark:text-white my-auto"
             >
-              Total Revenue
+              Total des utilisateurs
             </h6>
           </div>
-          <span
-            class="badge bg-primary/10 text-primary py-1 ltr:ml-auto rtl:mr-auto !my-auto"
-          >
-            <i class="ti ti-trending-up"></i> 20%
-          </span>
         </div>
-        <div class="mt-2">
+        <div class="mt-2 text-center flex flex-col">
           <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
-            $26,35,262
+            {{ result && result.total_user }}
           </h2>
-          <p class="text-xs text-gray-400">in last week</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-span-12 md:col-span-6 xxl:col-span-3">
+  <div class="col-span-12 md:col-span-6 xxl:col-span-4">
     <div class="box overflow-hidden">
       <div class="box-body">
         <div class="flex">
@@ -66,24 +60,19 @@
             <h6
               class="text-lg font-medium text-gray-800 mb-2 dark:text-white my-auto"
             >
-              Total Sales
+              Total des agents
             </h6>
           </div>
-          <span
-            class="badge bg-secondary/10 text-secondary py-1 ltr:ml-auto rtl:mr-auto !my-auto"
-            ><i class="ti ti-trending-up"></i> 1.8%</span
-          >
         </div>
         <div class="mt-2">
           <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
-            $56,35,262
+            {{ result && result.total_agent }}
           </h2>
-          <p class="text-xs text-gray-400">in last week</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-span-12 md:col-span-6 xxl:col-span-3">
+  <div class="col-span-12 md:col-span-6 xxl:col-span-4">
     <div class="box overflow-hidden">
       <div class="box-body">
         <div class="flex">
@@ -106,24 +95,19 @@
             <h6
               class="text-lg font-medium text-gray-800 mb-2 dark:text-white my-auto"
             >
-              Total Products
+              Total des clients
             </h6>
           </div>
-          <span
-            class="badge bg-warning/10 text-warning py-1 ltr:ml-auto rtl:mr-auto !my-auto"
-            ><i class="ti ti-trending-down"></i> 1.8%</span
-          >
         </div>
         <div class="mt-2">
           <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
-            $4,262
+            {{ result && result.total_client }}
           </h2>
-          <p class="text-xs text-gray-400">in last week</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-span-12 md:col-span-6 xxl:col-span-3">
+  <div class="col-span-12 md:col-span-6 xxl:col-span-4">
     <div class="box overflow-hidden">
       <div class="box-body">
         <div class="flex">
@@ -144,19 +128,80 @@
             <h6
               class="text-lg font-medium text-gray-800 mb-2 dark:text-white my-auto"
             >
-              Total Expenses
+              Total des colis
             </h6>
           </div>
-          <span
-            class="badge bg-success/10 text-success py-1 ltr:ml-auto rtl:mr-auto !my-auto"
-            ><i class="ti ti-trending-up"></i> 1.2%</span
-          >
         </div>
         <div class="mt-2">
           <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
-            $35,262
+            {{ result && result.total_colis }}
           </h2>
-          <p class="text-xs text-gray-400">in last week</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xxl:col-span-4">
+    <div class="box overflow-hidden">
+      <div class="box-body">
+        <div class="flex">
+          <div class="flex space-x-3 rtl:space-x-reverse">
+            <div class="avatar p-2 rounded-sm bg-success/10">
+              <svg
+                class="fill-success"
+                xmlns="http://www.w3.org/2000/svg"
+                enable-background="new 0 0 24 24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  class="fill-success"
+                  d="M10.75,8H12h0.0006104H15.5C15.776123,8,16,7.776123,16,7.5S15.776123,7,15.5,7h-3V5.5C12.5,5.223877,12.276123,5,12,5s-0.5,0.223877-0.5,0.5V7h-0.75C9.2312012,7,8,8.2312012,8,9.75s1.2312012,2.75,2.75,2.75h2.5c0.9664917,0,1.75,0.7835083,1.75,1.75S14.2164917,16,13.25,16H8.5C8.223877,16,8,16.223877,8,16.5S8.223877,17,8.5,17h3v1.5c0,0.0001831,0,0.0003662,0,0.0005493C11.5001831,18.7765503,11.723999,19.0001831,12,19c0.0001831,0,0.0003662,0,0.0006104,0c0.2759399-0.0001831,0.4995728-0.223999,0.4993896-0.5V17h0.75c1.5187988,0,2.75-1.2312012,2.75-2.75s-1.2312012-2.75-2.75-2.75h-2.5C9.7835083,11.5,9,10.7164917,9,9.75S9.7835083,8,10.75,8z M12,1C5.9248657,1,1,5.9248657,1,12s4.9248657,11,11,11c6.0722656-0.0068359,10.9931641-4.9277344,11-11C23,5.9248657,18.0751343,1,12,1z M12,22C6.4771729,22,2,17.5228271,2,12S6.4771729,2,12,2c5.5201416,0.0064697,9.9935303,4.4798584,10,10C22,17.5228271,17.5228271,22,12,22z"
+                ></path>
+              </svg>
+            </div>
+            <h6
+              class="text-lg font-medium text-gray-800 mb-2 dark:text-white my-auto"
+            >
+              Total des colis payé
+            </h6>
+          </div>
+        </div>
+        <div class="mt-2">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+            {{ result && (result.total_colis - result.total_unpaid_colis) }}
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xxl:col-span-4">
+    <div class="box overflow-hidden">
+      <div class="box-body">
+        <div class="flex">
+          <div class="flex space-x-3 rtl:space-x-reverse">
+            <div class="avatar p-2 rounded-sm bg-success/10">
+              <svg
+                class="fill-success"
+                xmlns="http://www.w3.org/2000/svg"
+                enable-background="new 0 0 24 24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  class="fill-success"
+                  d="M10.75,8H12h0.0006104H15.5C15.776123,8,16,7.776123,16,7.5S15.776123,7,15.5,7h-3V5.5C12.5,5.223877,12.276123,5,12,5s-0.5,0.223877-0.5,0.5V7h-0.75C9.2312012,7,8,8.2312012,8,9.75s1.2312012,2.75,2.75,2.75h2.5c0.9664917,0,1.75,0.7835083,1.75,1.75S14.2164917,16,13.25,16H8.5C8.223877,16,8,16.223877,8,16.5S8.223877,17,8.5,17h3v1.5c0,0.0001831,0,0.0003662,0,0.0005493C11.5001831,18.7765503,11.723999,19.0001831,12,19c0.0001831,0,0.0003662,0,0.0006104,0c0.2759399-0.0001831,0.4995728-0.223999,0.4993896-0.5V17h0.75c1.5187988,0,2.75-1.2312012,2.75-2.75s-1.2312012-2.75-2.75-2.75h-2.5C9.7835083,11.5,9,10.7164917,9,9.75S9.7835083,8,10.75,8z M12,1C5.9248657,1,1,5.9248657,1,12s4.9248657,11,11,11c6.0722656-0.0068359,10.9931641-4.9277344,11-11C23,5.9248657,18.0751343,1,12,1z M12,22C6.4771729,22,2,17.5228271,2,12S6.4771729,2,12,2c5.5201416,0.0064697,9.9935303,4.4798584,10,10C22,17.5228271,17.5228271,22,12,22z"
+                ></path>
+              </svg>
+            </div>
+            <h6
+              class="text-lg font-medium text-gray-800 mb-2 dark:text-white my-auto"
+            >
+              Total des colis non payé
+            </h6>
+          </div>
+        </div>
+        <div class="mt-2">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+            {{ result && result.total_unpaid_colis }}
+          </h2>
         </div>
       </div>
     </div>
@@ -174,22 +219,7 @@
     <div class="box">
       <div class="box-header">
         <div class="flex">
-          <h5 class="box-title my-auto">Recent Order Details</h5>
-          <div
-            class="hs-dropdown ti-dropdown block ltr:ml-auto rtl:mr-auto my-auto"
-          >
-            <button
-              type="button"
-              class="hs-dropdown-toggle ti-dropdown-toggle rounded-md p-1 px-3 !border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-200 hover:border-gray-200 focus:ring-gray-200 dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
-            >
-              View All <i class="ti ti-chevron-down"></i>
-            </button>
-            <div class="hs-dropdown-menu ti-dropdown-menu">
-              <a class="ti-dropdown-item" href="javascript:void(0)">Download</a>
-              <a class="ti-dropdown-item" href="javascript:void(0)">Import</a>
-              <a class="ti-dropdown-item" href="javascript:void(0)">Export</a>
-            </div>
-          </div>
+          <h5 class="box-title my-auto">Les 5 Recents Colis</h5>
         </div>
       </div>
       <div class="box-body">
@@ -199,116 +229,33 @@
           <table class="ti-custom-table ti-custom-table-head whitespace-nowrap">
             <thead class="bg-gray-50 dark:bg-black/20">
               <tr class="">
-                <th scope="col" class="dark:text-white/80">S.no</th>
-                <th scope="col" class="dark:text-white/80">Item Details</th>
-                <th scope="col" class="dark:text-white/80">Customer ID</th>
-                <th scope="col" class="dark:text-white/80 min-w-[300px]">
-                  Customer Details
-                </th>
-                <th scope="col" class="dark:text-white/80">Ordered Date</th>
+                <th scope="col" class="dark:text-white/80">#</th>
+                <th scope="col" class="dark:text-white/80">Client</th>
+                <th scope="col" class="dark:text-white/80">Desctinataire</th>
+                <th scope="col" class="dark:text-white/80">Nom du colis</th>
                 <th scope="col" class="dark:text-white/80">Status</th>
-                <th scope="col" class="dark:text-white/80">Price</th>
-                <th scope="col" class="dark:text-white/80">Action</th>
+                <th scope="col" class="dark:text-white/80">Date d'entré</th>
               </tr>
             </thead>
             <tbody class="">
-              <tr class="" *ngFor="let item of Itemdata">
+              <tr class="" *ngFor="let item of result.last_colis">
                 <td>{{ item.id }}</td>
-                <td>
-                  <div class="flex space-x-3 rtl:space-x-reverse w-full">
-                    <img
-                      class="avatar rounded-md bg-gray-100 dark:bg-black/20 p-2"
-                      src="{{ item.productsrc }}"
-                      alt="Image Description"
-                    />
-                    <div class="block w-full my-auto">
-                      <span
-                        class="block text-sm font-semibold text-gray-800 dark:text-gray-300 min-w-[180px] truncate"
-                        >{{ item.product }}
-                      </span>
-                      <span
-                        class="block text-xs text-gray-400 dark:text-white/80 !font-normal"
-                        >{{ item.userid }}</span
-                      >
-                    </div>
-                  </div>
+                <td class="font-semibold text-base">
+                  {{ item.user!.first_name }}
                 </td>
-                <td class="!text-success font-semibold text-base">
-                  {{ item.user }}
+                <td class="font-semibold text-base">
+                  {{ item.receiver!.first_name }}
                 </td>
-                <td>
-                  <div class="flex space-x-3 rtl:space-x-reverse text-start">
-                    <img
-                      class="avatar avatar-sm rounded-md"
-                      src="{{ item.src }}"
-                      alt="Image Description"
-                    />
-                    <div class="block my-auto">
-                      <p
-                        class="block text-sm font-semibold my-auto text-gray-800 dark:text-white"
-                      >
-                        {{ item.name }}
-                      </p>
-                      <span
-                        class="block text-xs text-gray-400 dark:text-white/80 !font-normal my-auto"
-                        >{{ item.mail }}</span
-                      >
-                    </div>
-                  </div>
+                <td class="font-semibold text-base">
+                  {{ item.nom }}
                 </td>
-                <td>{{ item.date }}</td>
                 <td>
                   <span
-                    class="truncate whitespace-nowrap inline-block py-1 px-3 rounded-full text-xs font-medium bg-{{item.bg}}/10 text-{{item.bg}}/80"
-                    >{{ item.status}}</span
-                  >
+                    class="truncate whitespace-nowrap inline-block py-1 px-3 rounded-full text-xs font-medium">
+                    {{ item.statut }}
+                  </span>
                 </td>
-                <td>{{ item.price }}</td>
-                <td class="font-medium space-x-2 rtl:space-x-reverse">
-                  <div class="hs-tooltip ti-main-tooltip">
-                    <a
-                      href="javascript:void(0);"
-                      class="m-0 hs-tooltip-toggle relative w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-primary"
-                    >
-                      <i class="ti ti-eye"></i>
-                      <span
-                        class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
-                        role="tooltip"
-                      >
-                        View
-                      </span>
-                    </a>
-                  </div>
-                  <div class="hs-tooltip ti-main-tooltip">
-                    <a
-                      href="javascript:void(0);"
-                      class="customer-edit m-0 hs-tooltip-toggle relative w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-secondary"
-                    >
-                      <i class="ti ti-pencil"></i>
-                      <span
-                        class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
-                        role="tooltip"
-                      >
-                        Edit
-                      </span>
-                    </a>
-                  </div>
-                  <div class="hs-tooltip ti-main-tooltip">
-                    <a
-                      href="javascript:void(0);"
-                      class="m-0 hs-tooltip-toggle relative w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-danger"
-                      (click)="click(item.id)"
-                    >
-                      <i class="ti ti-trash"></i>
-                      <span
-                        class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
-                        role="tooltip"
-                      >
-                        Delete
-                      </span>
-                    </a>
-                  </div>
-                </td>
+                <td>{{ item.created_at }}</td>
               </tr>
             </tbody>
           </table>

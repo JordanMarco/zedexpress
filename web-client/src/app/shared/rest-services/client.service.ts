@@ -7,7 +7,7 @@ import { IUser, User } from '../models/User';
 @Injectable({
   providedIn: 'root',
 })
-export class clientService {
+export class ClientService {
   private readonly baseUrl: string = `${environment.basePath}/api/clients`;
   private readonly userBaseUrl: string = `${environment.basePath}/api/user`;
 
