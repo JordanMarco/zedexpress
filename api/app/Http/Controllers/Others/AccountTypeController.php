@@ -13,7 +13,7 @@ class AccountTypeController extends Controller
     {
         $withPaginate = $request->input('with_paginate', true);
 
-        if ($withPaginate) {
+        if ($withPaginate === true) {
             $accountTypes = AccountType::paginate(10);
         } else {
             $accountTypes = AccountType::all();

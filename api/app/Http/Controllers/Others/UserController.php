@@ -45,7 +45,7 @@ class UserController extends Controller
             'login' => 'required|unique:users,login',
             'email' => 'required|unique:users,email',
             'password' => 'required|confirmed',
-            'account_id' => 'required|exists:account_types:id'
+            'account_id' => 'required|exists:account_types,id'
         ]);
 
         if ($validator->fails()) {
@@ -73,13 +73,13 @@ class UserController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'login' => 'required|unique:users,login',
-            'email' => 'required|unique:users,email',
-            'account_id' => 'required|exists:account_types:id'
+            'login' => 'required|unique:users,login,' . Auth::id(),
+            'email' => 'required|unique:users,email,' . Auth::id(),
+            'account_id' => 'required|exists:account_types,id'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['translate' => 'errors.validate'], 400);
+            return response()->json(['translate' => 'errors.validate', 'message' => $validator->messages()], 400);
         }
 
         $user->first_name = $request->first_name;
