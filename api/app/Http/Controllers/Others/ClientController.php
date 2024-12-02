@@ -48,7 +48,7 @@ class ClientController extends Controller
         $validator = Validator::make($data, [
             'login' => 'required|unique:users,login',
             'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed',
+            'password' => 'required|confirmed'
         ]);
 
         if ($validator->fails()) {
@@ -103,7 +103,6 @@ class ClientController extends Controller
         if (isset($data['password'])) {
             $client->password = Hash::make($request->password);
         }
-
 
         if ($request->cni)
             $client->cni = $request->cni;
