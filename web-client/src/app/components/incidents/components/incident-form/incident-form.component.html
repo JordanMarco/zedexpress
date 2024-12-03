@@ -14,7 +14,7 @@
         <mat-label>{{ 'INCIDENTS.PARCEL' | translate }}</mat-label>
         <mat-select formControlName="colis_id">
           <mat-option *ngFor="let col of colis" [value]="col.id">
-            {{ col.user?.first_name + '/ ' + col.nom }}
+            {{ col.user!.first_name + '/ ' + col.nom }}
           </mat-option>
         </mat-select>
       </mat-form-field>
