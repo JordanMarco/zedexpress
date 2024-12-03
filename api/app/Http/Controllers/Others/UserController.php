@@ -7,11 +7,17 @@ use App\Models\Enums\AccountTypeEnum;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
+
     public function index(Request $request)
     {
         $search = '%' . $request->input('search', '') . '%';
@@ -45,7 +51,7 @@ class UserController extends Controller
             'login' => 'required|unique:users,login',
             'email' => 'required|unique:users,email',
             'password' => 'required|confirmed',
-            'account_id' => 'required|exists:account_types:id'
+            'account_id' => 'required|exists:account_types,id'
         ]);
 
         if ($validator->fails()) {
@@ -73,13 +79,13 @@ class UserController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'login' => 'required|unique:users,login',
-            'email' => 'required|unique:users,email',
-            'account_id' => 'required|exists:account_types:id'
+            'login' => 'required|unique:users,login,' . Auth::id(),
+            'email' => 'required|unique:users,email,' . Auth::id(),
+            'account_id' => 'required|exists:account_types,id'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['translate' => 'errors.validate'], 400);
+            return response()->json(['translate' => 'errors.validate', 'message' => $validator->messages()], 400);
         }
 
         $user->first_name = $request->first_name;
@@ -107,13 +113,16 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-
-        if ($user->accountType->code === AccountTypeEnum::ADMIN->value || Auth::id() === $user->id) {
-            return response()->json(['translate' => 'errors.unauthorize']);
+        if ($user->account->code === AccountTypeEnum::ADMIN->value || Auth::id() === $user->id) {
+            return response()->json(['translate' => 'errors.unauthorize'], 401);
         }
 
         if ($user->colis()->count() > 0) {
-            return response()->json(['translate' => 'errors.existing-colis']);
+            return response()->json(['translate' => 'errors.existing-colis'], 400);
+        }
+
+        if ($user->receiveColis()->count() > 0) {
+            return response()->json(['translate' => 'errors.existing-colis'], 400);
         }
 
         $user->delete();

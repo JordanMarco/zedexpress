@@ -9,11 +9,16 @@ use Illuminate\Support\Facades\Validator;
 
 class AccountTypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(AccountType::class, 'account_type');
+    }
+
     public function index(Request $request)
     {
         $withPaginate = $request->input('with_paginate', true);
 
-        if ($withPaginate) {
+        if ($withPaginate === true) {
             $accountTypes = AccountType::paginate(10);
         } else {
             $accountTypes = AccountType::all();

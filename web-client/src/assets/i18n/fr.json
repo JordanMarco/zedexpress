@@ -264,5 +264,21 @@
   "login": {
     "username": "Enter your user name",
     "password": "Password here"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "active_item": "Accueil",
+    "total_users": "Total des utilisateurs",
+    "total_agents": "Total des agents",
+    "total_clients": "Total des clients",
+    "total_colis": "Total des colis",
+    "total_unpaid_colis": "Total des colis non payés",
+    "total_paid_colis": "Total des colis payés",
+    "five_recent": "Les 5 derniers colis",
+    "client": "Expéditeur",
+    "receiver": "Destinataire",
+    "colis_name": "Nom du colis",
+    "status": "Statut",
+    "created_at": "Date de création"
   }
 }

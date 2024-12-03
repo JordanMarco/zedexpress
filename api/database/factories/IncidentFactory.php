@@ -26,9 +26,8 @@ class IncidentFactory extends Factory
         return [
             'titre' => $this->faker->sentence(3),
             'statut' => $this->faker->randomElement(IncidentStatusEnum::toArray()),
-            'message' => $this->faker->numberBetween(1, 1000),
+            'message' => 1,
             'motif' => $this->faker->text(),
-            'client_id' => Client::factory(),
             'colis_id' => Colis::factory()
         ];
     }

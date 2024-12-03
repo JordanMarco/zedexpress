@@ -5,19 +5,19 @@
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ 'CLIENTS.FIRST_NAME' | translate }}</mat-label>
-        <input matInput formControlName="firstName">
+        <input matInput formControlName="first_name">
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>{{ 'CLIENTS.LAST_NAME' | translate }}</mat-label>
-        <input matInput formControlName="lastName">
+        <input matInput formControlName="last_name">
       </mat-form-field>
     </div>
 
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ 'CLIENTS.USERNAME' | translate }}</mat-label>
-        <input matInput formControlName="username" type="email">
+        <input matInput formControlName="login" type="email">
       </mat-form-field>
     </div>
 
@@ -29,14 +29,14 @@
 
       <mat-form-field>
         <mat-label>{{ 'CLIENTS.CONFIRM_PASSWORD' | translate }}</mat-label>
-        <input matInput formControlName="confirmPassword" type="password">
+        <input matInput formControlName="password_confirmation" type="password">
       </mat-form-field>
     </div>
 
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ 'CLIENTS.NATIONAL_ID' | translate }}</mat-label>
-        <input matInput formControlName="nationalId">
+        <input matInput formControlName="cni">
       </mat-form-field>
 
       <mat-form-field>

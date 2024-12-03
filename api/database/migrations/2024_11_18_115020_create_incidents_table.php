@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('statut')->nullable();
             $table->integer('message')->nullable();
             $table->text('motif')->nullable();
-            $table->foreignIdFor(Client::class)->constrained()->noActionOnDelete();
             $table->foreignIdFor(Colis::class)->constrained()->noActionOnDelete();
             $table->timestamps();
         });

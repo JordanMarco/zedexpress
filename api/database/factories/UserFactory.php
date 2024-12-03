@@ -28,10 +28,10 @@ class UserFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'login' => $this->faker->unique()->userName(),
-            'language_code' => LanguageEnum::FR->value, // Par défaut, 'fr'
-            'account_id' => AccountType::factory(), // Associe à un type de compte
+            'language_code' => LanguageEnum::FR->value,
+            'account_id' => AccountType::factory(),
             'email_verified_at' => $this->faker->optional()->dateTime(),
-            'password' => bcrypt('password'), // Mot de passe par défaut
+            'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
         ];
     }

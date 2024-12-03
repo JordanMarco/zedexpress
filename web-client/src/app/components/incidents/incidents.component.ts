@@ -8,8 +8,8 @@ import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-co
 import { debounceTime, Subject } from 'rxjs';
 import { IncidentFormComponent } from './components/incident-form/incident-form.component';
 import { Incident } from 'src/app/shared/models/incident.model';
-import { incidentService } from 'src/app/shared/rest-services/incident.service';
 import { IIncident } from 'src/app/shared/models/incident';
+import { IncidentService } from 'src/app/shared/rest-services/incident.service';
 
 @Component({
   selector: 'app-incidents',
@@ -17,7 +17,7 @@ import { IIncident } from 'src/app/shared/models/incident';
   styleUrls: ['./incidents.component.scss']
 })
 export class IncidentsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'clientName', 'parcelName', 'title', 'reason', 'status', 'actions'];
+  displayedColumns: string[] = ['id', 'clientName', 'parcelName', 'title', 'status', 'actions'];
   dataSource = new MatTableDataSource<Incident>();
   totalIncidents = 0;
   isLoading = false;
@@ -26,18 +26,18 @@ export class IncidentsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private incidentService: incidentService,
+    private incidentService: IncidentService,
     private dialog: MatDialog,
     private toastr: ToastrService,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.$inputSubject
-    .pipe(debounceTime(1000)) // Adjust the debounce time to your needs (e.g., 300ms)
-    .subscribe(searchValue => {
-      this.applyFilter()
-    });
+      .pipe(debounceTime(1000)) // Adjust the debounce time to your needs (e.g., 300ms)
+      .subscribe(searchValue => {
+        this.applyFilter()
+      });
     this.loadIncidents();
   }
 
@@ -46,7 +46,7 @@ export class IncidentsComponent implements OnInit {
     this.incidentService.index(
       (this.paginator?.pageIndex ?? 0) + 1,
       this.paginator?.pageSize || 10,
-      this.searchValue
+      this.searchValue, 1
     ).subscribe({
       next: (response) => {
         this.dataSource.data = response.data;

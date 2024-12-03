@@ -6,8 +6,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, Subject } from 'rxjs';
 import { DeleteConfirmationComponent } from 'src/app/shared/components/delete-confirmation/delete-confirmation.component';
+import { IIncident } from 'src/app/shared/models/incident';
+import { Incident } from 'src/app/shared/models/incident.model';
 import { Message } from 'src/app/shared/models/message.model';
-import { MessageService } from 'src/app/shared/services/message.service';
+import { IncidentService } from 'src/app/shared/rest-services/incident.service';
 
 @Component({
   selector: 'app-messages',
@@ -15,15 +17,8 @@ import { MessageService } from 'src/app/shared/services/message.service';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent {
-  displayedColumns: string[] = ['id', 'client', 'packageName', 'subject', 'content', 'status', 'actions'];
-  dataSource = new MatTableDataSource<Message>([{
-    id: 9,
-    client: 'kklfs',
-    packageName: 'klfsd',
-    subject: 'llfkds',
-    content: 'lfkds',
-    status: 'RESOLVED'
-  }]);
+  displayedColumns: string[] = ['id', 'client', 'packageName', 'subject', 'status', 'actions'];
+  dataSource = new MatTableDataSource<IIncident>();
   totalMessages = 0;
   isLoading = false;
   searchValue = '';
@@ -32,35 +27,36 @@ export class MessagesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private messageService: MessageService,
+    private incidentService: IncidentService,
     private dialog: MatDialog,
     private toastr: ToastrService,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.$inputSubject
-    .pipe(debounceTime(1000)) // Adjust the debounce time to your needs (e.g., 300ms)
-    .subscribe(searchValue => {
-      this.applyFilter()
-    });
+      .pipe(debounceTime(1000)) // Adjust the debounce time to your needs (e.g., 300ms)
+      .subscribe(searchValue => {
+        this.applyFilter()
+      });
     this.loadMessages();
   }
 
   loadMessages() {
     this.isLoading = true;
-    this.messageService.getMessages({
-      page: this.paginator?.pageIndex || 0,
-      pageSize: this.paginator?.pageSize || 10,
-      search: this.searchValue
-    }).subscribe({
+    this.incidentService.index(
+      (this.paginator?.pageIndex ?? 0) + 1,
+      this.paginator?.pageSize || 10,
+      this.searchValue,
+      0
+    ).subscribe({
       next: (response) => {
-        this.dataSource.data = response.messages;
+        this.dataSource.data = response.data;
         this.totalMessages = response.total;
         this.isLoading = false;
       },
       error: () => {
-        this.toastr.error(this.translate.instant('ERRORS.LOAD_MESSAGES'));
+        this.toastr.error(this.translate.instant('ERRORS.LOAD_INCIDENTS'));
         this.isLoading = false;
       }
     });
@@ -81,7 +77,7 @@ export class MessagesComponent {
 
   private deleteMessage(id: number) {
     this.isLoading = true;
-    this.messageService.deleteMessage(id).subscribe({
+    this.incidentService.destroy(id).subscribe({
       next: () => {
         this.toastr.success(this.translate.instant('SUCCESS.MESSAGE_DELETED'));
         this.loadMessages();
@@ -93,9 +89,9 @@ export class MessagesComponent {
     });
   }
 
-  updateStatus(message: Message) {
-    const newStatus = message.status === 'PENDING' ? 'RESOLVED' : 'PENDING';
-    this.messageService.updateMessageStatus(message.id, newStatus).subscribe({
+  updateStatus(message: Incident) {
+    message.status = message.status === 'PENDING' ? 'RESOLVED' : 'PENDING';
+    this.incidentService.update(message.id!, message).subscribe({
       next: () => {
         this.toastr.success(this.translate.instant('SUCCESS.STATUS_UPDATED'));
         this.loadMessages();

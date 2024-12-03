@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from 'src/app/shared/models/user.model'; 
-import { UserService } from 'src/app/shared/services/user.service'; 
+import { User } from 'src/app/shared/models/user.model';
+import { IAccountType } from 'src/app/shared/models/User';
+import { AccountTypeService } from 'src/app/shared/rest-services/account-type.service';
+import { UserService } from 'src/app/shared/rest-services/user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -14,12 +16,13 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class UserFormComponent implements OnInit {
   userForm: FormGroup;
   isLoading = false;
-  accountTypes = ['Administrator', 'Agent', 'Client'];
+  accountTypes: IAccountType[] = [];
   countries = ['Switzerland', 'Belgium']; // Add more countries as needed
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private accountTypeService: AccountTypeService,
     private dialogRef: MatDialogRef<UserFormComponent>,
     private toastr: ToastrService,
     private translate: TranslateService,
@@ -29,6 +32,7 @@ export class UserFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadAccountType();
     if (this.data) {
       this.userForm.patchValue(this.data);
     }
@@ -36,22 +40,22 @@ export class UserFormComponent implements OnInit {
 
   private createForm(): FormGroup {
     return this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      username: ['', [Validators.required]],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      login: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', this.data ? [] : [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', this.data ? [] : [Validators.required]],
-      nationalId: ['', [Validators.required]],
+      password_confirmation: ['', this.data ? [] : [Validators.required]],
+      cni: ['', [Validators.required]],
       address: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      accountType: ['', [Validators.required]]
+      account_id: ['', [Validators.required]]
     }, { validators: this.passwordMatchValidator });
   }
 
   private passwordMatchValidator(g: FormGroup) {
-    return g.get('password')?.value === g.get('confirmPassword')?.value
+    return g.get('password')?.value === g.get('password_confirmation')?.value
       ? null : { mismatch: true };
   }
 
@@ -61,8 +65,8 @@ export class UserFormComponent implements OnInit {
       const userData = this.userForm.value;
 
       const observable = this.data
-        ? this.userService.updateUser(this.data.id!, userData)
-        : this.userService.createUser(userData);
+        ? this.userService.update(this.data.id!, userData)
+        : this.userService.store(userData);
 
       observable.subscribe({
         next: () => {
@@ -79,5 +83,17 @@ export class UserFormComponent implements OnInit {
         }
       });
     }
+  }
+
+  loadAccountType(){
+    this.isLoading = true;
+    this.accountTypeService.index(1, false).subscribe({
+      next: (res) => {
+        this.accountTypes = res;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    })
   }
 }

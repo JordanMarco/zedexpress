@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Others\AccountTypeController;
+use App\Http\Controllers\Others\ClientController;
 use App\Http\Controllers\Others\ColisController;
+use App\Http\Controllers\Others\HomeController;
 use App\Http\Controllers\Others\IncidentsController;
 use App\Http\Controllers\Others\PaymentController;
 use App\Http\Controllers\Others\TarifsController;
@@ -23,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/home', [HomeController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::prefix('account-type')->group(function () {
@@ -56,6 +59,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('colis')->group(function () {
         Route::get('/', [ColisController::class, 'index']);
+        Route::get('/all-colis', [ColisController::class, 'listAllColis']);
         Route::get('/tracking', [ColisController::class, 'tracer']);
         Route::get('/withdrawal', [ColisController::class, 'withdrawal']);
         Route::post('/', [ColisController::class, 'store']);
@@ -65,6 +69,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{colis}', [ColisController::class, 'destroy']);
     });
 
+    Route::prefix('clients')->group(function () {
+        Route::get('/', [ClientController::class, 'index']);
+        Route::post('/', [ClientController::class, 'store']);
+        Route::put('/{client}', [ClientController::class, 'update']);
+    });
 
     Route::prefix('pay')->group(function () {
         Route::post('/{colis}', [PaymentController::class, 'pay']);

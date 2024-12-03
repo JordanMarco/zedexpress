@@ -10,13 +10,15 @@ use App\Models\Enums\ColisStatusEnum;
 use App\Models\Enums\EmailTemplateEnum;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class ColisController extends Controller
 {
     public function index(Request $request)
     {
-        if (auth()->user()->accountType->code != AccountTypeEnum::ADMIN->value) {
+        if (auth()->user()->account->code !== AccountTypeEnum::ADMIN->value) {
             $colis = Colis::where("who", auth()->id())->get();
         } else {
             $colis = Colis::all();
@@ -36,19 +38,25 @@ class ColisController extends Controller
 
     public function withdrawal()
     {
-        $colis = Colis::where("country", "=", auth()->user()->accountType->id)->get();
+        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
+            abort(401);
+        }
+
+        $colis = Colis::where("country", auth()->user()->account->country)
+            ->where('status', ColisStatusEnum::SEND->value)
+            ->get();
+
         return response()->json($colis);
     }
 
     public function remove(Colis $colis)
     {
-        if ($colis->statut === ColisStatusEnum::WAITING->value) {
+        if ($colis->statut !== ColisStatusEnum::SEND->value) {
             return response()->json(['translate' => 'errors.action-not-permitted'], 400);
         }
 
-        $colis->hours = Carbon::today()->format('d/m/y') . " - " . Carbon::now('Europe/Brussels')->format('H:i:s');
+        $colis->hours = Carbon::now()->format('d/m/y - H:i:s');
         $colis->statut = ColisStatusEnum::REMOVED->value;
-
         $colis->save();
 
         $details = [
@@ -65,18 +73,24 @@ class ColisController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            "user_id" => "required",
-            "receiver_id" => "required",
+        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
+            abort(401);
+        }
+
+        $validator = Validator::make($request->all(), [
+            "user_id" => "required|exists:users,id",
+            "receiver_id" => "required|exists:users,id",
         ]);
 
-        if ($request->user_id == $request->receiver_id) return back()->withErrors([
-            "message" => "Le client ne peut s'envoyer de colis à lui même."
-        ]);
+        if ($validator->fails()) {
+            return response()->json(['translate' => 'errors.validate', 'message' => $validator->messages()], 400);
+        }
 
         $colis = new Colis();
+
+        $colis->fill($request->all());
         $colis->country = auth()->user()->country;
-        $colis->date_entree = Carbon::today();
+        $colis->date_entree = Carbon::now();
         $colis->hour = "";
         $colis->longueur = $request->longueur;
         $colis->hauteur = $request->hauteur;
@@ -85,19 +99,28 @@ class ColisController extends Controller
         $colis->date_depart = $request->date_depart;
         $colis->who = auth()->user()->id;
 
-        $colis->fill($request->all());
         $colis->valeur_euro = (($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30;
 
         $colis->save();
+
+        return response()->json($colis);
     }
 
     public function send(Colis $colis)
     {
-        if ($colis->statut === ColisStatusEnum::UNPAID->value) {
-            return response()->json(['message' => "le colis n'est pas payé"], 400);
+        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->country])) {
+            abort(401);
         }
 
-        $colis->statut = "Envoyé";
+        if ($colis->statut === ColisStatusEnum::UNPAID->value) {
+            return response()->json(['translate' => "errors.unpaid-colis"], 400);
+        }
+
+        if ($colis->statut !== ColisStatusEnum::WAITING->value) {
+            abort(401);
+        }
+
+        $colis->statut = ColisStatusEnum::SEND->value;
 
         $details = [
             'title' => 'Votre colis est en cours de traitement',
@@ -112,25 +135,34 @@ class ColisController extends Controller
         ];
 
         Mail::to($colis->receiver->email)->send(new Mailing(EmailTemplateEnum::DEPOSITE, "Envoie de votre colis", ['details' => $details]));
-        $colis->hours = Carbon::today()->format('d/m/y') . " - " . Carbon::now('Europe/Brussels')->format('H:i:s');
+        $colis->hours = Carbon::now()->format('d/m/y - H:i:s');
         $colis->save();
 
         return response()->json($colis);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Colis $colis)
     {
-        $this->validate($request, [
-            "client_id" => "required",
+        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->sender->country])) {
+            abort(401);
+        }
+
+        if ($colis->statut != ColisStatusEnum::UNPAID->value && $colis->statut != ColisStatusEnum::WAITING->value) {
+            abort(400);
+        }
+
+        $validator = Validator::make($request->all(), [
+            "user_id" => "required",
             "receiver_id" => "required",
         ]);
 
-        $colis = Colis::findOrFail($id);
-        $colis->country = auth()->user()->country;
-        $colis->date_entree = Carbon::today();
-        $colis->user_id = $request->client_id;
-        $colis->receiver_id = $request->receiver_id;
+        if ($validator->fails()) {
+            return response()->json(['translate' => 'errors.validate', 'message' => $validator->messages()], 400);
+        }
+
         $colis->fill($request->all());
+        $colis->user_id = $request->user_id;
+        $colis->receiver_id = $request->receiver_id;
 
         $colis->save();
         return response()->json($colis);
@@ -138,8 +170,24 @@ class ColisController extends Controller
 
     public function destroy(Colis $colis)
     {
+        if (
+            !Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) &&
+            !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->sender->country]) &&
+            !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->country])
+        ) {
+            abort(401);
+        }
+
         $colis->delete();
 
         return response()->noContent();
+    }
+
+    public function listAllColis()
+    {
+        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
+            abort(401);
+        }
+        return response()->json(Colis::all());
     }
 }

@@ -4,8 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { PhoneNumberUtil } from 'google-libphonenumber';
-import { ClientService } from 'src/app/shared/services/client.service';
 import { Client } from 'src/app/shared/models/client.model';
+import { ClientService } from 'src/app/shared/rest-services/client.service';
 
 @Component({
   selector: 'app-client-form',
@@ -37,12 +37,12 @@ export class ClientFormComponent implements OnInit {
 
   private createForm(): FormGroup {
     return this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      username: ['', [Validators.required]],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      login: ['', [Validators.required]],
       password: ['', this.data ? [] : [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', this.data ? [] : [Validators.required]],
-      nationalId: ['', [Validators.required]],
+      password_confirmation: ['', this.data ? [] : [Validators.required]],
+      cni: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required]],
@@ -51,7 +51,7 @@ export class ClientFormComponent implements OnInit {
   }
 
   private passwordMatchValidator(g: FormGroup) {
-    return g.get('password')?.value === g.get('confirmPassword')?.value
+    return g.get('password')?.value === g.get('password_confirmation')?.value
       ? null : { mismatch: true };
   }
 
@@ -61,8 +61,8 @@ export class ClientFormComponent implements OnInit {
       const clientData = this.clientForm.value;
 
       const observable = this.data
-        ? this.clientService.updateClient(this.data.id!, clientData)
-        : this.clientService.createClient(clientData);
+        ? this.clientService.update(this.data.id!, clientData)
+        : this.clientService.store(clientData);
 
       observable.subscribe({
         next: () => {

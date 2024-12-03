@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class TarifsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Tarif::class, 'tarif');
+    }
+
     public function index(Request $request)
     {
         $withPaginate = $request->input('with_paginate', true);

@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { CategoryService } from 'src/app/shared/services/category.service';
-import { Category } from 'src/app/shared/models/category.model';
+import { TarifService } from 'src/app/shared/rest-services/tarif.service';
+import { ITarif } from 'src/app/shared/models/tarif';
 
 
 @Component({
@@ -18,11 +18,11 @@ export class CategoryFormComponent {
 
   constructor(
     private fb: FormBuilder,
-    private categoryService: CategoryService,
+    private categoryService: TarifService,
     private dialogRef: MatDialogRef<CategoryFormComponent>,
     private toastr: ToastrService,
     private translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public data: Category
+    @Inject(MAT_DIALOG_DATA) public data: ITarif
   ) {
     this.categoryForm = this.createForm();
     if (this.data) {
@@ -32,8 +32,8 @@ export class CategoryFormComponent {
 
   private createForm(): FormGroup {
     return this.fb.group({
-      label: ['', [Validators.required]],
-      amount: ['', [Validators.required, Validators.min(0)]]
+      libelle: ['', [Validators.required]],
+      montant: ['', [Validators.required, Validators.min(0)]]
     });
   }
 
@@ -43,8 +43,8 @@ export class CategoryFormComponent {
       const categoryData = this.categoryForm.value;
 
       const observable = this.data
-        ? this.categoryService.updateCategory(this.data.id!, categoryData)
-        : this.categoryService.createCategory(categoryData);
+        ? this.categoryService.update(this.data.id!, categoryData)
+        : this.categoryService.store(categoryData);
 
       observable.subscribe({
         next: () => {

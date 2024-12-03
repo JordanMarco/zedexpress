@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountTypeService {
-  private readonly baseUrl: string = '/api/account-type';
+  private readonly baseUrl: string = `${environment.basePath}/api/account-type`;
 
   constructor(private http: HttpClient) {}
 
@@ -28,8 +29,8 @@ export class AccountTypeService {
    * @param data Les données du type de compte à créer.
    * @returns Observable avec les informations du type de compte créé.
    */
-  store(AccountTy: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, data);
+  store(accountType: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, accountType);
   }
 
   /**

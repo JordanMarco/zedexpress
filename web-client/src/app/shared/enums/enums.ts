@@ -6,9 +6,9 @@ export enum ToastPosition {
 }
 
 export enum AccountCode {
-  ADMIN = 'admin',
-  CLIENT = 'client',
-  AGENT = 'agent'
+  ADMIN = 'ADM',
+  CLIENT = 'CLT',
+  AGENT = 'AGT'
 }
 
 export enum ColisStatusEnum {

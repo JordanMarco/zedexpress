@@ -7,16 +7,16 @@
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ "USERS.FIRST_NAME" | translate }}</mat-label>
-        <input matInput formControlName="firstName" />
-        <mat-error *ngIf="userForm.get('firstName')?.hasError('required')">
+        <input matInput formControlName="first_name" />
+        <mat-error *ngIf="userForm.get('first_name')?.hasError('required')">
           {{ "REQUIRED_FIELD" | translate }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>{{ "USERS.LAST_NAME" | translate }}</mat-label>
-        <input matInput formControlName="lastName" />
-        <mat-error *ngIf="userForm.get('firstName')?.hasError('required')">
+        <input matInput formControlName="last_name" />
+        <mat-error *ngIf="userForm.get('last_name')?.hasError('required')">
           {{ "REQUIRED_FIELD" | translate }}
         </mat-error>
       </mat-form-field>
@@ -25,8 +25,8 @@
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ "USERS.USERNAME" | translate }}</mat-label>
-        <input matInput formControlName="username" type="text" />
-        <mat-error *ngIf="userForm.get('firstName')?.hasError('required')">
+        <input matInput formControlName="login" type="text" />
+        <mat-error *ngIf="userForm.get('login')?.hasError('required')">
           {{ "REQUIRED_FIELD" | translate }}
         </mat-error>
       </mat-form-field>
@@ -53,10 +53,8 @@
 
       <mat-form-field>
         <mat-label>{{ "USERS.CONFIRM_PASSWORD" | translate }}</mat-label>
-        <input matInput formControlName="confirmPassword" type="password" />
-        <mat-error
-          *ngIf="userForm.get('confirmPassword')?.hasError('required')"
-        >
+        <input matInput formControlName="password_confirmation" type="password" />
+        <mat-error *ngIf="userForm.get('password_confirmation')?.hasError('required')">
           {{ "REQUIRED_FIELD" | translate }}
         </mat-error>
       </mat-form-field>
@@ -65,8 +63,8 @@
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ "USERS.NATIONAL_ID" | translate }}</mat-label>
-        <input matInput formControlName="nationalId" />
-        <mat-error *ngIf="userForm.get('nationalId')?.hasError('required')">
+        <input matInput formControlName="cni" />
+        <mat-error *ngIf="userForm.get('cni')?.hasError('required')">
           {{ "REQUIRED_FIELD" | translate }}
         </mat-error>
       </mat-form-field>
@@ -102,9 +100,9 @@
 
       <mat-form-field>
         <mat-label>{{ "USERS.ACCOUNT_TYPE" | translate }}</mat-label>
-        <mat-select formControlName="accountType">
-          <mat-option *ngFor="let type of accountTypes" [value]="type">
-            {{ type }}
+        <mat-select formControlName="account_id">
+          <mat-option *ngFor="let type of accountTypes" [value]="type.id">
+            {{ type.code + '/ ' + type.country + '/ ' + type.label }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -115,12 +113,7 @@
     <button mat-button mat-dialog-close>
       {{ "COMMON.CANCEL" | translate }}
     </button>
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="!userForm.valid || isLoading"
-    >
+    <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || isLoading">
       {{ (data ? "COMMON.UPDATE" : "COMMON.SAVE") | translate }}
     </button>
   </mat-dialog-actions>

@@ -6,10 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { UserService } from 'src/app/shared/services/user.service';
-import { UserService as RestUserService } from 'src/app/shared/rest-services/user.service';
 import { debounceTime, Subject } from 'rxjs';
 import { IUser } from 'src/app/shared/models/User';
+import { UserService } from 'src/app/shared/rest-services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -27,7 +26,6 @@ export class UsersComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private restUserService: RestUserService,
     private userService: UserService,
     private dialog: MatDialog,
     private toastr: ToastrService,
@@ -40,13 +38,12 @@ export class UsersComponent {
       .subscribe(searchValue => {
         this.applyFilter()
       });
-    this.fetch(1);
     this.loadUsers();
   }
 
   loadUsers() {
     this.isLoading = true;
-    this.restUserService.index((this.paginator?.pageIndex ?? 0) + 1, this.paginator?.pageSize, this.searchValue).subscribe({
+    this.userService.index((this.paginator?.pageIndex ?? 0) + 1, this.paginator?.pageSize, this.searchValue).subscribe({
       next: (res) => {
         this.dataSource.data = res.data;
         this.totalUsers = res.total;
@@ -87,7 +84,7 @@ export class UsersComponent {
 
   private deleteUser(id: number) {
     this.isLoading = true;
-    this.userService.deleteUser(id).subscribe({
+    this.userService.destroy(id).subscribe({
       next: () => {
         this.toastr.success(this.translate.instant('SUCCESS.USER_DELETED'));
         this.loadUsers();
@@ -107,13 +104,5 @@ export class UsersComponent {
   applyFilter() {
     this.paginator.firstPage();
     this.loadUsers();
-  }
-
-  fetch(page: number, search: string = '') {
-    this.restUserService.index().subscribe({
-      next: (res) => {
-        console.log(res);
-      }
-    })
   }
 }

@@ -11,14 +11,23 @@ use Illuminate\Support\Facades\Validator;
 
 class IncidentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Incident::class, 'incident');
+    }
+
+
     public function index(Request $request)
     {
         $withPaginate = $request->input('with_paginate', true);
+        $search = '%' . $request->input('search', '') . '%';
+        $perPage = $request->input('per_page', 10);
+        $message = $request->input('message', 1);
 
         if ($withPaginate) {
-            $incidents = Incident::where("message", 1)->paginate(10);
+            $incidents = Incident::where("message", $message)->where('titre', 'LIKE', $search)->paginate($perPage);
         } else {
-            $incidents = Incident::where("message", 1)->get();
+            $incidents = Incident::where("message", $message)->where('titre', 'LIKE', $search)->get();
         }
 
         return response()->json($incidents);
@@ -40,7 +49,8 @@ class IncidentsController extends Controller
         $incident->motif = $request->motif;
         $incident->colis_id = $request->colis_id;
         $incident->titre = $request->titre;
-        if (auth()->user()->accountType->code == AccountTypeEnum::CLIENT->value) {
+        $incident->statut = IncidentStatusEnum::WAITING->value;
+        if (auth()->user()->account->code == AccountTypeEnum::CLIENT->value) {
             $incident->message = 0;
         } else {
             $incident->message = 1;
