@@ -59,6 +59,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('colis')->group(function () {
         Route::get('/', [ColisController::class, 'index']);
+        Route::get('/all-colis', [ColisController::class, 'listAllColis']);
         Route::get('/tracking', [ColisController::class, 'tracer']);
         Route::get('/withdrawal', [ColisController::class, 'withdrawal']);
         Route::post('/', [ColisController::class, 'store']);

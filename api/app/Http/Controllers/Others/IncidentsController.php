@@ -43,7 +43,7 @@ class IncidentsController extends Controller
         $incident->motif = $request->motif;
         $incident->colis_id = $request->colis_id;
         $incident->titre = $request->titre;
-        if (auth()->user()->accountType->code == AccountTypeEnum::CLIENT->value) {
+        if (auth()->user()->account->code == AccountTypeEnum::CLIENT->value) {
             $incident->message = 0;
         } else {
             $incident->message = 1;

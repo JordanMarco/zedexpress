@@ -142,4 +142,9 @@ class ColisController extends Controller
 
         return response()->noContent();
     }
+
+    public function listAllColis()
+    {
+        return response()->json(Colis::all());
+    }
 }
