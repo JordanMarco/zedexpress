@@ -46,7 +46,6 @@ class PaymentController extends Controller
             $payment->save();
         }
 
-
         return response()->noContent();
     }
 

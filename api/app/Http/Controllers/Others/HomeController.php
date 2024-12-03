@@ -7,7 +7,6 @@ use App\Models\Colis;
 use App\Models\Enums\AccountTypeEnum;
 use App\Models\Enums\ColisStatusEnum;
 use App\Models\User;
-use Illuminate\Http\Request;
 use stdClass;
 
 class HomeController extends Controller

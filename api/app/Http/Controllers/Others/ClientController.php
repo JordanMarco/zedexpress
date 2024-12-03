@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
+
     /**
      * Display a listing of the resource.
      *
