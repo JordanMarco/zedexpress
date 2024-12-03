@@ -5,16 +5,16 @@
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ 'INCIDENTS.TITLE' | translate }}</mat-label>
-        <input matInput formControlName="title">
+        <input matInput formControlName="titre">
       </mat-form-field>
     </div>
 
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ 'INCIDENTS.PARCEL' | translate }}</mat-label>
-        <mat-select formControlName="parcelId">
-          <mat-option *ngFor="let parcel of parcels" [value]="parcel.id">
-            {{parcel.name}}
+        <mat-select formControlName="colis_id">
+          <mat-option *ngFor="let col of colis" [value]="col.id">
+            {{ col.user?.first_name + '/ ' + col.nom }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -23,7 +23,7 @@
     <div class="form-row">
       <mat-form-field>
         <mat-label>{{ 'INCIDENTS.REASON' | translate }}</mat-label>
-        <textarea matInput formControlName="reason" rows="4"></textarea>
+        <textarea matInput formControlName="motif" rows="4"></textarea>
       </mat-form-field>
     </div>
   </mat-dialog-content>
