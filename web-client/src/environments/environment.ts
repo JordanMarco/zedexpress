@@ -1,7 +1,7 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-const basePath = 'https://8f05-129-0-60-26.ngrok-free.app';
+const basePath = 'http://192.168.1.89:8000';
 export const environment = {
   production: false,
   basePath,

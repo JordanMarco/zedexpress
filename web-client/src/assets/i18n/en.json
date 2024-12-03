@@ -112,12 +112,13 @@
   },
   "COMMON": {
     "SEARCH": "Search",
-    "SEARCH_PLACEHOLDER": "Search users...",
+    "SEARCH_PLACEHOLDER": "Search...",
     "ACTIONS": "Actions",
     "SAVE": "Save",
     "UPDATE": "Update",
     "DELETE": "Delete",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "EDIT": "Edit"
   },
   "USERS": {
     "TITLE": "User Management",

@@ -112,12 +112,13 @@
   },
   "COMMON": {
     "SEARCH": "Rechercher",
-    "SEARCH_PLACEHOLDER": "Rechercher des utilisateurs...",
+    "SEARCH_PLACEHOLDER": "Rechercher...",
     "ACTIONS": "Actions",
     "SAVE": "Enregistrer",
     "UPDATE": "Mettre à jour",
     "DELETE": "Supprimer",
-    "CANCEL": "Annuler"
+    "CANCEL": "Annuler",
+    "EDIT": "Editer"
   },
   "USERS": {
     "TITLE": "Gestion des utilisateurs",
