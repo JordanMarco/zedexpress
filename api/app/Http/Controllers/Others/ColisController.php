@@ -16,7 +16,7 @@ class ColisController extends Controller
 {
     public function index(Request $request)
     {
-        if (auth()->user()->accountType->code != AccountTypeEnum::ADMIN->value) {
+        if (auth()->user()->account->code != AccountTypeEnum::ADMIN->value) {
             $colis = Colis::where("who", auth()->id())->get();
         } else {
             $colis = Colis::all();
@@ -36,13 +36,17 @@ class ColisController extends Controller
 
     public function withdrawal()
     {
-        $colis = Colis::where("country", "=", auth()->user()->accountType->id)->get();
+        $colis = Colis::where("country", "=", auth()->user()->account->id)->get();
         return response()->json($colis);
     }
 
     public function remove(Colis $colis)
     {
-        if ($colis->statut === ColisStatusEnum::WAITING->value) {
+        if ($colis->statut === ColisStatusEnum::UNPAID->value) {
+            return response()->json(['translate' => 'errors.action-not-permitted'], 400);
+        }
+
+        if ($colis->statut !== ColisStatusEnum::WAITING->value) {
             return response()->json(['translate' => 'errors.action-not-permitted'], 400);
         }
 
@@ -66,12 +70,8 @@ class ColisController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "user_id" => "required",
-            "receiver_id" => "required",
-        ]);
-
-        if ($request->user_id == $request->receiver_id) return back()->withErrors([
-            "message" => "Le client ne peut s'envoyer de colis à lui même."
+            "user_id" => "required|exists:users,id",
+            "receiver_id" => "required|exists:users,id",
         ]);
 
         $colis = new Colis();
@@ -89,15 +89,17 @@ class ColisController extends Controller
         $colis->valeur_euro = (($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30;
 
         $colis->save();
+
+        return response()->json($colis);
     }
 
     public function send(Colis $colis)
     {
-        if ($colis->statut === ColisStatusEnum::UNPAID->value) {
+        if ($colis->statut !== ColisStatusEnum::WAITING->value) {
             return response()->json(['message' => "le colis n'est pas payé"], 400);
         }
 
-        $colis->statut = "Envoyé";
+        $colis->statut = ColisStatusEnum::SEND->value;
 
         $details = [
             'title' => 'Votre colis est en cours de traitement',
@@ -112,7 +114,7 @@ class ColisController extends Controller
         ];
 
         Mail::to($colis->receiver->email)->send(new Mailing(EmailTemplateEnum::DEPOSITE, "Envoie de votre colis", ['details' => $details]));
-        $colis->hours = Carbon::today()->format('d/m/y') . " - " . Carbon::now('Europe/Brussels')->format('H:i:s');
+        $colis->hours = Carbon::now()->format('d/m/y - H:i:s');
         $colis->save();
 
         return response()->json($colis);

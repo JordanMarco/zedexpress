@@ -28,7 +28,7 @@ class HomeController extends Controller
         $result->total_colis = Colis::count();
         $result->total_unpaid_colis = Colis::where('statut', ColisStatusEnum::UNPAID->value)->count();
 
-        $result->last_colis = Colis::limit(5)->get();
+        $result->last_colis = Colis::latest()->limit(5)->get();
 
         return response()->json($result);
     }
