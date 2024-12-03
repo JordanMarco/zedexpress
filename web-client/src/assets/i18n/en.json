@@ -106,9 +106,10 @@
     "USERS": "User Management",
     "MESSAGES": "Message Management",
     "CLIENTS": "Client Management",
-    "PACKAGES": "Manage Packages",
+    "PACKAGES": "Manage Parcels",
     "CATEGORIES": "Manage Categories",
-    "INCIDENTS": "Manage Incidents"
+    "INCIDENTS": "Manage Incidents",
+    "TRACKING": "Parcel tracking"
   },
   "COMMON": {
     "SEARCH": "Search",
@@ -118,17 +119,20 @@
     "UPDATE": "Update",
     "DELETE": "Delete",
     "CANCEL": "Cancel",
-    "EDIT": "Edit"
+    "EDIT": "Edit",
+    "NO_DATA": "No data available",
+    "BACK": "Back"
   },
   "USERS": {
     "TITLE": "User Management",
     "ADD_USER": "Add User",
     "EDIT_USER": "Edit User",
-    "DELETE_CONFIRMATION": "Delete User",
-    "DELETE_MESSAGE": "Are you sure you want to delete {{name}}?",
+    "DELETE_CONFIRMATION": "Delete",
+    "DELETE_MESSAGE": "Are you sure you want to delete that row?",
     "FIRST_NAME": "First Name",
     "LAST_NAME": "Last Name",
     "USERNAME": "Username",
+    "EMAIL": "Email",
     "PASSWORD": "Password",
     "CONFIRM_PASSWORD": "Confirm Password",
     "NATIONAL_ID": "National ID",
@@ -182,6 +186,7 @@
     "DELETE_MESSAGE": "Are you sure you want to delete {{name}}?",
     "CLIENT": "Client",
     "PARCEL_NAME": "Parcel Name",
+    "PARCEL": "Parcel",
     "REASON": "Reason",
     "STATUS": "Status",
     "PREVIEW_PDF": "Preview PDF",
@@ -214,7 +219,8 @@
     "STATUS": "Status",
     "PREVIEW": "Preview",
     "SEND": "Send",
-    "PICKUP": "Pickup"
+    "PICKUP": "Pickup",
+    "RETRIEVE": "Retrieve"
   },
   "SUCCESS": {
     "USER_CREATED": "User created successfully",
@@ -233,7 +239,8 @@
     "PARCEL_CREATED": "Parcel created successfully",
     "PARCEL_UPDATED": "Parcel updated successfully",
     "PARCEL_DELETED": "Parcel deleted successfully",
-    "PARCEL_SENT": "Parcel sent successfully"
+    "PARCEL_SENT": "Parcel sent successfully",
+    "PARCEL_RETRIEVED": "Parcel retrieved successfully"
   },
   "ERRORS": {
     "LOAD_USERS": "Error loading users",

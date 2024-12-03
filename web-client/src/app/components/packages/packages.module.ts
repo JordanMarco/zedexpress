@@ -8,13 +8,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/sharedmodule';
 import { ParcelFormComponent } from './components/parcel-form/parcel-form.component';
 import { ParcelPickupComponent } from './components/parcel-pickup/parcel-pickup.component';
+import { ParcelComponent } from './parcel/parcel.component';
 
 
 @NgModule({
   declarations: [
     PackagesComponent,
     ParcelFormComponent,
-    ParcelPickupComponent
+    ParcelPickupComponent,
+    ParcelComponent
   ],
   imports: [
     CommonModule,

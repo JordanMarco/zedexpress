@@ -97,10 +97,13 @@ export class NavService implements OnDestroy {
       {
         title: 'MENU.DASHBOARD',
         icon: 'home-8-line',
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
         type: 'link',
         path: '/dashboard',
         selected: false,
         active: false,
+        showable: true
       },
       //Users
       {
@@ -140,12 +143,12 @@ export class NavService implements OnDestroy {
       },
       //Tracking
       {
-        title: 'Tracking',
+        title: 'MENU.TRACKING',
         icon: 'red-packet-line',
         active: false,
         badgeClass: 'badge badge-sm bg-secondary badge-hide',
         badgeValue: 'new',
-        path: '/packages',
+        path: '/tracking',
         selected: false,
         type: 'link',
         showable: this.hasClientAccount || this.hasAgentAccount
@@ -188,7 +191,7 @@ export class NavService implements OnDestroy {
       },
       // Message
       {
-        title: 'Message',
+        title: 'MENU.MESSAGES',
         icon: 'red-packet-line',
         active: false,
         badgeClass: 'badge badge-sm bg-secondary badge-hide',

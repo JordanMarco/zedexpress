@@ -1,4 +1,8 @@
-.parcel-pickup-container {
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+.parcel-list-container {
     padding: 20px;
     position: relative;
   
@@ -7,16 +11,13 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
+  
+    
     }
   
-    .filters {
-      display: flex;
-      gap: 20px;
+    .search-field {
+      width: 100%;
       margin-bottom: 20px;
-  
-      .search-field {
-        flex: 1;
-      }
     }
   
     .status-badge {
@@ -25,6 +26,11 @@
       font-size: 12px;
       font-weight: 500;
       text-transform: uppercase;
+  
+      &.pending {
+        background-color: #fff3e0;
+        color: #ef6c00;
+      }
   
       &.sent {
         background-color: #e3f2fd;
@@ -35,25 +41,10 @@
         background-color: #e8f5e9;
         color: #2e7d32;
       }
-  
-      &.pending {
-        background-color: #fff3e0;
-        color: #ef6c00;
-      }
     }
   }
   
   .mat-column-actions {
-    width: 80px;
     text-align: center;
   }
   
-  .mat-column-status {
-    width: 120px;
-  }
-  
-  .mat-mdc-no-data-row {
-    text-align: center;
-    padding: 16px;
-    color: rgba(0, 0, 0, 0.54);
-  }

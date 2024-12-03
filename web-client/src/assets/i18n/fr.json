@@ -108,7 +108,8 @@
     "CLIENTS": "Gestion les clients",
     "PACKAGES": "Gérer les colis",
     "CATEGORIES": "Gérer les catégories",
-    "INCIDENTS": "Gérer les incidents"
+    "INCIDENTS": "Gérer les incidents",
+    "TRACKING": "Suivi du colis"
   },
   "COMMON": {
     "SEARCH": "Rechercher",
@@ -118,7 +119,9 @@
     "UPDATE": "Mettre à jour",
     "DELETE": "Supprimer",
     "CANCEL": "Annuler",
-    "EDIT": "Editer"
+    "EDIT": "Editer",
+    "NO_DATA": "Aucune donnée disponible",
+    "BACK": "Retour"
   },
   "USERS": {
     "TITLE": "Gestion des utilisateurs",
@@ -128,6 +131,7 @@
     "DELETE_MESSAGE": "Êtes-vous sûr de vouloir supprimer {{name}} ?",
     "FIRST_NAME": "Prénom",
     "LAST_NAME": "Nom",
+    "EMAIL": "Email",
     "USERNAME": "Nom d'utilisateur",
     "PASSWORD": "Mot de passe",
     "CONFIRM_PASSWORD": "Confirmer le mot de passe",
@@ -170,9 +174,10 @@
     "ADD_INCIDENT": "Ajouter un incident",
     "EDIT_INCIDENT": "Modifier un incident",
     "DELETE_CONFIRMATION": "Supprimer un incident",
-    "DELETE_MESSAGE": "Êtes-vous sûr de vouloir supprimer {{name}} ?",
+    "DELETE_MESSAGE": "Êtes-vous sûr de vouloir supprimer cette ligne ?",
     "CLIENT": "Client",
     "PARCEL_NAME": "Nom du colis",
+    "PARCEL": "Colis",
     "REASON": "Raison",
     "STATUS": "Statut",
     "PREVIEW_PDF": "Aperçu PDF",
@@ -214,7 +219,8 @@
     "STATUS": "Statut",
     "PREVIEW": "Aperçu",
     "SEND": "Envoyer",
-    "PICKUP": "Récupération"
+    "PICKUP": "Récupération",
+    "RETRIEVE": "Récupérer"
   },
   "SUCCESS": {
     "USER_CREATED": "Utilisateur créé avec succès",
@@ -233,7 +239,8 @@
     "PARCEL_CREATED": "Colis créé avec succès",
     "PARCEL_UPDATED": "Colis mis à jour avec succès",
     "PARCEL_DELETED": "Colis supprimé avec succès",
-    "PARCEL_SENT": "Colis envoyé avec succès"
+    "PARCEL_SENT": "Colis envoyé avec succès",
+    "PARCEL_RETRIEVED": "Colis récupéré avec succès"
   },
   "ERRORS": {
     "LOAD_USERS": "Erreur lors du chargement des utilisateurs",

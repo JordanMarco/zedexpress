@@ -16589,9 +16589,7 @@ dp-day-calendar .dp-calendar-weekday{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-.mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper{
-  padding-left: 6px;
-}
+
 .mdc-text-field--filled .mdc-line-ripple::after{
   border-bottom-color: rgb(255 255 255 / 0.1);
 }
@@ -16615,28 +16613,8 @@ dp-day-calendar .dp-calendar-weekday{
 :is(.dark .mat-mdc-text-field-wrapper){
   border-color: rgb(255 255 255 / 0.1) !important;
 }
-.mdc-text-field{
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-.mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label{
-  left: 15px !important;
-}
-:is([dir="ltr"] .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input){
-  margin-inline-start: 15px !important;
-}
-:is([dir="rtl"] .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input){
-  margin-inline-start: 15px !important;
-}
-.joining-date.flatpickr-input.date.active.ti-form-input{
-  padding: 0px !important;
-}
-:is([dir="rtl"] .timepicker .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) .mat-mdc-form-field-infix){
-  margin-inline-start: 30px;
-}
-.timepicker .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) .mat-mdc-form-field-infix {
-  margin-inline-start: 30px;
-}
+
+
 ngx-dropzone-label{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -16661,30 +16639,7 @@ ngx-dropzone-label{
   line-height: 1.25rem !important;
   min-height: 45px !important;
 }
-.mdc-button__label{
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-}
-.mat-calendar-arrow{
-  fill: rgb(0 0 0 / 0.54) !important;
-}
-.dropzonebg{
-  border-width: 0px !important;
-  font-size: 1.25rem !important;
-  --tw-text-opacity: 1 !important;
-  color: rgb(79 79 79 / var(--tw-text-opacity)) !important;
-}
-:is([dir="rtl"] .joining-date){
-  text-align: right;
-}
-.input-date-picker{
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-}
-.ng-select{
-  width: auto !important;
-}
+
 /*-----Forms Styles End------*/
 /*-----Editers Styles Start------*/
 /*** rtl ***/
