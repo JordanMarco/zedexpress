@@ -28,7 +28,6 @@ class IncidentFactory extends Factory
             'statut' => $this->faker->randomElement(IncidentStatusEnum::toArray()),
             'message' => 1,
             'motif' => $this->faker->text(),
-            'client_id' => Client::factory(),
             'colis_id' => Colis::factory()
         ];
     }
