@@ -75,6 +75,6 @@ class IncidentPolicy
      */
     public function resolve(User $user, Incident $incident): bool
     {
-        return Gate::allows('has_account_type', [AccountTypeEnum::AGENT->value]);
+        return Gate::allows('has_account_type', [AccountTypeEnum::AGENT]);
     }
 }

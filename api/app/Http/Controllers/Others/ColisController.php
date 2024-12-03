@@ -51,12 +51,17 @@ class ColisController extends Controller
 
     public function remove(Colis $colis)
     {
+        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->country])) {
+            abort(401);
+        }
+
         if ($colis->statut !== ColisStatusEnum::SEND->value) {
             return response()->json(['translate' => 'errors.action-not-permitted'], 400);
         }
 
         $colis->hours = Carbon::now()->format('d/m/y - H:i:s');
         $colis->statut = ColisStatusEnum::REMOVED->value;
+        // Ajouter la date de retrait
         $colis->save();
 
         $details = [
@@ -108,7 +113,7 @@ class ColisController extends Controller
 
     public function send(Colis $colis)
     {
-        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->country])) {
+        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
             abort(401);
         }
 
