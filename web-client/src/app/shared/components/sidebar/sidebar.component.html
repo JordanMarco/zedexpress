@@ -24,7 +24,7 @@
         <ul class="main-menu">
           <!-- 1st Level Menu -->
           <ng-container *ngFor="let menuItem of menuItems">
-              <li class="slide" #activeMenuItems
+              <li *ngIf="menuItem.showable" class="slide" #activeMenuItems
                   [ngClass]="{'slide__category':menuItem.headTitle,
                   'slide has-sub':menuItem.title,
                   'open': menuItem.active,
@@ -85,7 +85,7 @@
                                           <!-- link -->
                                           <a class="side-menu__item" routerLinkActive="active" [routerLink]="!childrenSubItem.type ?  null : [childrenSubItem.path]"
                                               *ngIf="childrenSubItem.type === 'link'" [routerLinkActiveOptions]="{exact : true}">
-                                              {{childrenSubItem.title}} {{localdata['synto-dir']}} 
+                                              {{childrenSubItem.title}} {{localdata['synto-dir']}}
                                           </a>
                                           <!-- empty -->
                                           <a class="side-menu__item" href="javascript:;" *ngIf="childrenSubItem.type === 'empty'">

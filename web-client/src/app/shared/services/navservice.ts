@@ -2,6 +2,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Subject, BehaviorSubject, fromEvent } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { SessionService } from './session-service';
+import { AccountCode } from '../enums/enums';
 // Menu
 export interface Menu {
   headTitle?: string;
@@ -13,6 +15,7 @@ export interface Menu {
   badgeValue?: string;
   badgeClass?: string;
   active?: boolean;
+  showable?: boolean;
   selected?: boolean;
   bookmark?: boolean;
   children?: Menu[];
@@ -35,6 +38,9 @@ export class NavService implements OnDestroy {
 
   // Language
   public language = false;
+  public hasAdminAccount = false;
+  public hasAgentAccount = false;
+  public hasClientAccount = false;
 
   // Mega Menu
   public megaMenu = false;
@@ -50,8 +56,14 @@ export class NavService implements OnDestroy {
   // Full screen
   public fullScreen = false;
   active: any;
+  public MENUITEMS!: Menu[];
+  items: BehaviorSubject<Menu[]>;
 
-  constructor(private router: Router) {
+
+  constructor(
+    private router: Router,
+    private sessionService: SessionService,
+  ) {
     this.setScreenWidth(window.innerWidth);
     fromEvent(window, 'resize')
       .pipe(debounceTime(1000), takeUntil(this.unsubscriber))
@@ -74,7 +86,123 @@ export class NavService implements OnDestroy {
         this.levelMenu = false;
       });
     }
+
+    this.hasAdminAccount = this.sessionService.hasAccounType(AccountCode.ADMIN);
+    this.hasAgentAccount = this.sessionService.hasAccounType(AccountCode.AGENT);
+    this.hasClientAccount = this.sessionService.hasAccounType(AccountCode.CLIENT);
+
+     this.MENUITEMS = [
+      // Dashboard
+      { headTitle: 'MAIN' },
+      {
+        title: 'Dashboards',
+        icon: 'home-8-line',
+        type: 'sub',
+        selected: false,
+        active: false,
+        children: [{ path: '/dashboard', title: 'Sales', type: 'link' }],
+        showable: true
+      },
+      // Users
+      {
+        title: 'Users managment',
+        icon: 'group-line',
+        active: false,
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
+        path: '/users',
+        selected: false,
+        type: 'link',
+        showable: this.hasAdminAccount
+      },
+      // Messages
+      {
+        title: 'Messages managment',
+        icon: 'chat-4-line',
+        active: false,
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
+        path: '/messages',
+        selected: false,
+        type: 'link',
+        showable: this.hasAdminAccount
+      },
+      // Clients
+      {
+        title: 'Clients managment',
+        icon: 'service-line',
+        active: false,
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
+        path: '/clients',
+        selected: false,
+        type: 'link',
+        showable: this.hasAgentAccount || this.hasAdminAccount
+      },
+      // Tracking
+      {
+        title: 'Tracking',
+        icon: 'red-packet-line',
+        active: false,
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
+        path: '/packages',
+        selected: false,
+        type: 'link',
+        showable: this.hasClientAccount || this.hasAgentAccount
+      },
+      // Pack
+      {
+        title: 'Packages managment',
+        icon: 'red-packet-line',
+        active: false,
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
+        path: '/packages',
+        selected: false,
+        type: 'link',
+        showable: this.hasAgentAccount || this.hasAdminAccount
+      },
+      // Categories
+      {
+        title: 'Categories managment',
+        icon: 'apps-2-line',
+        active: false,
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
+        path: '/categories',
+        selected: false,
+        type: 'link',
+        showable: this.hasAdminAccount
+      },
+      // Incidents
+      {
+        title: 'Incidents managment',
+        icon: 'fire-line',
+        active: false,
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
+        path: '/incidents',
+        selected: false,
+        type: 'link',
+        showable: this.hasAgentAccount || this.hasAdminAccount
+      },
+      // Pack
+      {
+        title: 'Message',
+        icon: 'red-packet-line',
+        active: false,
+        badgeClass: 'badge badge-sm bg-secondary badge-hide',
+        badgeValue: 'new',
+        path: '/packages',
+        selected: false,
+        type: 'link',
+        showable: this.hasClientAccount
+      },
+    ];
+    this.items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
   }
+
 
   ngOnDestroy() {
     this.unsubscriber.next;
@@ -85,84 +213,4 @@ export class NavService implements OnDestroy {
     this.screenWidth.next(width);
   }
 
-  MENUITEMS: Menu[] = [
-    // Dashboard
-    { headTitle: 'MAIN' },
-    {
-      title: 'Dashboards',
-      icon: 'home-8-line',
-      type: 'sub',
-      selected: false,
-      active: false,
-      children: [{ path: '/dashboard', title: 'Sales', type: 'link' }],
-    },
-    //Users
-    {
-      title: 'Users managment',
-      icon: 'group-line',
-      active: false,
-      badgeClass: 'badge badge-sm bg-secondary badge-hide',
-      badgeValue: 'new',
-      path: '/users',
-      selected: false,
-      type: 'link',
-    },
-    //Messages
-    {
-      title: 'Messages managment',
-      icon: 'chat-4-line',
-      active: false,
-      badgeClass: 'badge badge-sm bg-secondary badge-hide',
-      badgeValue: 'new',
-      path: '/messages',
-      selected: false,
-      type: 'link',
-    },
-    //Clients
-    {
-      title: 'Clients managment',
-      icon: 'service-line',
-      active: false,
-      badgeClass: 'badge badge-sm bg-secondary badge-hide',
-      badgeValue: 'new',
-      path: '/clients',
-      selected: false,
-      type: 'link',
-    },
-    //Pack
-    {
-      title: 'Packages managment',
-      icon: 'red-packet-line',
-      active: false,
-      badgeClass: 'badge badge-sm bg-secondary badge-hide',
-      badgeValue: 'new',
-      path: '/packages',
-      selected: false,
-      type: 'link',
-    },
-     //Categories
-     {
-      title: 'Categories managment',
-      icon: 'apps-2-line',
-      active: false,
-      badgeClass: 'badge badge-sm bg-secondary badge-hide',
-      badgeValue: 'new',
-      path: '/categories',
-      selected: false,
-      type: 'link',
-    },
-     //Incidents
-     {
-      title: 'Incidents managment',
-      icon: 'fire-line',
-      active: false,
-      badgeClass: 'badge badge-sm bg-secondary badge-hide',
-      badgeValue: 'new',
-      path: '/incidents',
-      selected: false,
-      type: 'link',
-    },
-  ];
-  // Array
-  items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
 }
