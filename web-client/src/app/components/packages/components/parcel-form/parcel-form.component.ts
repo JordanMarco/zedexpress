@@ -67,7 +67,7 @@ export class ParcelFormComponent implements OnInit {
       receiver_id: ['', [Validators.required]],
       user_id: ['', [Validators.required]],
       tarif_id: ['', [Validators.required]],
-      valeur_euro: [0, [Validators.required]],
+      valeur_euro: [(1 / 5000) * 30, [Validators.required]],
       date_entre: ['', [Validators.required]],
       date_depart: ['', [Validators.required]],
       date_arrive: ['', [Validators.required]],

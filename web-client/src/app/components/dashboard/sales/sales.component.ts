@@ -23,7 +23,6 @@ export class SalesComponent implements OnInit{
     this.loadClients();
   }
 
-
   loadClients() {
     this.isLoading = true;
     this.dashboardService.index().subscribe({
