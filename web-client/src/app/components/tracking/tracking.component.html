@@ -1,23 +1,8 @@
 <app-page-header
-[title]="'PARCELS.TITLE' | translate"
-[title1]="'PARCELS.TITLE' | translate"
+[title]="'PARCELS.TRACKING' | translate"
+[title1]="'PARCELS.TRACKING' | translate"
 activeitem="Pages"
 ></app-page-header>
-
-<div class="user-list-container">
-  <div class="flex w-full justify-end my-4">
-    <div class="header-actions">
-      <button mat-raised-button color="primary" style="text-transform: uppercase;" (click)="navigateToPickup()">
-          <mat-icon>add</mat-icon>
-        {{ 'PARCELS.PICKUP' | translate }}
-      </button>
-      <button mat-raised-button color="primary" style="text-transform: uppercase;" (click)="openParcelForm()">
-          <mat-icon>add</mat-icon>
-        {{ 'PARCELS.ADD_PARCEL' | translate }}
-      </button>
-    </div>
-  </div>
-</div>
 
 <!-- Start::row-1 -->
 <div class="grid grid-cols-12 gap-6">
@@ -84,17 +69,6 @@ activeitem="Pages"
                   <button mat-icon-button color="primary" (click)="previewParcel(parcel)" matTooltip="{{ 'PARCELS.PREVIEW' | translate }}">
                     <mat-icon>visibility</mat-icon>
                   </button>
-                  <button mat-icon-button color="primary" (click)="sendParcel(parcel)" [disabled]="parcel.statut !== 'waiting'"
-                          matTooltip="{{ 'PARCELS.SEND' | translate }}">
-                    <mat-icon>send</mat-icon>
-                  </button>
-                  <button mat-icon-button color="primary" (click)="openParcelForm(parcel)" matTooltip="{{ 'COMMON.EDIT' | translate }}"
-                  [disabled]="parcel.statut !== 'waiting' && parcel.statut !== 'unpaid'">
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                  <button mat-icon-button color="warn" (click)="confirmDelete(parcel)" [disabled]="parcel.statut !== 'waiting' && parcel.statut !== 'unpaid'"matTooltip="{{ 'COMMON.DELETE' | translate }}">
-                    <mat-icon>delete</mat-icon>
-                  </button>
                 </td>
               </ng-container>
 
@@ -117,4 +91,3 @@ activeitem="Pages"
 </div>
 </div>
 <router-outlet></router-outlet>
-

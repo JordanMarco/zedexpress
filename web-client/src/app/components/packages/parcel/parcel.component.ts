@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, Subject } from 'rxjs';
 import { ColisService } from 'src/app/shared/rest-services/colis.service';
 import { IColis } from 'src/app/shared/models/colis';
+import { PaymentService } from 'src/app/shared/rest-services/payment.service';
 
 @Component({
   selector: 'app-parcel',
@@ -34,9 +35,11 @@ export class ParcelComponent implements OnInit {
   searchValue = '';
   $inputSubject = new Subject<string>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  intervale!: number;
 
   constructor(
     private colisService: ColisService,
+    private paymentService: PaymentService,
     private dialog: MatDialog,
     private router: Router,
     private toastr: ToastrService,
@@ -149,4 +152,37 @@ export class ParcelComponent implements OnInit {
     this.paginator.firstPage();
     this.loadParcels();
   }
+
+  pay(colis: IColis){
+    this.paymentService.pay(colis.id).subscribe({
+      next: (res: any) => {
+        if(res && res.url){
+          window.open(res.url, '_blank');
+        }
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+
+  // verifyStatus(colis: IColis){
+  //   this.intervale = setInterval(() => this.getPayment(colis.id), 1000);
+  // }
+
+  getPayment(id: number)
+  {
+    this.paymentService.checkStatus(id).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        if(res && res.status !== 'pending'){
+          this.loadParcels();
+          clearInterval(this.intervale);
+        }
+      },
+      complete: () => {
+      }
+    });
+  }
+
 }

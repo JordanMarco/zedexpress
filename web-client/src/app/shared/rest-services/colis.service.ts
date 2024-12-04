@@ -29,8 +29,12 @@ export class ColisService {
     return this.http.get<any>(this.baseUrl, { params });
   }
 
-  public tracking(): Observable<any> {
+  public tracking(page: number = 1, size: number = 10, search: string = ''): Observable<any> {
     let params = new HttpParams();
+    params = params.set('page', page);
+    params = params.set('per_page', size);
+    params = params.set('search', search);
+
     return this.http.get<any>(this.baseUrl+'/tracking', { params });
   }
 

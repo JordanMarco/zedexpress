@@ -194,6 +194,7 @@
   },
   "PARCELS": {
     "TITLE": "Parcel Management",
+    "TRACKING": "My parcel",
     "PICKUP_TITLE": "Parcels for Pickup",
     "ADD_PARCEL": "New Parcel",
     "EDIT_PARCEL": "Edit Parcel",

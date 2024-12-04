@@ -194,6 +194,7 @@
   },
   "PARCELS": {
     "TITLE": "Gestion des colis",
+    "TRACKING": "Mes colis",
     "PICKUP_TITLE": "Colis à récupérer",
     "ADD_PARCEL": "Nouveau colis",
     "EDIT_PARCEL": "Modifier le colis",
