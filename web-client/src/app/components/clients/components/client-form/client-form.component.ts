@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import { Client } from 'src/app/shared/models/client.model';
 import { ClientService } from 'src/app/shared/rest-services/client.service';
+import { AGENCES } from 'src/app/shared/enums/enums';
 
 @Component({
   selector: 'app-client-form',
@@ -16,7 +17,7 @@ export class ClientFormComponent implements OnInit {
   clientForm: FormGroup;
   isLoading = false;
   phoneUtil = PhoneNumberUtil.getInstance();
-  countries = ['Switzerland', 'Belgium', 'Cameroun'];
+  countries = AGENCES;
 
   constructor(
     private fb: FormBuilder,

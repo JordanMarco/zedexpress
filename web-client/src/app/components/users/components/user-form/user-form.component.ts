@@ -7,6 +7,7 @@ import { User } from 'src/app/shared/models/user.model';
 import { IAccountType } from 'src/app/shared/models/User';
 import { AccountTypeService } from 'src/app/shared/rest-services/account-type.service';
 import { UserService } from 'src/app/shared/rest-services/user.service';
+import { AGENCES } from 'src/app/shared/enums/enums';
 
 @Component({
   selector: 'app-user-form',
@@ -17,7 +18,7 @@ export class UserFormComponent implements OnInit {
   userForm: FormGroup;
   isLoading = false;
   accountTypes: IAccountType[] = [];
-  countries = ['Switzerland', 'Belgium']; // Add more countries as needed
+  countries = AGENCES; // Add more countries as needed
 
   constructor(
     private fb: FormBuilder,

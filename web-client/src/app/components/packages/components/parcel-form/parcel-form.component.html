@@ -1,144 +1,146 @@
 <h2 mat-dialog-title>
     {{ (data ? (readonly ? 'PARCELS.VIEW_PARCEL' : 'PARCELS.EDIT_PARCEL') : 'PARCELS.ADD_PARCEL') | translate }}
   </h2>
-  
+
   <form [formGroup]="parcelForm" (ngSubmit)="onSubmit()">
     <mat-dialog-content>
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.CLIENT' | translate }}</mat-label>
-          <mat-select formControlName="client">
-            <mat-option value="kezy muzz">Kezy Muzz</mat-option>
-            <mat-option value="naomi stara">Naomi Stara</mat-option>
+          <mat-select formControlName="user_id">
+            <mat-option *ngFor="let client of clients" [value]="client.id">
+              {{ client.first_name }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>{{ 'PARCELS.RECIPIENT' | translate }}</mat-label>
-          <mat-select formControlName="recipient">
-            <mat-option value="kezy muzz">Kezy Muzz</mat-option>
-            <mat-option value="naomi stara">Naomi Stara</mat-option>
+          <mat-select formControlName="receiver_id">
+            <mat-option *ngFor="let client of clients" [value]="client.id">
+              {{ client.first_name }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-  
+
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.NAME' | translate }}</mat-label>
-          <input matInput formControlName="name">
+          <input matInput formControlName="nom">
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>{{ 'PARCELS.WEIGHT' | translate }}</mat-label>
-          <input matInput type="number" formControlName="weight">
+          <input matInput type="number" formControlName="poids" min="1">
           <span matSuffix>Kg</span>
         </mat-form-field>
       </div>
-  
+
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.WIDTH' | translate }}</mat-label>
-          <input matInput type="number" formControlName="width">
+          <input matInput type="number" formControlName="largeur" min="1">
           <span matSuffix>cm</span>
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>{{ 'PARCELS.HEIGHT' | translate }}</mat-label>
-          <input matInput type="number" formControlName="height">
+          <input matInput type="number" formControlName="hauteur" min="1">
           <span matSuffix>cm</span>
         </mat-form-field>
       </div>
-  
+
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.LENGTH' | translate }}</mat-label>
-          <input matInput type="number" formControlName="length">
+          <input matInput type="number" formControlName="longueur" min="1">
           <span matSuffix>cm</span>
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>{{ 'PARCELS.QUANTITY' | translate }}</mat-label>
-          <input matInput type="number" formControlName="quantity">
+          <input matInput type="number" formControlName="quantite" min="1">
         </mat-form-field>
       </div>
-  
+
       <div class="form-row">
         <mat-form-field class="full-width">
           <mat-label>{{ 'PARCELS.DESCRIPTION' | translate }}</mat-label>
-          <textarea matInput formControlName="description" rows="3"></textarea>
+          <textarea matInput formControlName="contenance" rows="3"></textarea>
         </mat-form-field>
       </div>
-  
+
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.FRAGILITY' | translate }}</mat-label>
-          <mat-select formControlName="fragility">
+          <mat-select formControlName="fragilite">
             <mat-option *ngFor="let option of fragilityOptions" [value]="option">
               {{option}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>{{ 'PARCELS.CATEGORY' | translate }}</mat-label>
-          <mat-select formControlName="category">
-            <mat-option *ngFor="let category of categories" [value]="category">
-              {{category}}
+          <mat-select formControlName="tarif_id">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{category.libelle}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>{{ 'PARCELS.PRICE' | translate }}</mat-label>
-          <input matInput formControlName="price" readonly>
+          <input matInput formControlName="valeur_euro" readonly>
           <span matSuffix>€</span>
         </mat-form-field>
       </div>
-  
+
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.AGENCY' | translate }}</mat-label>
-          <mat-select formControlName="agency">
+          <mat-select formControlName="country">
             <mat-option *ngFor="let agency of agencies" [value]="agency">
               {{agency}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-  
+
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.ENTRY_DATE' | translate }}</mat-label>
-          <input matInput [matDatepicker]="entryPicker" formControlName="entryDate">
-          <mat-datepicker-toggle matSuffix [for]="entryPicker"></mat-datepicker-toggle>
-          <mat-datepicker #entryPicker></mat-datepicker>
+          <input matInput [matDatepicker]="date_entre" formControlName="date_entre">
+          <mat-datepicker-toggle matSuffix [for]="date_entre"></mat-datepicker-toggle>
+          <mat-datepicker #date_entre></mat-datepicker>
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>{{ 'PARCELS.DEPARTURE_DATE' | translate }}</mat-label>
-          <input matInput [matDatepicker]="departurePicker" formControlName="departureDate">
-          <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
-          <mat-datepicker #departurePicker></mat-datepicker>
+          <input matInput [matDatepicker]="date_depart" formControlName="date_depart">
+          <mat-datepicker-toggle matSuffix [for]="date_depart"></mat-datepicker-toggle>
+          <mat-datepicker #date_depart></mat-datepicker>
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>{{ 'PARCELS.EXPECTED_ARRIVAL_DATE' | translate }}</mat-label>
-          <input matInput [matDatepicker]="arrivalPicker" formControlName="expectedArrivalDate">
-          <mat-datepicker-toggle matSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
-          <mat-datepicker #arrivalPicker></mat-datepicker>
+          <input matInput [matDatepicker]="date_arrive" formControlName="date_arrive">
+          <mat-datepicker-toggle matSuffix [for]="date_arrive"></mat-datepicker-toggle>
+          <mat-datepicker #date_arrive></mat-datepicker>
         </mat-form-field>
       </div>
     </mat-dialog-content>
-  
+
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>{{ 'COMMON.CANCEL' | translate }}</button>
-      <button mat-raised-button color="primary" type="submit" 
+      <button mat-raised-button color="primary" type="submit"
               [disabled]="!parcelForm.valid || isLoading || readonly">
         {{ (data ? 'COMMON.UPDATE' : 'COMMON.SAVE') | translate }}
       </button>
     </mat-dialog-actions>
   </form>
-  
+
   <div class="loading-overlay" *ngIf="isLoading">
     <mat-spinner></mat-spinner>
   </div>

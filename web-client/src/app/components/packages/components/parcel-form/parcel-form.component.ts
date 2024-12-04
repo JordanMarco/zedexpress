@@ -3,8 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { ParcelService } from 'src/app/shared/rest-services/parcel.service';
-import { Parcel } from 'src/app/shared/models/parcel.model';
+import { ColisService } from 'src/app/shared/rest-services/colis.service';
+import { IColis } from 'src/app/shared/models/colis';
+import { AGENCES } from 'src/app/shared/enums/enums';
+import { TarifService } from 'src/app/shared/rest-services/tarif.service';
+import { ITarif } from 'src/app/shared/models/tarif';
+import { ClientService } from 'src/app/shared/rest-services/client.service';
+import { IClient } from 'src/app/shared/models/client';
 
 
 @Component({
@@ -16,17 +21,20 @@ export class ParcelFormComponent implements OnInit {
   parcelForm: FormGroup;
   isLoading = false;
   readonly = false;
-  agencies = ['Agence Suisse', 'Agence Belgique', 'Agence Cameroun'];
+  agencies = AGENCES;
   fragilityOptions = ['Fragile', 'Normal'];
-  categories = ['Véhicules', 'Documents', 'Colis'];
+  categories!: ITarif[];
+  clients!: IClient[];
 
   constructor(
     private fb: FormBuilder,
-    private parcelService: ParcelService,
+    private colisService: ColisService,
+    private tarifService: TarifService,
+    private clientService: ClientService,
     private dialogRef: MatDialogRef<ParcelFormComponent>,
     private toastr: ToastrService,
     private translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public data: { readonly: boolean } & Parcel
+    @Inject(MAT_DIALOG_DATA) public data: { readonly: boolean } & IColis
   ) {
     this.readonly = data?.readonly || false;
     this.parcelForm = this.createForm();
@@ -36,37 +44,38 @@ export class ParcelFormComponent implements OnInit {
     if (this.data) {
       this.parcelForm.patchValue(this.data);
     }
-    
+
     if (this.readonly) {
       this.parcelForm.disable();
     }
-
+    this.loadTarif();
+    this.loadClient();
     this.setupPriceCalculation();
   }
 
   private createForm(): FormGroup {
     return this.fb.group({
-      client: ['', [Validators.required]],
-      recipient: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      weight: [0, [Validators.required, Validators.min(0)]],
-      width: [0, [Validators.required, Validators.min(0)]],
-      height: [0, [Validators.required, Validators.min(0)]],
-      length: [0, [Validators.required, Validators.min(0)]],
-      quantity: [1, [Validators.required, Validators.min(1)]],
-      description: [''],
-      fragility: ['Normal', [Validators.required]],
-      category: ['', [Validators.required]],
-      price: [{value: 0, disabled: true}],
-      agency: ['', [Validators.required]],
-      entryDate: [new Date(), [Validators.required]],
-      departureDate: ['', [Validators.required]],
-      expectedArrivalDate: ['', [Validators.required]]
+      nom: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      fragilite: ['', [Validators.required]],
+      contenance: ['', [Validators.required]],
+      poids: [1, [Validators.required]],
+      hauteur: [1, [Validators.required]],
+      largeur: [1, [Validators.required]],
+      longueur: [1, [Validators.required]],
+      quantite: [1, [Validators.required]],
+      receiver_id: ['', [Validators.required]],
+      user_id: ['', [Validators.required]],
+      tarif_id: ['', [Validators.required]],
+      valeur_euro: [0, [Validators.required]],
+      date_entre: ['', [Validators.required]],
+      date_depart: ['', [Validators.required]],
+      date_arrive: ['', [Validators.required]],
     });
   }
 
   private setupPriceCalculation() {
-    const dimensionControls = ['weight', 'width', 'height', 'length'];
+    const dimensionControls = ['longueur', 'largeur', 'hauteur'];
     dimensionControls.forEach(control => {
       this.parcelForm.get(control)?.valueChanges.subscribe(() => {
         this.calculatePrice();
@@ -75,13 +84,13 @@ export class ParcelFormComponent implements OnInit {
   }
 
   private calculatePrice() {
-    const weight = this.parcelForm.get('weight')?.value || 0;
-    const width = this.parcelForm.get('width')?.value || 0;
-    const height = this.parcelForm.get('height')?.value || 0;
-    const length = this.parcelForm.get('length')?.value || 0;
+    const longueur = this.parcelForm.get('longueur')?.value || 0;
+    const hauteur = this.parcelForm.get('hauteur')?.value || 0;
+    const largeur = this.parcelForm.get('largeur')?.value || 0;
 
-    const price = this.parcelService.calculatePrice(weight, width, height, length);
-    this.parcelForm.patchValue({ price }, { emitEvent: false });
+    const valeur_euro = ((longueur * hauteur * largeur) / 5000) * 30;
+
+    this.parcelForm.patchValue({ valeur_euro }, { emitEvent: false });
   }
 
   onSubmit() {
@@ -90,8 +99,8 @@ export class ParcelFormComponent implements OnInit {
       const parcelData = this.parcelForm.getRawValue();
 
       const observable = this.data
-        ? this.parcelService.updateParcel(this.data.id!, parcelData)
-        : this.parcelService.createParcel(parcelData);
+        ? this.colisService.update(this.data.id!, parcelData)
+        : this.colisService.store(parcelData);
 
       observable.subscribe({
         next: () => {
@@ -109,4 +118,21 @@ export class ParcelFormComponent implements OnInit {
       });
     }
   }
+
+  loadTarif(){
+    this.tarifService.index(1, 10, '', false).subscribe({
+      next: (res) => {
+        this.categories = res;
+      }
+    })
+  }
+
+  loadClient(){
+    this.clientService.index(1, 10, '', false).subscribe({
+      next: (res) => {
+        this.clients = res;
+      }
+    })
+  }
+
 }

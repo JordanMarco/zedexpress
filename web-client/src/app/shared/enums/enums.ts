@@ -23,3 +23,5 @@ export enum PaymentStatusEnum {
   CANCELLED = 'cancelled',
   FAILED = 'failed'
 }
+
+export const AGENCES = ['Belgique', 'France', 'Cameroun'];

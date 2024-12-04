@@ -3,8 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { ParcelPickupService } from 'src/app/shared/models/parcel-pickup.service';
-import { ParcelPickup } from 'src/app/shared/models/parcel-pickup.model';
+import { ColisService } from 'src/app/shared/rest-services/colis.service';
+import { IColis } from 'src/app/shared/models/colis';
 
 
 @Component({
@@ -14,10 +14,10 @@ import { ParcelPickup } from 'src/app/shared/models/parcel-pickup.model';
 })
 export class ParcelPickupComponent  implements OnInit {
   displayedColumns: string[] = [
-    'id', 'client', 'recipient', 'name', 'entryDate', 
+    'id', 'client', 'recipient', 'name', 'entryDate',
     'expectedArrivalDate', 'status', 'actions'
   ];
-  dataSource = new MatTableDataSource<ParcelPickup>([]);
+  dataSource = new MatTableDataSource<IColis>();
   totalParcels = 0;
   isLoading = false;
   searchValue = '';
@@ -25,7 +25,7 @@ export class ParcelPickupComponent  implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private parcelPickupService: ParcelPickupService,
+    private colisService: ColisService,
     private toastr: ToastrService,
     private translate: TranslateService
   ) {}
@@ -36,26 +36,27 @@ export class ParcelPickupComponent  implements OnInit {
 
   loadParcels() {
     this.isLoading = true;
-    this.parcelPickupService.getPickupParcels({
-      page: this.paginator?.pageIndex || 0,
-      pageSize: this.paginator?.pageSize || 10,
-      search: this.searchValue
-    }).subscribe({
+    this.colisService.withdrawal(
+      (this.paginator?.pageIndex ?? 0) + 1,
+      this.paginator?.pageSize || 10,
+      this.searchValue
+    )
+    .subscribe({
       next: (response) => {
-        this.dataSource.data = response.parcels;
+        this.dataSource.data = response.data;
         this.totalParcels = response.total;
         this.isLoading = false;
       },
       error: () => {
-        this.toastr.error(this.translate.instant('ERRORS.LOAD_PARCELS_PICKUP'));
+        this.toastr.error(this.translate.instant('ERRORS.LOAD_PARCELS'));
         this.isLoading = false;
-      }
+      },
     });
   }
 
   retrieveParcel(id: number) {
     this.isLoading = true;
-    this.parcelPickupService.retrieveParcel(id).subscribe({
+    this.colisService.remove(id).subscribe({
       next: () => {
         this.toastr.success(this.translate.instant('SUCCESS.PARCEL_RETRIEVED'));
         this.loadParcels();
