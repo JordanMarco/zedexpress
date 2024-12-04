@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Client;
 use App\Models\Colis;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('message')->nullable();
             $table->text('motif')->nullable();
             $table->foreignIdFor(Colis::class)->constrained()->noActionOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->noActionOnDelete();
             $table->timestamps();
         });
     }

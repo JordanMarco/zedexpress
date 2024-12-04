@@ -11,11 +11,11 @@ class Incident extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $with = ['client', 'colis'];
+    protected $with = ['user', 'colis'];
 
-    public function client(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
     }
 
     public function colis(): BelongsTo

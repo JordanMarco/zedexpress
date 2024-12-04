@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Client;
 use App\Models\Colis;
 use App\Models\Enums\IncidentStatusEnum;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class IncidentFactory extends Factory
@@ -26,9 +27,10 @@ class IncidentFactory extends Factory
         return [
             'titre' => $this->faker->sentence(3),
             'statut' => $this->faker->randomElement(IncidentStatusEnum::toArray()),
-            'message' => 1,
+            'message' => random_int(0, 1),
             'motif' => $this->faker->text(),
-            'colis_id' => Colis::factory()
+            'colis_id' => Colis::factory(),
+            'user_id' => User::factory()
         ];
     }
 }

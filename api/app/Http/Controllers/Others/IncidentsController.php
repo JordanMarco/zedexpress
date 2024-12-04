@@ -7,6 +7,7 @@ use App\Models\Enums\AccountTypeEnum;
 use App\Models\Enums\IncidentStatusEnum;
 use App\Models\Incident;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class IncidentsController extends Controller
@@ -23,11 +24,17 @@ class IncidentsController extends Controller
         $search = '%' . $request->input('search', '') . '%';
         $perPage = $request->input('per_page', 10);
         $message = $request->input('message', 1);
+        $query = Incident::where('titre', 'LIKE', $search);
+
+        if(Gate::allows('has_account_type', [AccountTypeEnum::CLIENT])){
+            $message = 0;
+            $query->where('user_id', auth()->id());
+        }
 
         if ($withPaginate != 'false') {
-            $incidents = Incident::where("message", $message)->where('titre', 'LIKE', $search)->paginate($perPage);
+            $incidents = $query->where("message", $message)->paginate($perPage);
         } else {
-            $incidents = Incident::where("message", $message)->where('titre', 'LIKE', $search)->get();
+            $incidents = $query->where("message", $message)->get();
         }
 
         return response()->json($incidents);
@@ -49,6 +56,7 @@ class IncidentsController extends Controller
         $incident->motif = $request->motif;
         $incident->colis_id = $request->colis_id;
         $incident->titre = $request->titre;
+        $incident->user_id = auth()->id();
         $incident->statut = IncidentStatusEnum::WAITING->value;
         if (auth()->user()->account->code == AccountTypeEnum::CLIENT->value) {
             $incident->message = 0;

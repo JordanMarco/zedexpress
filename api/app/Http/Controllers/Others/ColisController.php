@@ -197,8 +197,8 @@ class ColisController extends Controller
 
     public function listAllColis()
     {
-        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
-            abort(401);
+        if (Gate::allows('has_account_type', [AccountTypeEnum::CLIENT])) {
+            return response()->json(Colis::where('user_id', auth()->id())->get());
         }
         return response()->json(Colis::all());
     }
