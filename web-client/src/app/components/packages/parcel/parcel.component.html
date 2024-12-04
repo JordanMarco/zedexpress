@@ -78,12 +78,18 @@ activeitem="Pages"
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>{{ 'COMMON.ACTIONS' | translate }}</th>
                 <td mat-cell *matCellDef="let parcel">
-                  <button mat-icon-button color="primary" (click)="pay(parcel)" matTooltip="{{ 'PARCELS.PAY' | translate }}" [disabled]="parcel.statut !== 'unpaid'">
-                    <mat-icon>paid</mat-icon>
-                  </button>
                   <button mat-icon-button color="primary" (click)="previewParcel(parcel)" matTooltip="{{ 'PARCELS.PREVIEW' | translate }}">
                     <mat-icon>visibility</mat-icon>
                   </button>
+                
+                  <button *ngIf="parcel.statut === 'unpaid'" mat-icon-button color="primary" (click)="pay(parcel)" matTooltip="{{ 'PARCELS.PAY' | translate }}">
+                    <mat-icon>paid</mat-icon>
+                  </button>
+                  
+                  <button *ngIf="parcel.statut !== 'unpaid'" mat-icon-button color="primary" (click)="previewInvoice(parcel)" matTooltip="{{ 'INVOICE.PREVIEW' | translate }}">
+                    <mat-icon>receipt</mat-icon>
+                  </button>
+                  
                   <button mat-icon-button color="primary" (click)="sendParcel(parcel)" [disabled]="parcel.statut !== 'waiting'"
                           matTooltip="{{ 'PARCELS.SEND' | translate }}">
                     <mat-icon>send</mat-icon>

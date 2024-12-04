@@ -11,6 +11,7 @@ import { debounceTime, Subject } from 'rxjs';
 import { ColisService } from 'src/app/shared/rest-services/colis.service';
 import { IColis } from 'src/app/shared/models/colis';
 import { PaymentService } from 'src/app/shared/rest-services/payment.service';
+import { CustomNavigationService } from 'src/app/shared/services/custom-navigation.service';
 
 @Component({
   selector: 'app-parcel',
@@ -44,6 +45,7 @@ export class ParcelComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private translate: TranslateService,
+    private navigationService: CustomNavigationService
   ) {}
 
   ngOnInit() {
@@ -101,6 +103,7 @@ export class ParcelComponent implements OnInit {
     this.colisService.send(colis.id!).subscribe({
       next: () => {
         this.toastr.success(this.translate.instant('SUCCESS.PARCEL_SENT'));
+        window.open(`/invoice/${colis.id}`, '_blank');
         this.loadParcels();
       },
       error: () => {
@@ -183,6 +186,11 @@ export class ParcelComponent implements OnInit {
       complete: () => {
       }
     });
+  }
+
+
+  previewInvoice(parcel: IColis) {
+    window.open(`/invoice/${parcel.id}`, '_blank');
   }
 
 }

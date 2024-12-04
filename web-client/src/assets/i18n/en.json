@@ -121,7 +121,9 @@
     "CANCEL": "Cancel",
     "EDIT": "Edit",
     "NO_DATA": "No data available",
-    "BACK": "Back"
+    "BACK": "Back",
+    "COMPANY_NAME": "Your Company Name",
+    "COMPANY_ADDRESS": "123 Business Street, City, Country"
   },
   "USERS": {
     "TITLE": "User Management",
@@ -221,7 +223,30 @@
     "PREVIEW": "Preview",
     "SEND": "Send",
     "PICKUP": "Pickup",
-    "RETRIEVE": "Retrieve"
+    "RETRIEVE": "Retrieve",
+    "PAY": "Pay"
+  },
+  "INVOICE": {
+    "TITLE": "INVOICE",
+    "CREATED_DATE": "Created Date",
+    "DUE_DATE": "Due Date",
+    "BILLED_TO": "Billed To",
+    "SHIPPED_TO": "Shipped To",
+    "SN": "S.NO",
+    "PRODUCT": "Product",
+    "QUANTITY": "Quantity",
+    "UNIT_PRICE": "Unit Price",
+    "AMOUNT": "Amount",
+    "PAYMENT_METHOD": "Invoice Payment Method",
+    "ACCOUNT": "Account",
+    "BANK": "Bank",
+    "SUBTOTAL": "Sub-Total",
+    "TAX": "Tax",
+    "TOTAL": "Total",
+    "TERMS_CONDITIONS": "Terms And Conditions",
+    "TERMS_TEXT": "Payment is due within 15 days from the date of invoice. Late payment is subject to fees.",
+    "SIGNATURE": "Authorized Signature",
+    "PREVIEW": "Preview Invoice"
   },
   "SUCCESS": {
     "USER_CREATED": "User created successfully",

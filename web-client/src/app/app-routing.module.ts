@@ -5,6 +5,7 @@ import { FullLayoutComponent } from './shared/layout-components/full-layout/full
 import { content } from './shared/routes/fullroutes';
 import { guestGuard } from './authentication/guards/guest.guard';
 import { loginGuard } from './authentication/guards/login.guards';
+import { InvoicePreviewComponent } from './components/packages/components/invoice-preview/invoice-preview.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       ),
     canActivate: [guestGuard()]
   },
+  {
+    path: 'invoice/:id',
+    component: InvoicePreviewComponent
+  }
 ];
 
 @NgModule({

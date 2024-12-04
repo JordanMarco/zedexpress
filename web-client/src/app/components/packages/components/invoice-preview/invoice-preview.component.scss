@@ -1,0 +1,148 @@
+:host {
+    display: block;
+  }
+
+  .print-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+    button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+  
+  .invoice-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .invoice-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  
+    .company-info {
+      h2 {
+        margin: 0 0 10px;
+        color: #333;
+      }
+    }
+  
+    .invoice-info {
+      text-align: right;
+  
+      h1 {
+        color: #4a6ee0;
+        margin: 0 0 10px;
+      }
+    }
+  }
+  
+  .invoice-addresses {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  
+    > div {
+      flex: 1;
+      
+      h3 {
+        color: #666;
+        margin: 0 0 10px;
+      }
+    }
+  }
+  
+  .invoice-items {
+    margin-bottom: 40px;
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+  
+      th {
+        background: #f8f9fa;
+        color: #666;
+      }
+    }
+  }
+  
+  .invoice-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  
+    .payment-info {
+      flex: 1;
+      
+      h3 {
+        color: #666;
+        margin: 0 0 10px;
+      }
+    }
+  
+    .totals {
+      width: 300px;
+  
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        
+        &.total {
+          font-weight: bold;
+          border-top: 2px solid #eee;
+          margin-top: 8px;
+          padding-top: 16px;
+        }
+      }
+    }
+  }
+  
+  .invoice-footer {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+  
+    .terms {
+      margin-bottom: 20px;
+  
+      h3 {
+        color: #666;
+        margin: 0 0 10px;
+      }
+    }
+  
+    .signature {
+      text-align: right;
+      font-style: italic;
+    }
+  }
+  
+  @media print {
+    body {
+      background: white;
+    }
+    
+    .invoice-container {
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+    }
+  }

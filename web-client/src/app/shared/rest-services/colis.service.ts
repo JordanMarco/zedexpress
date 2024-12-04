@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser, User } from '../models/User';
 import { IColis } from '../models/colis';
+import { Parcel } from '../models/parcel.model';
 
 @Injectable({
   providedIn: 'root',
@@ -62,6 +63,10 @@ export class ColisService {
 
   public remove(id: number): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/remove/${id}`, {});
+  }
+
+  getParcel(id: number): Observable<IColis> {
+    return this.http.get<IColis>(`${this.baseUrl}/${id}`);
   }
 
   public destroy(id: number): Observable<any> {

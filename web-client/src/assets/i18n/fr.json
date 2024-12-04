@@ -121,7 +121,9 @@
     "CANCEL": "Annuler",
     "EDIT": "Editer",
     "NO_DATA": "Aucune donnée disponible",
-    "BACK": "Retour"
+    "BACK": "Retour",
+    "COMPANY_NAME": "Nom de votre entreprise",
+    "COMPANY_ADDRESS": "123 Rue des Affaires, Ville, Pays"
   },
   "USERS": {
     "TITLE": "Gestion des utilisateurs",
@@ -221,7 +223,30 @@
     "PREVIEW": "Aperçu",
     "SEND": "Envoyer",
     "PICKUP": "Récupération",
-    "RETRIEVE": "Récupérer"
+    "RETRIEVE": "Récupérer",
+    "PAY": "Payer"
+  },
+  "INVOICE": {
+    "TITLE": "FACTURE",
+    "CREATED_DATE": "Date de création",
+    "DUE_DATE": "Date d'échéance",
+    "BILLED_TO": "Facturé à",
+    "SHIPPED_TO": "Expédié à",
+    "SN": "N°",
+    "PRODUCT": "Produit",
+    "QUANTITY": "Quantité",
+    "UNIT_PRICE": "Prix unitaire",
+    "AMOUNT": "Montant",
+    "PAYMENT_METHOD": "Méthode de paiement de la facture",
+    "ACCOUNT": "Compte",
+    "BANK": "Banque",
+    "SUBTOTAL": "Sous-total",
+    "TAX": "Taxe",
+    "TOTAL": "Total",
+    "TERMS_CONDITIONS": "Termes et conditions",
+    "TERMS_TEXT": "Le paiement est dû dans les 15 jours suivant la date de la facture. Les paiements en retard sont soumis à des frais.",
+    "SIGNATURE": "Signature autorisée",
+    "PREVIEW": "Aperçu de la facture"
   },
   "SUCCESS": {
     "USER_CREATED": "Utilisateur créé avec succès",
