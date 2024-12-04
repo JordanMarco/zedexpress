@@ -18,10 +18,14 @@ class ColisController extends Controller
 {
     public function index(Request $request)
     {
+        $perPage = $request->input('per_page', 10);
+        $search = '%' . $request->input('search', '') . '%';
         if (auth()->user()->account->code !== AccountTypeEnum::ADMIN->value) {
-            $colis = Colis::where("who", auth()->id())->get();
+            $colis = Colis::where("who", auth()->id())
+                ->where('nom', 'LIKE', $search)
+                ->paginate($perPage);
         } else {
-            $colis = Colis::all();
+            $colis = Colis::where('nom', 'LIKE', $search)->paginate($perPage);
         }
 
         return response()->json($colis);
@@ -36,15 +40,17 @@ class ColisController extends Controller
         return response()->json($colis);
     }
 
-    public function withdrawal()
+    public function withdrawal(Request $request)
     {
         if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
             abort(401);
         }
-
-        $colis = Colis::where("country", auth()->user()->account->country)
-            ->where('status', ColisStatusEnum::SEND->value)
-            ->get();
+        $perPage = $request->input('per_page', 10);
+        $search = '%' . $request->input('search', '') . '%';
+        $colis = Colis::where("country", auth()->user()->country)
+            ->where('statut', ColisStatusEnum::SEND->value)
+            ->where('nom', 'LIKE', $search)
+            ->paginate($perPage);
 
         return response()->json($colis);
     }
@@ -93,15 +99,10 @@ class ColisController extends Controller
 
         $colis = new Colis();
 
-        $colis->fill($request->all());
-        $colis->country = auth()->user()->country;
-        $colis->date_entree = Carbon::now();
-        $colis->hour = "";
-        $colis->longueur = $request->longueur;
-        $colis->hauteur = $request->hauteur;
-        $colis->poids = $request->poids;
-        $colis->largeur = $request->largeur;
-        $colis->date_depart = $request->date_depart;
+        $colis->fill($request->except('price', 'valeur_euro'));
+        $colis->date_entre = Carbon::parse($request->date_entre)->format('Y-m-d H:i:s');
+        $colis->date_depart = Carbon::parse($request->date_depart)->format('Y-m-d H:i:s');
+        $colis->date_arrive = Carbon::parse($request->date_arrive)->format('Y-m-d H:i:s');
         $colis->who = auth()->user()->id;
 
         $colis->valeur_euro = (($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30;
@@ -139,9 +140,9 @@ class ColisController extends Controller
             'colis9' => $colis->date_arrivee,
         ];
 
-        Mail::to($colis->receiver->email)->send(new Mailing(EmailTemplateEnum::DEPOSITE, "Envoie de votre colis", ['details' => $details]));
         $colis->hours = Carbon::now()->format('d/m/y - H:i:s');
         $colis->save();
+        Mail::to($colis->receiver->email)->send(new Mailing(EmailTemplateEnum::DEPOSITE, "Envoie de votre colis", ['details' => $details]));
 
         return response()->json($colis);
     }
@@ -165,10 +166,13 @@ class ColisController extends Controller
             return response()->json(['translate' => 'errors.validate', 'message' => $validator->messages()], 400);
         }
 
-        $colis->fill($request->all());
+        $colis->fill($request->except('price', 'valeur_euro'));
+        $colis->date_entre = Carbon::parse($request->date_entre)->format('Y-m-d H:i:s');
+        $colis->date_depart = Carbon::parse($request->date_depart)->format('Y-m-d H:i:s');
+        $colis->date_arrive = Carbon::parse($request->date_arrive)->format('Y-m-d H:i:s');
         $colis->user_id = $request->user_id;
         $colis->receiver_id = $request->receiver_id;
-
+        $colis->valeur_euro = (($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30;
         $colis->save();
         return response()->json($colis);
     }

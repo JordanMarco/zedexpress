@@ -28,7 +28,7 @@ class ClientController extends Controller
         $perPage = $request->input('per_page', 10);
         $search = '%' . $request->input('search', '') . '%';
 
-        if ($withPaginate) {
+        if ($withPaginate === true) {
             $clients = User::whereHas('account', function ($query) {
                 $query->where('code', AccountTypeEnum::CLIENT->value);
             })->where(function ($query) use ($search) {

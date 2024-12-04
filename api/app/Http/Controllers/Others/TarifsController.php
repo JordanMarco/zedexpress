@@ -20,7 +20,7 @@ class TarifsController extends Controller
         $search = '%' . $request->input('search', '') . '%';
         $perPage = $request->input('per_page', 10);
 
-        if ($withPaginate) {
+        if ($withPaginate === true) {
             $tarifs = Tarif::where('libelle', 'LIKE', $search)->paginate($perPage);
         } else {
             $tarifs = Tarif::where('libelle', 'LIKE', $search)->get();

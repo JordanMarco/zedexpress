@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('nature')->nullable();
             $table->string('country')->nullable();
             $table->text('fragilite')->nullable();
-            $table->date('date_entre')->nullable();
+            $table->dateTime('date_entre')->nullable();
             $table->text('contenance')->nullable();
-            $table->date('date_arrivee')->nullable();
+            $table->dateTime('date_arrivee')->nullable();
             $table->unsignedInteger('who')->nullable();
             $table->unsignedDouble('poids')->nullable();
             $table->dateTime('date_depart')->nullable();

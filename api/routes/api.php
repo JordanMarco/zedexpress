@@ -64,7 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/withdrawal', [ColisController::class, 'withdrawal']);
         Route::post('/', [ColisController::class, 'store']);
         Route::post('/send/{colis}', [ColisController::class, 'send']);
-        Route::delete('/remove/{colis}', [ColisController::class, 'remove']);
+        Route::post('/remove/{colis}', [ColisController::class, 'remove']);
         Route::put('/{colis}', [ColisController::class, 'update']);
         Route::delete('/{colis}', [ColisController::class, 'destroy']);
     });
