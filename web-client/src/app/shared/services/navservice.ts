@@ -187,22 +187,10 @@ export class NavService implements OnDestroy {
         path: '/incidents',
         selected: false,
         type: 'link',
-        showable: this.hasAgentAccount || this.hasAdminAccount
-      },
-      // Message
-      {
-        title: 'MENU.MESSAGES',
-        icon: 'red-packet-line',
-        active: false,
-        badgeClass: 'badge badge-sm bg-secondary badge-hide',
-        badgeValue: 'new',
-        path: '/packages',
-        selected: false,
-        type: 'link',
-        showable: this.hasClientAccount
-      },
+        showable: true
+      }
     ];
-  
+
     this.items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
   }
 

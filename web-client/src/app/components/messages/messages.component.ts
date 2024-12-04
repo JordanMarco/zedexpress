@@ -17,7 +17,7 @@ import { IncidentService } from 'src/app/shared/rest-services/incident.service';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent {
-  displayedColumns: string[] = ['id', 'client', 'packageName', 'subject', 'status', 'actions'];
+  displayedColumns: string[] = ['id', 'client', 'packageName', 'subject', 'actions'];
   dataSource = new MatTableDataSource<IIncident>();
   totalMessages = 0;
   isLoading = false;

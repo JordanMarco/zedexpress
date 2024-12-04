@@ -18,7 +18,7 @@ import { IncidentService } from 'src/app/shared/rest-services/incident.service';
 })
 export class IncidentsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'clientName', 'parcelName', 'title', 'status', 'actions'];
-  dataSource = new MatTableDataSource<Incident>();
+  dataSource = new MatTableDataSource<IIncident>();
   totalIncidents = 0;
   isLoading = false;
   searchValue = '';

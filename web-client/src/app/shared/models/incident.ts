@@ -1,5 +1,5 @@
-import { IClient } from "./client";
 import { IColis } from "./colis";
+import { IUser } from "./User";
 
 export interface IIncident {
   id: number;
@@ -7,8 +7,8 @@ export interface IIncident {
   statut?: string;
   message?: number;
   motif?: string;
-  client_id: number;
-  client?: IClient;
+  user_id: number;
+  user?: IUser;
   colis?: IColis;
   created_at?: Date;
   updated_at?: Date;
@@ -17,7 +17,7 @@ export interface IIncident {
 export class Incidents implements IIncident {
   constructor(
       public id: number,
-      public client_id: number,
+      public user_id: number,
       public titre?: string,
       public statut?: string,
       public message?: number,
