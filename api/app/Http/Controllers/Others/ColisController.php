@@ -31,11 +31,14 @@ class ColisController extends Controller
         return response()->json($colis);
     }
 
-    public function tracer()
+    public function tracer(Request $request)
     {
-        $colis = Colis::where("user_id", auth()->id())
-            ->orWhere("receiver_id", auth()->id())
-            ->get();
+        $perPage = $request->input('per_page', 10);
+        $search = '%' . $request->input('search', '') . '%';
+        $colis = Colis::where(function ($query) {
+            $query->where("user_id", auth()->id())
+                ->orWhere("receiver_id", auth()->id());
+        })->where('nom', 'LIKE', $search)->paginate($perPage);
 
         return response()->json($colis);
     }
