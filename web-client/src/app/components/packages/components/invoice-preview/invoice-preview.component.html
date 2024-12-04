@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ 'INVOICE.TITLE' | translate }} #{{parcel.id}}</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  
+  <div class="invoice-container">
+    <div class="invoice-header">
+      <div class="company-info">
+        <h2>{{ 'COMMON.COMPANY_NAME' | translate }}</h2>
+        <p>{{ 'COMMON.COMPANY_ADDRESS' | translate }}</p>
+      </div>
+      <div class="invoice-info">
+        <h1>{{ 'INVOICE.TITLE' | translate }}</h1>
+        <p>#INV-{{parcel.id}}</p>
+        <p>{{ 'INVOICE.CREATED_DATE' | translate }}: {{parcel.date_entre| date}}</p>
+        <p>{{ 'INVOICE.DUE_DATE' | translate }}: {{parcel.date_arrive | date}}</p>
+      </div>
+    </div>
+
+    <div class="invoice-addresses">
+      <div class="billed-to">
+        <h3>{{ 'INVOICE.BILLED_TO' | translate }}:</h3>
+        <p>{{parcel.user?.first_name+' '+parcel.user?.last_name}}</p>
+      </div>
+      <div class="shipped-to">
+        <h3>{{ 'INVOICE.SHIPPED_TO' | translate }}:</h3>
+        <p>{{parcel.receiver?.first_name+' '+parcel.receiver?.last_name}}</p>
+      </div>
+    </div>
+
+    <div class="invoice-items">
+      <table>
+        <thead>
+          <tr>
+            <th>{{ 'INVOICE.SN' | translate }}</th>
+            <th>{{ 'INVOICE.PRODUCT' | translate }}</th>
+            <th>{{ 'INVOICE.QUANTITY' | translate }}</th>
+            <th>{{ 'INVOICE.UNIT_PRICE' | translate }}</th>
+            <th>{{ 'INVOICE.AMOUNT' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>{{parcel.nom}}</td>
+            <td>{{parcel.quantite}}</td>
+            <td>€{{parcel.valeur_euro}}</td>
+            <td>€{{parcel.valeur_euro! * parcel.quantite!}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="invoice-summary">
+      <div class="payment-info">
+        <h3>{{ 'INVOICE.PAYMENT_METHOD' | translate }}</h3>
+        <p>{{ 'INVOICE.ACCOUNT' | translate }}: XXXX-XXXX-XXXX</p>
+        <p>{{ 'INVOICE.BANK' | translate }}: Example Bank</p>
+      </div>
+      <div class="totals">
+        <div class="total-row">
+          <span>{{ 'INVOICE.SUBTOTAL' | translate }}</span>
+          <span>€{{parcel.valeur_euro! * parcel.quantite!}}</span>
+        </div>
+        <div class="total-row">
+          <span>{{ 'INVOICE.TAX' | translate }} (20%)</span>
+          <span>€{{parcel.valeur_euro! * parcel.quantite! * 0.2}}</span>
+        </div>
+        <div class="total-row total">
+          <span>{{ 'INVOICE.TOTAL' | translate }}</span>
+          <span>€{{parcel.valeur_euro! * parcel.quantite! * 1.2}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="invoice-footer">
+      <div class="terms">
+        <h3>{{ 'INVOICE.TERMS_CONDITIONS' | translate }}</h3>
+        <p>{{ 'INVOICE.TERMS_TEXT' | translate }}</p>
+      </div>
+      <div class="signature">
+        <p>{{ 'INVOICE.SIGNATURE' | translate }}</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/sharedmodule';
 import { ParcelFormComponent } from './components/parcel-form/parcel-form.component';
 import { ParcelPickupComponent } from './components/parcel-pickup/parcel-pickup.component';
 import { ParcelComponent } from './parcel/parcel.component';
+import { InvoicePreviewComponent } from './components/invoice-preview/invoice-preview.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ParcelComponent } from './parcel/parcel.component';
     PackagesComponent,
     ParcelFormComponent,
     ParcelPickupComponent,
-    ParcelComponent
+    ParcelComponent,
+    InvoicePreviewComponent
   ],
   imports: [
     CommonModule,

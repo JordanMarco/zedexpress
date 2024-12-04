@@ -24,6 +24,10 @@ export class ParcelService {
     return this.http.get<ParcelListResponse>(this.apiUrl, { params: httpParams });
   }
 
+  getParcel(id: number): Observable<Parcel> {
+    return this.http.get<Parcel>(`${this.apiUrl}/${id}`);
+  }
+
   getParcelForPickup(): Observable<ParcelListResponse> {
     return this.http.get<ParcelListResponse>(`${this.apiUrl}/pickup`);
   }
