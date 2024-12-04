@@ -27,8 +27,7 @@ class ClientController extends Controller
         $withPaginate = $request->input('with_paginate', true);
         $perPage = $request->input('per_page', 10);
         $search = '%' . $request->input('search', '') . '%';
-
-        if ($withPaginate === true) {
+        if ($withPaginate != 'false') {
             $clients = User::whereHas('account', function ($query) {
                 $query->where('code', AccountTypeEnum::CLIENT->value);
             })->where(function ($query) use ($search) {
@@ -96,11 +95,13 @@ class ClientController extends Controller
             return response()->json(['translate' => 'errors.validate', 'message' => $validator->messages()], 400);
         }
 
-        if ($request->first_name)
+        if ($request->first_name) {
             $client->first_name = $request->first_name;
+        }
 
-        if ($request->last_name)
+        if ($request->last_name) {
             $client->last_name = $request->last_name;
+        }
 
         $client->login = $request->login;
         $client->email = $request->email;
@@ -109,15 +110,18 @@ class ClientController extends Controller
             $client->password = Hash::make($request->password);
         }
 
-        if ($request->cni)
+        if ($request->cni) {
             $client->cni = $request->cni;
+        }
 
-        if ($request->phone)
+        if ($request->phone) {
             $client->phone = $request->phone;
+        }
 
 
-        if ($request->address)
+        if ($request->address) {
             $client->address = $request->address;
+        }
 
         $client->save();
         return response()->json($client);

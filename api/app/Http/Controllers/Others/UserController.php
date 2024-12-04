@@ -25,7 +25,7 @@ class UserController extends Controller
         $withPaginate = $request->input('with_paginate', true);
         $perPage = $request->input('per_page', 10);
 
-        if ($withPaginate) {
+        if ($withPaginate != 'false') {
             $users = User::when($accountId, function ($query) use ($accountId) {
                 return $query->where('account_id', $accountId);
             })->where(function ($query) use ($search) {

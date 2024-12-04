@@ -24,7 +24,7 @@ class IncidentsController extends Controller
         $perPage = $request->input('per_page', 10);
         $message = $request->input('message', 1);
 
-        if ($withPaginate) {
+        if ($withPaginate != 'false') {
             $incidents = Incident::where("message", $message)->where('titre', 'LIKE', $search)->paginate($perPage);
         } else {
             $incidents = Incident::where("message", $message)->where('titre', 'LIKE', $search)->get();

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\AccountType;
+use App\Models\Constants\Constants;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Enums\LanguageEnum;
@@ -22,7 +23,7 @@ class UserFactory extends Factory
         return [
             'cni' => $this->faker->optional()->regexify('[0-9]{13}'), // 13 chiffres
             'phone' => $this->faker->phoneNumber(),
-            'country' => $this->faker->country(),
+            'country' => $this->faker->randomElement(Constants::COUNTRIES),
             'address' => $this->faker->optional()->address(),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
