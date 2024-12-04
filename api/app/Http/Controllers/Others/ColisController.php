@@ -203,4 +203,9 @@ class ColisController extends Controller
         }
         return response()->json(Colis::all());
     }
+
+    public function show(Colis $colis) {
+        $colis->append('sender');
+        return response()->json($colis);
+    }
 }

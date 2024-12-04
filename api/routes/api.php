@@ -67,6 +67,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/remove/{colis}', [ColisController::class, 'remove']);
         Route::put('/{colis}', [ColisController::class, 'update']);
         Route::delete('/{colis}', [ColisController::class, 'destroy']);
+        Route::get('/{colis}', [ColisController::class, 'show']);
     });
 
     Route::prefix('clients')->group(function () {
