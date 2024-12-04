@@ -23,9 +23,10 @@ class ColisController extends Controller
         if (auth()->user()->account->code !== AccountTypeEnum::ADMIN->value) {
             $colis = Colis::where("who", auth()->id())
                 ->where('nom', 'LIKE', $search)
+                ->latest()
                 ->paginate($perPage);
         } else {
-            $colis = Colis::where('nom', 'LIKE', $search)->paginate($perPage);
+            $colis = Colis::where('nom', 'LIKE', $search)->latest()->paginate($perPage);
         }
 
         return response()->json($colis);

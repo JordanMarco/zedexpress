@@ -22,7 +22,7 @@ class PaymentController extends Controller
         $payment = new Payment();
         $payment->user_id = Auth::id();
         $payment->colis_id = $colis->id;
-        $payment->amount = $colis->tarif->montant;
+        $payment->amount = $colis->valeur_euro;
         $payment->save();
         $payment->fresh();
         $service = new StripeService();

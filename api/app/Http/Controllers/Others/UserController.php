@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(User::class, 'user');
+        // $this->authorizeResource(User::class, 'user');
     }
 
     public function index(Request $request)
@@ -31,14 +31,14 @@ class UserController extends Controller
             })->where(function ($query) use ($search) {
                 $query->orWhere('first_name', 'LIKE', $search)
                     ->orWhere('last_name', 'LIKE', $search);
-            })->paginate($perPage);
+            })->latest()->paginate($perPage);
         } else {
             $users = User::when($accountId, function ($query) use ($accountId) {
                 return $query->where('account_id', $accountId);
             })->where(function ($query) use ($search) {
                 $query->orWhere('first_name', 'LIKE', $search)
                     ->orWhere('last_name', 'LIKE', $search);
-            })->get();
+            })->latest()->get();
         }
 
         return response()->json($users);
@@ -79,8 +79,8 @@ class UserController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'login' => 'required|unique:users,login,' . Auth::id(),
-            'email' => 'required|unique:users,email,' . Auth::id(),
+            'login' => 'required|unique:users,login,' . $user->id,
+            'email' => 'required|unique:users,email,' . $user->id,
             'account_id' => 'required|exists:account_types,id'
         ]);
 

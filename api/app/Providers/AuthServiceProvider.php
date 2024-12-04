@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         Gate::define('has_account_type', function (User $user, AccountTypeEnum $code, string $country = null) {
             return $user->account->code === $code->value &&
-                (isset($country) ? $country === $user->account->country : true);
+                (isset($country) ? $country === $user->country : true);
         });
     }
 }
