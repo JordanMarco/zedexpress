@@ -47,7 +47,7 @@ class ColisController extends Controller
     public function withdrawal(Request $request)
     {
         if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
-            abort(401);
+            abort(403);
         }
         $perPage = $request->input('per_page', 10);
         $search = '%' . $request->input('search', '') . '%';
@@ -62,7 +62,7 @@ class ColisController extends Controller
     public function remove(Colis $colis)
     {
         if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->country])) {
-            abort(401);
+            abort(403);
         }
 
         if ($colis->statut !== ColisStatusEnum::SEND->value) {
@@ -89,7 +89,7 @@ class ColisController extends Controller
     public function store(Request $request)
     {
         if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
-            abort(401);
+            abort(403);
         }
 
         $validator = Validator::make($request->all(), [
@@ -109,7 +109,7 @@ class ColisController extends Controller
         $colis->date_arrive = Carbon::parse($request->date_arrive)->format('Y-m-d H:i:s');
         $colis->who = auth()->user()->id;
 
-        $colis->valeur_euro = (($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30;
+        $colis->valeur_euro = ((($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30) * $colis->quantite;
 
         $colis->save();
 
@@ -119,7 +119,7 @@ class ColisController extends Controller
     public function send(Colis $colis)
     {
         if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
-            abort(401);
+            abort(403);
         }
 
         if ($colis->statut === ColisStatusEnum::UNPAID->value) {
@@ -127,7 +127,7 @@ class ColisController extends Controller
         }
 
         if ($colis->statut !== ColisStatusEnum::WAITING->value) {
-            abort(401);
+            abort(403);
         }
 
         $colis->statut = ColisStatusEnum::SEND->value;
@@ -154,7 +154,7 @@ class ColisController extends Controller
     public function update(Request $request, Colis $colis)
     {
         if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->sender->country])) {
-            abort(401);
+            abort(403);
         }
 
         if ($colis->statut != ColisStatusEnum::UNPAID->value && $colis->statut != ColisStatusEnum::WAITING->value) {
@@ -188,7 +188,7 @@ class ColisController extends Controller
             !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->sender->country]) &&
             !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->country])
         ) {
-            abort(401);
+            abort(403);
         }
 
         $colis->delete();
@@ -204,7 +204,8 @@ class ColisController extends Controller
         return response()->json(Colis::all());
     }
 
-    public function show(Colis $colis) {
+    public function show(Colis $colis)
+    {
         $colis->append('sender');
         return response()->json($colis);
     }

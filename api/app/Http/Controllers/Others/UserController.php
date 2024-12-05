@@ -114,7 +114,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->account->code === AccountTypeEnum::ADMIN->value || Auth::id() === $user->id) {
-            return response()->json(['translate' => 'errors.unauthorize'], 401);
+            return response()->json(['translate' => 'errors.unauthorize'], 403);
         }
 
         if ($user->colis()->count() > 0) {

@@ -67,7 +67,7 @@ export class ParcelFormComponent implements OnInit {
       receiver_id: ['', [Validators.required]],
       user_id: ['', [Validators.required]],
       tarif_id: ['', [Validators.required]],
-      valeur_euro: [(1 / 5000) * 30, [Validators.required]],
+      valeur_euro: [((1 / 5000) * 30), [Validators.required]],
       date_entre: ['', [Validators.required]],
       date_depart: ['', [Validators.required]],
       date_arrive: ['', [Validators.required]],
@@ -75,7 +75,7 @@ export class ParcelFormComponent implements OnInit {
   }
 
   private setupPriceCalculation() {
-    const dimensionControls = ['longueur', 'largeur', 'hauteur'];
+    const dimensionControls = ['longueur', 'largeur', 'hauteur', 'quantite'];
     dimensionControls.forEach(control => {
       this.parcelForm.get(control)?.valueChanges.subscribe(() => {
         this.calculatePrice();
@@ -84,11 +84,12 @@ export class ParcelFormComponent implements OnInit {
   }
 
   private calculatePrice() {
-    const longueur = this.parcelForm.get('longueur')?.value || 0;
-    const hauteur = this.parcelForm.get('hauteur')?.value || 0;
-    const largeur = this.parcelForm.get('largeur')?.value || 0;
+    const longueur = this.parcelForm.get('longueur')?.value || 1;
+    const hauteur = this.parcelForm.get('hauteur')?.value || 1;
+    const largeur = this.parcelForm.get('largeur')?.value || 1;
+    const quantite = this.parcelForm.get('quantite')?.value || 1;
 
-    const valeur_euro = ((longueur * hauteur * largeur) / 5000) * 30;
+    const valeur_euro = (((longueur * hauteur * largeur) / 5000) * 30) * quantite;
 
     this.parcelForm.patchValue({ valeur_euro }, { emitEvent: false });
   }
