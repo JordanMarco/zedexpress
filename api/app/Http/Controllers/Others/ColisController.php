@@ -176,7 +176,7 @@ class ColisController extends Controller
         $colis->date_arrive = Carbon::parse($request->date_arrive)->format('Y-m-d H:i:s');
         $colis->user_id = $request->user_id;
         $colis->receiver_id = $request->receiver_id;
-        $colis->valeur_euro = (($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30;
+        $colis->valeur_euro = ((($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30) * $colis->quantite;
         $colis->save();
         return response()->json($colis);
     }
