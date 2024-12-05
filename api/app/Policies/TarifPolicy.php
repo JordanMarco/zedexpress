@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\Enums\AccountTypeEnum;
 use App\Models\Tarif;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
 
 class TarifPolicy
