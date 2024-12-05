@@ -20,6 +20,7 @@ class ColisFactory extends Factory
      */
     public function definition()
     {
+        $quantite = $this->faker->numberBetween(1, 100);
         return [
             'nom' => $this->faker->word(),
             'hour' => $this->faker->time(),
@@ -39,8 +40,8 @@ class ColisFactory extends Factory
             'largeur' => $this->faker->randomFloat(2, 10, 200),
             'receiver_id' => User::factory(),
             'longueur' => $this->faker->randomFloat(2, 10, 200),
-            'quantite' => $this->faker->numberBetween(1, 100),
-            'valeur_euro' => $this->faker->randomFloat(2, 10, 1000),
+            'quantite' => $quantite,
+            'valeur_euro' => $this->faker->randomFloat(2, 10, 1000) * $quantite,
             'user_id' => User::factory(),
             'tarif_id' => Tarif::factory()
         ];
