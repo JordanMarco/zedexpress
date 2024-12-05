@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  
+
   <div class="invoice-container">
     <div class="invoice-header">
       <div class="company-info">
@@ -47,8 +47,8 @@
             <td>1</td>
             <td>{{parcel.nom}}</td>
             <td>{{parcel.quantite}}</td>
-            <td>€{{parcel.valeur_euro}}</td>
-            <td>€{{parcel.valeur_euro! * parcel.quantite!}}</td>
+            <td>€{{parcel.valeur_euro! / parcel.quantite!}}</td>
+            <td>€{{parcel.valeur_euro }}</td>
           </tr>
         </tbody>
       </table>
@@ -63,15 +63,15 @@
       <div class="totals">
         <div class="total-row">
           <span>{{ 'INVOICE.SUBTOTAL' | translate }}</span>
-          <span>€{{parcel.valeur_euro! * parcel.quantite!}}</span>
+          <span>€{{parcel.valeur_euro!}}</span>
         </div>
         <div class="total-row">
           <span>{{ 'INVOICE.TAX' | translate }} (20%)</span>
-          <span>€{{parcel.valeur_euro! * parcel.quantite! * 0.2}}</span>
+          <span>€{{parcel.valeur_euro! * 0.2}}</span>
         </div>
         <div class="total-row total">
           <span>{{ 'INVOICE.TOTAL' | translate }}</span>
-          <span>€{{parcel.valeur_euro! * parcel.quantite! * 1.2}}</span>
+          <span>€{{parcel.valeur_euro! * 1.2}}</span>
         </div>
       </div>
     </div>
