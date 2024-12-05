@@ -40,31 +40,16 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError(err => {
           if (
             err &&
-            (err.status === 403 || err.statusText === 'Forbidden')
+            (err.status === 401 || err.statusText === 'Forbidden')
           ) {
             return this.forbidden();
           }
-          if (err && (err.status === 401 || err.statusText === 'Unauthorized')) {
+          if (err && (err.status === 403 || err.statusText === 'Unauthorized')) {
             this.notificationService.warning(
               this.translateService.instant('errors.unauthorized-request')
             );
           }
 
-          if (err && err.status === 406) {
-            this.notificationService.danger(
-              this.translateService.instant(
-                err.error?.translate ?? 'errors.wrong-file-type'
-              )
-            );
-          }
-
-          if (err && err.status === 408) {
-            this.notificationService.danger(
-              this.translateService.instant(
-                err.error?.translate ?? 'errors.max-file-size-per-day-wait'
-              )
-            );
-          }
           return this.errorToMessage(err);
         })
       );
