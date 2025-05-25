@@ -224,7 +224,8 @@
     "SEND": "Envoyer",
     "PICKUP": "Récupération",
     "RETRIEVE": "Récupérer",
-    "PAY": "Payer"
+    "PAY": "Payer",
+    "NOTIFY": "Notifier le receveur de ce colis"
   },
   "INVOICE": {
     "TITLE": "FACTURE",
@@ -266,7 +267,8 @@
     "PARCEL_UPDATED": "Colis mis à jour avec succès",
     "PARCEL_DELETED": "Colis supprimé avec succès",
     "PARCEL_SENT": "Colis envoyé avec succès",
-    "PARCEL_RETRIEVED": "Colis récupéré avec succès"
+    "PARCEL_RETRIEVED": "Colis récupéré avec succès",
+    "RECEIVER_NOTIFY": "Notification envoyéeavec succès"
   },
   "ERRORS": {
     "LOAD_USERS": "Erreur lors du chargement des utilisateurs",

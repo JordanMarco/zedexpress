@@ -68,6 +68,20 @@ export class ParcelPickupComponent  implements OnInit {
     });
   }
 
+  sendEmailToReceiver(id: number) {
+    this.isLoading = true;
+    this.colisService.notifyReceiver(id).subscribe({
+      next: () => {
+        this.toastr.success(this.translate.instant('SUCCESS.RECEIVER_NOTIFY'));
+        this.loadParcels();
+      },
+      error: (err: any) => {
+        this.toastr.error(this.translate.instant(err.translate));
+        this.isLoading = false;
+      }
+    });
+  }
+
   applyFilter(event: Event) {
     this.searchValue = (event.target as HTMLInputElement).value;
     this.paginator.firstPage();

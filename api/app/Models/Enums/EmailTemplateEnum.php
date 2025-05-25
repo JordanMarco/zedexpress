@@ -6,4 +6,5 @@ enum EmailTemplateEnum: string
 {
     case DEPOSITE = 'emails.colis-deposit';
     case WITHDRAWAL = 'emails.colis-withdrawal';
+    case ARRIVAL = 'emails.colis-arrival';
 }

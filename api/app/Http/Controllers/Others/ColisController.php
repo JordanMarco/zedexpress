@@ -49,6 +49,7 @@ class ColisController extends Controller
         if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT])) {
             abort(403);
         }
+
         $perPage = $request->input('per_page', 10);
         $search = '%' . $request->input('search', '') . '%';
         $colis = Colis::where("country", auth()->user()->country)
@@ -82,6 +83,28 @@ class ColisController extends Controller
         ];
 
         Mail::to($colis->user->email)->send(new Mailing(EmailTemplateEnum::WITHDRAWAL, "retrait du colis", ['details' => $details]));
+
+        return response()->json($colis);
+    }
+
+    public function notifyReceiver(Colis $colis)
+    {
+        if (!Gate::allows('has_account_type', [AccountTypeEnum::ADMIN]) && !Gate::allows('has_account_type', [AccountTypeEnum::AGENT, $colis->country])) {
+            abort(403);
+        }
+
+        if ($colis->statut !== ColisStatusEnum::SEND->value) {
+            return response()->json(['translate' => 'errors.action-not-permitted'], 400);
+        }
+
+        $details = [
+            'title' => 'Votre colis est arrivé dans notre agence',
+            'body' => 'Nous vous prions de venir le recupérer dans les plus brefs delais',
+            'colis1' => $colis->user->first_name,
+            'colis2' => $colis->user->last_name,
+        ];
+
+        Mail::to($colis->user->email)->send(new Mailing(EmailTemplateEnum::ARRIVAL, "Arrivée du colis", ['details' => $details]));
 
         return response()->json($colis);
     }

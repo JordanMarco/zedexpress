@@ -75,6 +75,10 @@
                                     matTooltip="{{ 'PARCELS.RETRIEVE' | translate }}">
                                     <mat-icon>done</mat-icon>
                                 </button>
+                                <button mat-icon-button color="warn" (click)="sendEmailToReceiver(parcel.id)"
+                                    matTooltip="{{ 'PARCELS.NOTIFY' | translate }}">
+                                    <mat-icon>notifications_none</mat-icon>
+                                </button>
                             </td>
                         </ng-container>
 

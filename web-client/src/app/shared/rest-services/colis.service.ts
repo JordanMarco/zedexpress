@@ -65,6 +65,10 @@ export class ColisService {
     return this.http.post<any>(`${this.baseUrl}/remove/${id}`, {});
   }
 
+  public notifyReceiver(id: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/notify/${id}`, {});
+  }
+
   getParcel(id: number): Observable<IColis> {
     return this.http.get<IColis>(`${this.baseUrl}/${id}`);
   }

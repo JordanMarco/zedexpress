@@ -224,7 +224,8 @@
     "SEND": "Send",
     "PICKUP": "Pickup",
     "RETRIEVE": "Retrieve",
-    "PAY": "Pay"
+    "PAY": "Pay",
+    "NOTIFY": "Notify the receiver"
   },
   "INVOICE": {
     "TITLE": "INVOICE",
@@ -266,7 +267,8 @@
     "PARCEL_UPDATED": "Parcel updated successfully",
     "PARCEL_DELETED": "Parcel deleted successfully",
     "PARCEL_SENT": "Parcel sent successfully",
-    "PARCEL_RETRIEVED": "Parcel retrieved successfully"
+    "PARCEL_RETRIEVED": "Parcel retrieved successfully",
+    "RECEIVER_NOTIFY": "Notification send successfully"
   },
   "ERRORS": {
     "LOAD_USERS": "Error loading users",
