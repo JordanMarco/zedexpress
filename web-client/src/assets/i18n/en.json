@@ -123,7 +123,8 @@
     "NO_DATA": "No data available",
     "BACK": "Back",
     "COMPANY_NAME": "Your Company Name",
-    "COMPANY_ADDRESS": "123 Business Street, City, Country"
+    "COMPANY_ADDRESS": "123 Business Street, City, Country",
+    "RESET-LABEL": "Reset"
   },
   "USERS": {
     "TITLE": "User Management",
@@ -196,9 +197,13 @@
   },
   "PARCELS": {
     "TITLE": "Parcel Management",
-    "TRACKING": "My parcel",
+    "TRACKING": "My Parcel",
     "PICKUP_TITLE": "Parcels for Pickup",
-    "ADD_PARCEL": "New Parcel",
+    "DEPARTURE": "Departure",
+    "DESTINATION": "Destination",
+    "DEPARTURE_PLACEHOLDER": "Departure location",
+    "DESTINATION_PLACEHOLDER": "Lieu de destination",
+    "ADD_PARCEL": "Add Parcel",
     "EDIT_PARCEL": "Edit Parcel",
     "VIEW_PARCEL": "View Parcel",
     "DELETE_CONFIRMATION": "Delete Parcel",
@@ -225,7 +230,9 @@
     "PICKUP": "Pickup",
     "RETRIEVE": "Retrieve",
     "PAY": "Pay",
-    "NOTIFY": "Notify the receiver"
+    "NOTIFY": "Notify the receiver",
+    "CALCULATE_PRICE": "Calculate parcel price",
+    "CALCULATE": "Calculate"
   },
   "INVOICE": {
     "TITLE": "INVOICE",

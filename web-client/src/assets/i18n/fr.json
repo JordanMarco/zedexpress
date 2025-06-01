@@ -123,7 +123,8 @@
     "NO_DATA": "Aucune donnée disponible",
     "BACK": "Retour",
     "COMPANY_NAME": "Nom de votre entreprise",
-    "COMPANY_ADDRESS": "123 Rue des Affaires, Ville, Pays"
+    "COMPANY_ADDRESS": "123 Rue des Affaires, Ville, Pays",
+    "RESET-LABEL": "Reset"
   },
   "USERS": {
     "TITLE": "Gestion des utilisateurs",
@@ -197,6 +198,10 @@
   "PARCELS": {
     "TITLE": "Gestion des colis",
     "TRACKING": "Mes colis",
+    "DEPARTURE": "Départ",
+    "DESTINATION": "Destionation",
+    "DEPARTURE_PLACEHOLDER": "Lieu de départ",
+    "DESTINATION_PLACEHOLDER": "Lieu de destination",
     "PICKUP_TITLE": "Colis à récupérer",
     "ADD_PARCEL": "Nouveau colis",
     "EDIT_PARCEL": "Modifier le colis",
@@ -225,7 +230,9 @@
     "PICKUP": "Récupération",
     "RETRIEVE": "Récupérer",
     "PAY": "Payer",
-    "NOTIFY": "Notifier le receveur de ce colis"
+    "NOTIFY": "Notifier le receveur de ce colis",
+    "CALCULATE_PRICE": "Evaluer le prix d'un colis",
+    "CALCULATE": "Calculer"
   },
   "INVOICE": {
     "TITLE": "FACTURE",

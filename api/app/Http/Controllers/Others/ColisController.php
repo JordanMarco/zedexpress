@@ -98,13 +98,12 @@ class ColisController extends Controller
         }
 
         $details = [
-            'title' => 'Votre colis est arrivé dans notre agence',
-            'body' => 'Nous vous prions de venir le recupérer dans les plus brefs delais',
-            'colis1' => $colis->user->first_name,
-            'colis2' => $colis->user->last_name,
+            'colis1' => $colis->receiver->first_name,
+            'colis2' => $colis->receiver->last_name,
+            'country' => $colis->country
         ];
 
-        Mail::to($colis->user->email)->send(new Mailing(EmailTemplateEnum::ARRIVAL, "Arrivée du colis", ['details' => $details]));
+        Mail::to($colis->receiver->email)->send(new Mailing(EmailTemplateEnum::ARRIVAL, "Arrivée du colis", ['details' => $details]));
 
         return response()->json($colis);
     }

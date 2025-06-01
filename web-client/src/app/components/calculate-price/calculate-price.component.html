@@ -1,0 +1,106 @@
+<!-- ========== MAIN CONTENT ========== -->
+<div class="flex justify-center min-h-screen align-middle gradient-background">
+    <main id="content" class=" max-w-[550px] mx-auto my-auto p-6">
+        <a routerLink="/dashboard" class="header-logo">
+            <img src="./assets/img/logos/R-white.png"  width="120" alt="logo" class="mx-auto block" />
+        </a>
+        <div class="box-body">
+            <div class="mt-3">
+                <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">
+                    <div class="mt-7 bg-white rounded-sm shadow-sm dark:bg-bgdark">
+                        <div class="p-4 sm:p-7">
+                            <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">
+                                {{ 'PARCELS.CALCULATE_PRICE' | translate }}
+                            </h1>
+                            <div class="mt-5">
+                                <!-- Form -->
+                                <form [formGroup]="parcelForm" (ngSubmit)="calculatePrice()">
+                                    <mat-dialog-content>
+                                        <div class="form-row">
+                                            <mat-form-field>
+                                                <mat-label>{{ 'PARCELS.DEPARTURE' | translate }}</mat-label>
+                                                <mat-select formControlName="country_start">
+                                                    <mat-option *ngFor="let agency of agencies" [value]="agency" [disabled]="agency === parcelForm.get('country_end')?.value">
+                                                        {{agency}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <mat-label>{{ 'PARCELS.DESTINATION' | translate }}</mat-label>
+                                                <mat-select formControlName="country_end">
+                                                    <mat-option *ngFor="let agency of agencies" [value]="agency" [disabled]="agency === parcelForm.get('country_start')?.value">
+                                                        {{agency}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <mat-form-field>
+                                                <mat-label>{{ 'PARCELS.WEIGHT' | translate }}</mat-label>
+                                                <input matInput type="number" formControlName="poids" min="1">
+                                                <span matSuffix>Kg</span>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <mat-form-field>
+                                                <mat-label>{{ 'PARCELS.WIDTH' | translate }}</mat-label>
+                                                <input matInput type="number" formControlName="largeur" min="1">
+                                                <span matSuffix>cm</span>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <mat-label>{{ 'PARCELS.HEIGHT' | translate }}</mat-label>
+                                                <input matInput type="number" formControlName="hauteur" min="1">
+                                                <span matSuffix>cm</span>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <mat-form-field>
+                                                <mat-label>{{ 'PARCELS.LENGTH' | translate }}</mat-label>
+                                                <input matInput type="number" formControlName="longueur" min="1">
+                                                <span matSuffix>cm</span>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <mat-label>{{ 'PARCELS.QUANTITY' | translate }}</mat-label>
+                                                <input matInput type="number" formControlName="quantite" min="1">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div *ngIf="showPrice"
+                                            style="margin-top: 10px; margin-bottom: 10px; border-radius: 7px;"
+                                            class="w-full mt-4 bg-gray-800 bg-opacity-10 p-4 gradient-background">
+                                            <h3 class="text-lg font-semibold text-white">{{ 'PARCELS.PRICE' | translate
+                                                }}:</h3>
+                                            <p class="text-xl font-bold text-white">{{ valeur_euro | number:'1.2-2' }} €
+                                            </p>
+                                        </div>
+
+                                    </mat-dialog-content>
+
+                                    <div class="flex items-center justify-between w-full">
+                                        <button mat-raised-button (click)="resetForm()" color="primary" type="button"
+                                            [disabled]="parcelForm.invalid"
+                                            [disabled]="!parcelForm.valid || isLoading || readonly">
+                                            {{ 'COMMON.RESET-LABEL' | translate }}
+                                        </button>
+                                        <button mat-raised-button color="primary" type="submit"
+                                            [disabled]="!parcelForm.valid">
+                                            {{ 'PARCELS.CALCULATE' | translate }}
+                                        </button>
+                                    </div>
+                                </form>
+                                <!-- End Form -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+</div>

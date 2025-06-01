@@ -23,6 +23,14 @@ const routes: Routes = [
     canActivate: [guestGuard()]
   },
   {
+    path: 'pack-price',
+    loadChildren: () =>
+      import('./components/calculate-price/calculate-price.module').then(
+        (m) => m.CalculatePriceModule
+      ),
+    canActivate: [guestGuard()]
+  },
+  {
     path: 'invoice/:id',
     component: InvoicePreviewComponent
   }
