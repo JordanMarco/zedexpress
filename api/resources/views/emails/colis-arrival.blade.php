@@ -30,7 +30,6 @@ Bonjour M/Mme {{ $details['colis1'] }} {{ $details['colis2'] }}
 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
 Nous avons un colis pour vous, veuillez vous rendre à notre agence {{ $details['country'] }}
 entre 08h-18h du lundi à vendredi, 09h-14h samedi pour entre en possession 
-
 </td>
 </tr>
 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
