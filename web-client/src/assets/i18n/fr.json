@@ -232,7 +232,8 @@
     "PAY": "Payer",
     "NOTIFY": "Notifier le receveur de ce colis",
     "CALCULATE_PRICE": "Evaluer le prix d'un colis",
-    "CALCULATE": "Calculer"
+    "CALCULATE": "Calculer",
+    "AVAILABLE_COUNTRY": "Liste de nos pays"
   },
   "INVOICE": {
     "TITLE": "FACTURE",

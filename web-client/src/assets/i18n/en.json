@@ -232,7 +232,8 @@
     "PAY": "Pay",
     "NOTIFY": "Notify the receiver",
     "CALCULATE_PRICE": "Calculate parcel price",
-    "CALCULATE": "Calculate"
+    "CALCULATE": "Calculate",
+    "AVAILABLE_COUNTRY": "List of our countries"
   },
   "INVOICE": {
     "TITLE": "INVOICE",
