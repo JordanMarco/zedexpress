@@ -80,6 +80,7 @@ class ColisController extends Controller
             'body' => 'Nous somme ravi d avoir traité avec vous, nous espérons vous revoir bientot',
             'colis1' => $colis->user->first_name,
             'colis2' => $colis->user->last_name,
+            'hours' => $colis->hours
         ];
 
         Mail::to($colis->user->email)->send(new Mailing(EmailTemplateEnum::WITHDRAWAL, "retrait du colis", ['details' => $details]));
@@ -95,6 +96,11 @@ class ColisController extends Controller
 
         if ($colis->statut !== ColisStatusEnum::SEND->value) {
             return response()->json(['translate' => 'errors.action-not-permitted'], 400);
+        }
+
+        if (isset($colis->date_arrivee)) {
+            $colis->date_arrivee = Carbon::now();
+            $colis->update();
         }
 
         $details = [

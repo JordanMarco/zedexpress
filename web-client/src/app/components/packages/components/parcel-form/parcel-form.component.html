@@ -111,23 +111,26 @@
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.ENTRY_DATE' | translate }}</mat-label>
-          <input matInput [matDatepicker]="date_entre" formControlName="date_entre">
+          <input matInput formControlName="date_entre" type="datetime-local">
+          <!-- <input matInput [matDatepicker]="date_entre" formControlName="date_entre">
           <mat-datepicker-toggle matSuffix [for]="date_entre"></mat-datepicker-toggle>
-          <mat-datepicker #date_entre></mat-datepicker>
+          <mat-datepicker #date_entre></mat-datepicker> -->
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>{{ 'PARCELS.DEPARTURE_DATE' | translate }}</mat-label>
-          <input matInput [matDatepicker]="date_depart" formControlName="date_depart">
+          <input matInput formControlName="date_depart" type="datetime-local">
+          <!-- <input matInput [matDatepicker]="date_depart" formControlName="date_depart">
           <mat-datepicker-toggle matSuffix [for]="date_depart"></mat-datepicker-toggle>
-          <mat-datepicker #date_depart></mat-datepicker>
+          <mat-datepicker #date_depart></mat-datepicker> -->
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>{{ 'PARCELS.EXPECTED_ARRIVAL_DATE' | translate }}</mat-label>
-          <input matInput [matDatepicker]="date_arrive" formControlName="date_arrive">
+          <input matInput formControlName="date_arrive" type="datetime-local">
+          <!-- <input matInput [matDatepicker]="date_arrive" formControlName="date_arrive">
           <mat-datepicker-toggle matSuffix [for]="date_arrive"></mat-datepicker-toggle>
-          <mat-datepicker #date_arrive></mat-datepicker>
+          <mat-datepicker #date_arrive></mat-datepicker> -->
         </mat-form-field>
       </div>
     </mat-dialog-content>

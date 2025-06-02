@@ -28,8 +28,8 @@ Bonjour M/Mme {{ $details['colis1'] }} {{ $details['colis2'] }}
 </tr>
 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-Votre colis a été livré avec succés, votre destinataire vient de recupérer son colis
-
+Votre colis a été livré avec succès.
+Le destinataire l’a récupéré le {{ $details['hours'] }}.
 </td>
 </tr>
 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
