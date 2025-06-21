@@ -223,7 +223,7 @@
     "AGENCY": "Agency",
     "ENTRY_DATE": "Entry Date",
     "DEPARTURE_DATE": "Departure Date",
-    "EXPECTED_ARRIVAL_DATE": "Arrival Date",
+    "REMOVAL_DATE": "Removal date",
     "STATUS": "Status",
     "PREVIEW": "Preview",
     "SEND": "Send",

@@ -24,4 +24,4 @@ export enum PaymentStatusEnum {
   FAILED = 'failed'
 }
 
-export const AGENCES = ['Belgique', 'France', 'Cameroun'];
+export const AGENCES = ['Belgique 1', 'Belgique 2', 'France 1', 'France 2', 'Cameroun 1', 'Cameroun 2'];

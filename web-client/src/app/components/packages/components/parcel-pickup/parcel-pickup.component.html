@@ -55,8 +55,8 @@
                         </ng-container>
 
                         <ng-container matColumnDef="expectedArrivalDate">
-                            <th mat-header-cell *matHeaderCellDef>{{ 'PARCELS.EXPECTED_ARRIVAL_DATE' | translate }}</th>
-                            <td mat-cell *matCellDef="let parcel">{{parcel.date_arrivee | date:'yyyy-MM-dd HH:mm'}}</td>
+                            <th mat-header-cell *matHeaderCellDef>{{ 'PARCELS.REMOVAL_DATE' | translate }}</th>
+                            <td mat-cell *matCellDef="let parcel">{{parcel.hours}}</td>
                         </ng-container>
 
                         <ng-container matColumnDef="status">
@@ -71,11 +71,11 @@
                         <ng-container matColumnDef="actions">
                             <th mat-header-cell *matHeaderCellDef>{{ 'COMMON.ACTIONS' | translate }}</th>
                             <td mat-cell *matCellDef="let parcel">
-                                <button mat-icon-button color="primary" (click)="retrieveParcel(parcel.id)"
+                                <button *ngIf="parcel.statut === 'send'" mat-icon-button color="primary" (click)="retrieveParcel(parcel.id)"
                                     matTooltip="{{ 'PARCELS.RETRIEVE' | translate }}">
                                     <mat-icon>done</mat-icon>
                                 </button>
-                                <button mat-icon-button color="warn" (click)="sendEmailToReceiver(parcel.id)"
+                                <button *ngIf="parcel.statut === 'send'" mat-icon-button color="warn" (click)="sendEmailToReceiver(parcel.id)"
                                     matTooltip="{{ 'PARCELS.NOTIFY' | translate }}">
                                     <mat-icon>notifications_none</mat-icon>
                                 </button>

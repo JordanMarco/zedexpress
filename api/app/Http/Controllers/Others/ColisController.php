@@ -53,7 +53,7 @@ class ColisController extends Controller
         $perPage = $request->input('per_page', 10);
         $search = '%' . $request->input('search', '') . '%';
         $colis = Colis::where("country", auth()->user()->country)
-            ->where('statut', ColisStatusEnum::SEND->value)
+            ->whereIn('statut', [ColisStatusEnum::SEND->value, ColisStatusEnum::REMOVED->value])
             ->where('nom', 'LIKE', $search)
             ->paginate($perPage);
 
@@ -70,7 +70,7 @@ class ColisController extends Controller
             return response()->json(['translate' => 'errors.action-not-permitted'], 400);
         }
 
-        $colis->hours = Carbon::now()->format('d/m/y - H:i:s');
+        $colis->hours = Carbon::now()->format('Y-m-d H:i');
         $colis->statut = ColisStatusEnum::REMOVED->value;
         // Ajouter la date de retrait
         $colis->save();
@@ -172,7 +172,7 @@ class ColisController extends Controller
             'colis9' => $colis->date_arrivee,
         ];
 
-        $colis->hours = Carbon::now()->format('d/m/y - H:i:s');
+        $colis->hour = Carbon::now()->format('d/m/y - H:i:s');
         $colis->save();
         Mail::to($colis->receiver->email)->send(new Mailing(EmailTemplateEnum::DEPOSITE, "Envoie de votre colis", ['details' => $details]));
 

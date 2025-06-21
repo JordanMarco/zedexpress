@@ -24,6 +24,18 @@
         </mat-form-field>
       </div>
 
+
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>{{ 'PARCELS.AGENCY' | translate }}</mat-label>
+          <mat-select formControlName="country">
+            <mat-option *ngFor="let agency of agencies" [value]="agency">
+              {{agency}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <div class="form-row">
         <mat-form-field>
           <mat-label>{{ 'PARCELS.NAME' | translate }}</mat-label>
@@ -94,17 +106,6 @@
           <mat-label>{{ 'PARCELS.PRICE' | translate }}</mat-label>
           <input matInput formControlName="valeur_euro" readonly>
           <span matSuffix>€</span>
-        </mat-form-field>
-      </div>
-
-      <div class="form-row">
-        <mat-form-field>
-          <mat-label>{{ 'PARCELS.AGENCY' | translate }}</mat-label>
-          <mat-select formControlName="country">
-            <mat-option *ngFor="let agency of agencies" [value]="agency">
-              {{agency}}
-            </mat-option>
-          </mat-select>
         </mat-form-field>
       </div>
 
