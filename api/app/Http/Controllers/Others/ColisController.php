@@ -55,6 +55,7 @@ class ColisController extends Controller
         $colis = Colis::where("country", auth()->user()->country)
             ->whereIn('statut', [ColisStatusEnum::SEND->value, ColisStatusEnum::REMOVED->value])
             ->where('nom', 'LIKE', $search)
+            ->orderBy('statut', 'DESC')
             ->paginate($perPage);
 
         return response()->json($colis);

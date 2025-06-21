@@ -31,11 +31,11 @@ export class CalculatePriceComponent {
     return this.fb.group({
       country_start: ['', [Validators.required]],
       country_end: ['', [Validators.required]],
-      poids: [0, [Validators.required]],
-      hauteur: [0, [Validators.required]],
-      largeur: [0, [Validators.required]],
-      longueur: [0, [Validators.required]],
-      quantite: [0, [Validators.required]],
+      poids: [1, [Validators.required]],
+      hauteur: [1, [Validators.required]],
+      largeur: [1, [Validators.required]],
+      longueur: [1, [Validators.required]],
+      quantite: [1, [Validators.required]],
     });
   }
 
@@ -43,13 +43,14 @@ export class CalculatePriceComponent {
 
   calculatePrice() {
     const longueur = this.parcelForm.get('longueur')?.value || 1;
+    const poids = this.parcelForm.get('poids')?.value || 1;
     const hauteur = this.parcelForm.get('hauteur')?.value || 1;
     const largeur = this.parcelForm.get('largeur')?.value || 1;
     const quantite = this.parcelForm.get('quantite')?.value || 1;
 
-    this.valeur_euro = ((longueur * hauteur * largeur) / 5000) * 30 * quantite;
+    this.valeur_euro = ((poids * 10.37) + (longueur * hauteur * largeur * 3)) * quantite;
     const price = this.valeur_euro
-    
+
     this.parcelForm.patchValue({ price }, { emitEvent: false });
     this.showPrice = true;
   }

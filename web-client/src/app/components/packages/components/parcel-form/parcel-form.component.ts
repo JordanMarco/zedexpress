@@ -85,11 +85,12 @@ export class ParcelFormComponent implements OnInit {
 
   private calculatePrice() {
     const longueur = this.parcelForm.get('longueur')?.value || 1;
+    const poids = this.parcelForm.get('poids')?.value || 1;
     const hauteur = this.parcelForm.get('hauteur')?.value || 1;
     const largeur = this.parcelForm.get('largeur')?.value || 1;
     const quantite = this.parcelForm.get('quantite')?.value || 1;
 
-    const valeur_euro = (((longueur * hauteur * largeur) / 5000) * 30) * quantite;
+    const valeur_euro =  ((poids * 10.37) + (longueur * hauteur * largeur * 3)) * quantite;
 
     this.parcelForm.patchValue({ valeur_euro }, { emitEvent: false });
   }
