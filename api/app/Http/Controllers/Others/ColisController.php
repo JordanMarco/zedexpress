@@ -71,7 +71,7 @@ class ColisController extends Controller
             return response()->json(['translate' => 'errors.action-not-permitted'], 400);
         }
 
-        $colis->hours = Carbon::now()->format('Y-m-d H:i');
+        $colis->hours = Carbon::now()->addHour()->format('Y-m-d H:i');
         $colis->statut = ColisStatusEnum::REMOVED->value;
         // Ajouter la date de retrait
         $colis->save();
@@ -138,8 +138,7 @@ class ColisController extends Controller
         $colis->date_arrive = Carbon::parse($request->date_arrive)->format('Y-m-d H:i:s');
         $colis->who = auth()->user()->id;
 
-        $colis->valeur_euro = ((($colis->longueur * $colis->hauteur * $colis->largeur) / 5000) * 30) * $colis->quantite;
-
+        $colis->valeur_euro = ($colis->poids * 10.37 + $colis->longueur * $colis->hauteur * $colis->largeur * 3) * $colis->quantite;
         $colis->save();
 
         return response()->json($colis);
