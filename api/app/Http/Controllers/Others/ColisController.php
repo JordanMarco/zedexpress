@@ -71,7 +71,7 @@ class ColisController extends Controller
             return response()->json(['translate' => 'errors.action-not-permitted'], 400);
         }
 
-        $colis->hours = Carbon::now()->addHour()->format('Y-m-d H:i');
+        $colis->hours = Carbon::now()->addHours(2)->format('Y-m-d H:i');
         $colis->statut = ColisStatusEnum::REMOVED->value;
         // Ajouter la date de retrait
         $colis->save();
